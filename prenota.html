@@ -1,0 +1,55 @@
+---
+layout: default
+title: "Prenota una call"
+nav: prenota
+permalink: /prenota/
+description: "Venti minuti gratuiti per raccontarmi come lavorate e capire insieme se e come posso aiutarvi. Nessun impegno."
+---
+
+<section class="hero" style="padding-block:clamp(3.5rem,8vw,5.5rem) clamp(2.5rem,5vw,3.5rem)">
+  <div class="wrap hero-inner">
+    <p class="eyebrow" style="color:var(--brass)">Primo incontro</p>
+    <h1>Venti minuti,<br>senza <em>impegno</em></h1>
+    <p class="lead">
+      Mi racconti come lavorate e cosa vi porta via più tempo.
+      Io ti dico se e come posso aiutarvi, e da dove partirei.
+      Se non lo vedo, ti dico anche quello.
+    </p>
+  </div>
+</section>
+
+<section class="section-tight">
+  <div class="wrap split">
+    <div>
+      <h3 style="font-size:1.15rem;margin-bottom:1rem">Cosa serve preparare</h3>
+      <ul class="ticks" style="margin-bottom:2rem">
+        <li>Che lavoro fate e quante persone siete</li>
+        <li>L'attività ripetitiva che vi pesa di più</li>
+        <li>I programmi che usate tutti i giorni</li>
+      </ul>
+
+      <h3 style="font-size:1.15rem;margin-bottom:1rem">Come funziona</h3>
+      <ul class="ticks ticks-open">
+        <li>Videochiamata, link nell'email di conferma</li>
+        <li>Nessun materiale da inviare prima</li>
+        <li>Se serve un preventivo, arriva scritto entro pochi giorni</li>
+      </ul>
+    </div>
+
+    <div>
+      <div class="booking-frame">
+        <!-- Sostituire src con il proprio link Cal.com -->
+        <iframe
+          src="{{ site.booking_url }}?embed=true"
+          title="Calendario per prenotare la call"
+          loading="lazy"></iframe>
+      </div>
+
+      <p style="margin-top:1.2rem;font-size:0.9rem;color:var(--muted)">
+        Il calendario non si carica? Scrivimi a
+        <a href="mailto:{{ site.author.email }}" style="color:var(--brass-deep)">{{ site.author.email }}</a>
+        e concordiamo un orario per email.
+      </p>
+    </div>
+  </div>
+</section>

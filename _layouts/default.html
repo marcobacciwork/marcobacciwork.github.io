@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.tagline }}{% endif %}</title>
+<meta name="description" content="{{ page.description | default: site.description }}">
+<link rel="canonical" href="{{ page.url | absolute_url }}">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:title" content="{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }} · {{ site.tagline }}{% endif %}">
+<meta property="og:description" content="{{ page.description | default: site.description }}">
+<meta property="og:url" content="{{ page.url | absolute_url }}">
+<meta property="og:image" content="{{ '/assets/img/og-image.png' | absolute_url }}">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="{{ '/assets/img/favicon.svg' | relative_url }}" type="image/svg+xml">
+
+<link rel="preload" href="{{ '/assets/fonts/inter.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="{{ '/assets/fonts/space-grotesk.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Marco Bacci",
+  "description": {{ site.description | jsonify }},
+  "url": {{ site.url | jsonify }},
+  "areaServed": "IT",
+  "knowsLanguage": "it",
+  "serviceType": "Consulenza in intelligenza artificiale e automazione dei processi"
+}
+</script>
+</head>
+
+<body>
+<a class="skip" href="#main">Vai al contenuto</a>
+
+{% include header.html %}
+
+<main id="main">
+  {{ content }}
+</main>
+
+{% include footer.html %}
+
+<script>
+  (function () {
+    var toggle = document.querySelector('.nav-toggle');
+    var nav = document.getElementById('nav');
+    if (!toggle || !nav) return;
+    toggle.addEventListener('click', function () {
+      var open = nav.getAttribute('data-open') === 'true';
+      nav.setAttribute('data-open', String(!open));
+      toggle.setAttribute('aria-expanded', String(!open));
+      toggle.textContent = open ? 'Menu' : 'Chiudi';
+    });
+  })();
+
+  /* Movimento. Se JavaScript è disattivato o l'utente preferisce ridurre
+     le animazioni, la classe non viene aggiunta e il sito resta statico
+     ma completamente leggibile. */
+  (function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (!('IntersectionObserver' in window)) return;
+
+    document.body.classList.add('js-anim');
+
+    var bersagli = document.querySelectorAll(
+      '.section-head, .split > *, .card, .case, .book, .tool, ' +
+      '.optin, .shop-group, .faq, .path-step, .booking-frame'
+    );
+
+    Array.prototype.forEach.call(bersagli, function (el) {
+      el.setAttribute('data-rivela', '');
+    });
+
+    /* Sfalsa gli elementi che stanno nella stessa griglia */
+    Array.prototype.forEach.call(document.querySelectorAll('.grid'), function (g) {
+      Array.prototype.forEach.call(g.children, function (figlio, i) {
+        figlio.style.setProperty('--i', i);
+      });
+    });
+
+    var osservatore = new IntersectionObserver(function (voci) {
+      voci.forEach(function (voce) {
+        if (voce.isIntersecting) {
+          voce.target.classList.add('visibile');
+          osservatore.unobserve(voce.target);
+        }
+      });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
+
+    Array.prototype.forEach.call(bersagli, function (el) {
+      osservatore.observe(el);
+    });
+
+    /* Il percorso non usa data-rivela: gli serve solo la classe visibile */
+    Array.prototype.forEach.call(document.querySelectorAll('.path-step'), function (el) {
+      el.removeAttribute('data-rivela');
+    });
+
+    /* Elenco a barre: la voce accesa scorre da sola, si ferma al passaggio del mouse */
+    Array.prototype.forEach.call(document.querySelectorAll('.bars'), function (lista) {
+      var voci = lista.querySelectorAll('li');
+      if (voci.length < 2) return;
+      var i = 0, fermo = false;
+      Array.prototype.forEach.call(voci, function (v, k) {
+        if (v.classList.contains('acceso')) i = k;
+      });
+      lista.addEventListener('mouseenter', function () { fermo = true; });
+      lista.addEventListener('mouseleave', function () { fermo = false; });
+      setInterval(function () {
+        if (fermo) return;
+        voci[i].classList.remove('acceso');
+        i = (i + 1) % voci.length;
+        voci[i].classList.add('acceso');
+      }, 2800);
+    });
+
+    /* Intestazione che si stacca */
+    var testata = document.querySelector('.site-header');
+    if (testata) {
+      var aggiorna = function () {
+        testata.classList.toggle('staccata', window.scrollY > 12);
+      };
+      aggiorna();
+      window.addEventListener('scroll', aggiorna, { passive: true });
+    }
+  })();
+</script>
+</body>
+</html>

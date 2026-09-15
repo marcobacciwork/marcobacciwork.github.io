@@ -1,0 +1,50 @@
+<footer class="site-footer">
+  <div class="wrap">
+
+    <div class="footer-grid">
+      <div>
+        <h4>Lavoriamo insieme</h4>
+        <ul>
+          <li><a href="{{ '/servizi/' | relative_url }}">Servizi</a></li>
+          <li><a href="{{ '/prenota/' | relative_url }}">Prenota una call</a></li>
+          <li><a href="{{ '/chi-sono/' | relative_url }}">Chi sono</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Materiali</h4>
+        <ul>
+          <li><a href="{{ '/libri/' | relative_url }}">Libri</a></li>
+          <li><a href="{{ '/risorse/' | relative_url }}">Risorse e template</a></li>
+          <li><a href="{{ '/toolbox/' | relative_url }}">Toolbox</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Dove mi trovi</h4>
+        <ul>
+          <li><a href="{{ site.linkedin_url }}" rel="me noopener" target="_blank">LinkedIn</a></li>
+          <li><a href="{{ site.instagram_url }}" rel="me noopener" target="_blank">Instagram</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Contatti</h4>
+        <ul>
+          <li><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
+          <li>{{ site.legal.sede }}</li>
+          <li>{{ site.legal.piva }}</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {{ 'now' | date: "%Y" }} {{ site.author.name }}</span>
+      <span>
+        <a href="{{ '/privacy/' | relative_url }}">Privacy</a> ·
+        <a href="{{ '/cookie-policy/' | relative_url }}">Cookie</a>
+      </span>
+    </div>
+
+  </div>
+</footer>

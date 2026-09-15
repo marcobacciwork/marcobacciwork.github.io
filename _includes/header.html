@@ -1,0 +1,17 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ '/' | relative_url }}">
+      Marco Bacci<span class="brand-dot" aria-hidden="true"></span>
+    </a>
+
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+
+    <nav class="nav" id="nav" aria-label="Navigazione principale">
+      <a href="{{ '/servizi/' | relative_url }}" {% if page.nav == 'servizi' %}aria-current="page"{% endif %}>Servizi</a>
+      <a href="{{ '/libri/' | relative_url }}" {% if page.nav == 'libri' %}aria-current="page"{% endif %}>Libri</a>
+      <a href="{{ '/risorse/' | relative_url }}" {% if page.nav == 'risorse' %}aria-current="page"{% endif %}>Risorse</a>
+      <a href="{{ '/chi-sono/' | relative_url }}" {% if page.nav == 'chi-sono' %}aria-current="page"{% endif %}>Chi sono</a>
+      <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Prenota una call</a>
+    </nav>
+  </div>
+</header>

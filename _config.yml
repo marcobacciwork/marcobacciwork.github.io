@@ -1,0 +1,30 @@
+title: "Marco Bacci"
+tagline: "Formazione aziendale sull'intelligenza artificiale"
+description: "Formazione sull'intelligenza artificiale per studi professionali e microimprese. In aula o online, sui vostri casi reali. Roma e tutta Italia."
+url: "https://marcobacci.it"
+baseurl: ""
+lang: it
+
+author:
+  name: "Marco Bacci"
+  email: "marco.bacci.work@gmail.com"
+
+# Link esterni — sostituire con i propri
+booking_url: "https://cal.com/marcobacci/call-20min"
+gumroad_url: "https://marcobacci.gumroad.com"
+amazon_author_url: "https://www.amazon.it/stores/author/PLACEHOLDER"
+linkedin_url: "https://www.linkedin.com/in/PLACEHOLDER"
+instagram_url: "https://www.instagram.com/marcobacci.ai"
+
+# Dati legali — completare all'apertura della partita IVA
+legal:
+  piva: "P.IVA 00000000000"
+  sede: "Roma, Italia"
+  pec: "PLACEHOLDER@pec.it"
+
+plugins:
+  - jekyll-sitemap
+
+exclude:
+  - README.md
+  - LEGGIMI.md

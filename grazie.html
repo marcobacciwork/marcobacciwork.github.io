@@ -1,0 +1,45 @@
+---
+layout: default
+title: "Grazie"
+permalink: /grazie/
+description: "Iscrizione ricevuta. Controlla la posta per confermare."
+sitemap: false
+---
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow" style="color:var(--brass)">Iscrizione ricevuta</p>
+    <h1>Manca<br><em>un passaggio</em></h1>
+    <p class="lead">
+      Ti ho appena inviato un'email con un pulsante di conferma.
+      Cliccalo e la guida arriva subito dopo. Serve per essere certi
+      che l'indirizzo sia davvero tuo.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap wrap-narrow">
+    <h2>Non è arrivata nulla?</h2>
+    <p class="lead" style="margin-bottom:2.5rem">
+      Guarda nella posta indesiderata e, se usi Gmail, nella scheda Promozioni.
+      Se dopo dieci minuti non trovi niente, scrivimi a
+      <a href="mailto:{{ site.author.email }}" style="color:var(--brass-deep)">{{ site.author.email }}</a>
+      e te la mando a mano.
+    </p>
+
+    <h2>Nel frattempo</h2>
+    <div class="grid grid-2" style="margin-top:1.8rem">
+      <a class="card" href="{{ '/servizi/' | relative_url }}">
+        <h3>I servizi</h3>
+        <p>Formazione, assistente configurato, AI che resta in sede.</p>
+        <span class="link-arrow">Leggi</span>
+      </a>
+      <a class="card" href="{{ '/prenota/' | relative_url }}">
+        <h3>Una call di venti minuti</h3>
+        <p>Se hai già in mente l'attività che vorresti togliere di mezzo.</p>
+        <span class="link-arrow">Scegli un orario</span>
+      </a>
+    </div>
+  </div>
+</section>
