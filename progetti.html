@@ -1,0 +1,60 @@
+---
+layout: default
+title: "Progetti"
+nav: progetti
+permalink: /progetti/
+description: "Strumenti che ho progettato e costruito con l'intelligenza artificiale: online, funzionanti e da provare."
+---
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow" style="color:var(--brass)">Progetti</p>
+    <h1>Cosa ho<br><em>costruito</em></h1>
+    <p class="lead">
+      Strumenti che ho progettato e costruito io, con l'aiuto dell'intelligenza artificiale.
+      Non sono lavori per clienti: sono progetti miei, online e funzionanti.
+      Aprili e provali, è il modo più rapido per capire cosa si può fare.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+
+    {% for p in site.data.progetti %}
+    <article class="project">
+      <a class="project-preview" href="{{ p.url | relative_url }}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+        {% if p.immagine and p.immagine != "" %}
+        <img src="{{ '/assets/img/progetti/' | append: p.immagine | relative_url }}" alt="" loading="lazy">
+        {% else %}
+        <span class="project-bar"><i></i><i></i><i></i></span>
+        <span class="project-nome">{{ p.nome }}</span>
+        <span class="project-sub">{{ p.sottotitolo }}</span>
+        {% endif %}
+      </a>
+
+      <div class="project-body">
+        <span class="case-tag">{{ p.tag }}</span>
+        <h2>{{ p.nome }}</h2>
+        <p class="project-claim">{{ p.sottotitolo }}</p>
+        <p>{{ p.descrizione }}</p>
+        <p class="project-nota"><strong>Cosa mostra.</strong> {{ p.cosa_mostra }}</p>
+        <a class="btn btn-outline" href="{{ p.url | relative_url }}" target="_blank" rel="noopener">Apri il progetto <span aria-hidden="true">↗</span></a>
+      </div>
+    </article>
+    {% endfor %}
+
+  </div>
+</section>
+
+<section class="section section-warm">
+  <div class="wrap wrap-narrow" style="text-align:center">
+    <h2>Ti serve uno strumento su misura?</h2>
+    <p class="lead" style="margin:0 auto 2rem">
+      Un calcolatore, un cruscotto, una scheda che si compila da sola.
+      Se un'attività ti porta via tempo ogni settimana, raccontamela:
+      ti dico se ha senso costruire uno strumento e da dove partirei.
+    </p>
+    <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Raccontami la tua idea</a>
+  </div>
+</section>

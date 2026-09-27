@@ -32,9 +32,14 @@
   "name": "Marco Bacci",
   "description": {{ site.description | jsonify }},
   "url": {{ site.url | jsonify }},
+  "email": {{ site.author.email | jsonify }},
+  "telephone": {{ site.author.telefono_link | jsonify }},
+  "vatID": "IT{{ site.legal.piva }}",
+  "address": { "@type": "PostalAddress", "addressLocality": "Roma", "addressCountry": "IT" },
+  "sameAs": [{{ site.linkedin_url | jsonify }}, {{ site.instagram_url | jsonify }}],
   "areaServed": "IT",
   "knowsLanguage": "it",
-  "serviceType": "Consulenza in intelligenza artificiale e automazione dei processi"
+  "serviceType": "Formazione e consulenza sull'intelligenza artificiale"
 }
 </script>
 </head>
@@ -73,8 +78,8 @@
     document.body.classList.add('js-anim');
 
     var bersagli = document.querySelectorAll(
-      '.section-head, .split > *, .card, .case, .book, .tool, ' +
-      '.optin, .shop-group, .faq, .path-step, .booking-frame'
+      '.section-head, .split > *, .card, .project, .book, ' +
+      '.optin, .faq, .path-step, .booking-frame'
     );
 
     Array.prototype.forEach.call(bersagli, function (el) {

@@ -8,8 +8,8 @@
 
     <nav class="nav" id="nav" aria-label="Navigazione principale">
       <a href="{{ '/servizi/' | relative_url }}" {% if page.nav == 'servizi' %}aria-current="page"{% endif %}>Servizi</a>
+      <a href="{{ '/progetti/' | relative_url }}" {% if page.nav == 'progetti' %}aria-current="page"{% endif %}>Progetti</a>
       <a href="{{ '/libri/' | relative_url }}" {% if page.nav == 'libri' %}aria-current="page"{% endif %}>Libri</a>
-      <a href="{{ '/risorse/' | relative_url }}" {% if page.nav == 'risorse' %}aria-current="page"{% endif %}>Risorse</a>
       <a href="{{ '/chi-sono/' | relative_url }}" {% if page.nav == 'chi-sono' %}aria-current="page"{% endif %}>Chi sono</a>
       <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Prenota una call</a>
     </nav>

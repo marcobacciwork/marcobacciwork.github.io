@@ -1468,3 +1468,200 @@ a.card:hover .card-mark { background: var(--accent); color: #fff; }
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+
+/* --------------------------------------------------------------------------
+   25. Pulsanti dei profili social
+   Nome del profilo + freccia che si accende al passaggio del mouse.
+   Nessun logo: niente file o servizi esterni da caricare.
+   -------------------------------------------------------------------------- */
+
+.social-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.social {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.1rem;
+  min-width: 13.5rem;
+  padding: 0.7rem 0.75rem 0.7rem 1.15rem;
+  text-decoration: none;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: 100px;
+  transition: border-color var(--dur) var(--ease),
+              transform var(--dur) var(--ease),
+              background var(--dur) var(--ease);
+}
+
+.social-testo { display: grid; line-height: 1.25; margin-right: auto; text-align: left; }
+
+.social-nome {
+  font-family: var(--display);
+  font-size: 0.98rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.social-handle { font-size: 0.8rem; color: var(--text-3); }
+
+.social-freccia {
+  display: grid;
+  place-items: center;
+  width: 2.1rem;
+  height: 2.1rem;
+  flex: none;
+  border-radius: 50%;
+  font-size: 0.95rem;
+  color: var(--accent);
+  background: var(--accent-soft);
+  transition: background var(--dur) var(--ease),
+              color var(--dur) var(--ease),
+              transform var(--dur) var(--ease);
+}
+
+.social:hover { border-color: var(--accent); transform: translateY(-2px); }
+.social:hover .social-freccia {
+  background: var(--accent);
+  color: #fff;
+  transform: rotate(45deg);
+}
+
+/* Su fondo scuro: footer e sezioni scure */
+.site-footer .social,
+.section-dark .social {
+  color: var(--on-deep);
+  background: rgba(237, 241, 247, 0.04);
+  border-color: var(--deep-line);
+}
+
+.site-footer .social-handle,
+.section-dark .social-handle { color: var(--on-deep-2); }
+
+.site-footer .social-freccia,
+.section-dark .social-freccia {
+  color: var(--accent-lift);
+  background: rgba(124, 149, 255, 0.14);
+}
+
+.site-footer .social:hover,
+.section-dark .social:hover { border-color: var(--accent-lift); }
+
+.site-footer .social:hover .social-freccia,
+.section-dark .social:hover .social-freccia {
+  background: var(--accent);
+  color: #fff;
+}
+
+.footer-social .social-row { flex-direction: column; align-items: flex-start; }
+.social-center .social-row { justify-content: center; }
+
+/* --------------------------------------------------------------------------
+   26. Progetti
+   Anteprima a sinistra, testo a destra. Senza screenshot l'anteprima
+   mostra il nome del progetto su fondo scuro a griglia.
+   -------------------------------------------------------------------------- */
+
+.project {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: center;
+  padding-block: clamp(2.75rem, 6vw, 4.5rem);
+  border-top: 1px solid var(--line);
+}
+
+.project:first-of-type { border-top: none; padding-top: 0; }
+
+@media (min-width: 900px) {
+  .project { grid-template-columns: 1.05fr 0.95fr; }
+}
+
+.project-preview {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  aspect-ratio: 16 / 10;
+  padding: clamp(1.5rem, 3vw, 2.25rem);
+  text-decoration: none;
+  color: var(--on-deep);
+  background-color: var(--deep);
+  background-image:
+    radial-gradient(circle at 85% 15%, rgba(51, 85, 255, 0.35) 0%, transparent 45%),
+    linear-gradient(rgba(237, 241, 247, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(237, 241, 247, 0.05) 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+  border: 1px solid var(--deep-line);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
+  transition: transform var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+
+.project-preview:hover { transform: translateY(-4px); box-shadow: var(--shadow-lift); }
+
+.project-preview img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.project-bar {
+  position: absolute;
+  top: 1.05rem;
+  left: 1.15rem;
+  display: flex;
+  gap: 6px;
+}
+
+.project-bar i {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: rgba(237, 241, 247, 0.22);
+}
+
+.project-nome {
+  font-family: var(--display);
+  font-size: clamp(2rem, 4.4vw, 3.1rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.project-sub {
+  margin-top: 0.7rem;
+  font-size: 0.95rem;
+  color: var(--on-deep-2);
+}
+
+.project-body h2 { margin: 0 0 0.35rem; }
+
+.project-body .project-claim {
+  margin: 0 0 1.1rem;
+  font-size: 1.06rem;
+  font-weight: 500;
+  color: var(--accent);
+}
+
+.project-body p { color: var(--text-2); max-width: 54ch; }
+
+.project-body .project-nota {
+  margin: 1.3rem 0 1.9rem;
+  padding: 0.95rem 1.15rem;
+  font-size: 0.94rem;
+  line-height: 1.6;
+  background: var(--accent-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+}
+
+.project-nota strong { color: var(--text); font-weight: 600; }
+
+.project-card .case-tag { align-self: flex-start; margin-bottom: 0.2rem; }

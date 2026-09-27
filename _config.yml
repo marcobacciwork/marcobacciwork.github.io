@@ -1,6 +1,6 @@
 title: "Marco Bacci"
 tagline: "Formazione aziendale sull'intelligenza artificiale"
-description: "Formazione sull'intelligenza artificiale per studi professionali e microimprese. In aula o online, sui vostri casi reali. Roma e tutta Italia."
+description: "Formazione sull'intelligenza artificiale per studi professionali e microimprese, in aula o online, sul lavoro di tutti i giorni. Roma e tutta Italia."
 url: "https://marcobacci.it"
 baseurl: ""
 lang: it
@@ -8,19 +8,24 @@ lang: it
 author:
   name: "Marco Bacci"
   email: "marco.bacci.work@gmail.com"
+  telefono: "+39 352 295 7889"       # come si legge sul sito
+  telefono_link: "+393522957889"     # per il clic da cellulare: solo cifre, con +39
 
-# Link esterni — sostituire con i propri
-booking_url: "https://cal.com/marcobacci/call-20min"
-gumroad_url: "https://marcobacci.gumroad.com"
-amazon_author_url: "https://www.amazon.it/stores/author/PLACEHOLDER"
-linkedin_url: "https://www.linkedin.com/in/PLACEHOLDER"
-instagram_url: "https://www.instagram.com/marcobacci.ai"
+# Link esterni
+booking_url: "https://cal.com/marcobacci/call-20min"                  # DA VERIFICARE: deve essere il tuo link Cal.com vero
+amazon_author_url: "https://www.amazon.it/stores/author/PLACEHOLDER"  # finché resta PLACEHOLDER, il pulsante Amazon non compare
+linkedin_url: "https://www.linkedin.com/in/marcobacci94/"
+linkedin_nome: "marcobacci94"
+instagram_url: "https://www.instagram.com/marcobacci.ai/"
+instagram_nome: "@marcobacci.ai"
 
-# Dati legali — completare all'apertura della partita IVA
+# Guida gratuita in home: metti true quando il PDF esiste e il modulo Brevo è collegato
+newsletter_attiva: false
+
+# Dati legali
 legal:
-  piva: "P.IVA 00000000000"
+  piva: "18685861009"
   sede: "Roma, Italia"
-  pec: "PLACEHOLDER@pec.it"
 
 plugins:
   - jekyll-sitemap
@@ -28,3 +33,4 @@ plugins:
 exclude:
   - README.md
   - LEGGIMI.md
+  - assets/img/og-image.source.html

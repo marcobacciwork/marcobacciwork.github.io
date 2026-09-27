@@ -1,22 +1,30 @@
-<!-- Rendi questo file a 1200x630 con la tua pipeline Playwright per ottenere og-image.png -->
+<!-- Sorgente dell'immagine per la condivisione social (og-image.png, 1200x630).
+     Usa i caratteri del sito, nessuna chiamata esterna. Non viene pubblicato:
+     è escluso in _config.yml. Per rigenerarlo: screenshot 1200x630 di questa pagina. -->
 <!DOCTYPE html><html lang="it"><head><meta charset="utf-8">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  body{width:1200px;height:630px;background:#0B1220;color:#F8F9FA;
-       font-family:"Inter",sans-serif;display:flex;flex-direction:column;
-       justify-content:center;padding:90px;position:relative;overflow:hidden}
-  body::before{content:"";position:absolute;right:-140px;bottom:-260px;width:640px;height:640px;
-       border-radius:50%;background:radial-gradient(circle,rgba(124,147,255,.18) 0%,transparent 68%)}
-  .eyebrow{font-size:17px;letter-spacing:.2em;text-transform:uppercase;color:#7C93FF;margin-bottom:34px}
-  h1{font-family:"Space Grotesk",sans-serif;font-weight:700;font-size:74px;line-height:1.04;letter-spacing:-.035em;max-width:16ch}
-  h1 em{font-style:normal;color:#7C93FF}
-  .foot{margin-top:44px;padding-top:26px;border-top:1px solid rgba(248,249,250,.16);
-        font-size:20px;color:#98A3B8;display:flex;gap:36px}
-  .foot span::before{content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
-        background:#7C93FF;margin-right:11px;vertical-align:3px}
+  @font-face { font-family: "Space Grotesk"; src: url("../fonts/space-grotesk.woff2") format("woff2"); font-weight: 300 700; }
+  @font-face { font-family: "Inter"; src: url("../fonts/inter.woff2") format("woff2"); font-weight: 100 900; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    width: 1200px; height: 630px; overflow: hidden; position: relative;
+    display: flex; flex-direction: column; justify-content: center; padding: 0 92px;
+    font-family: "Inter", sans-serif; color: #EDF1F7;
+    background-color: #0F172A;
+    background-image:
+      radial-gradient(circle at 92% 8%, rgba(51,85,255,.42) 0%, transparent 42%),
+      linear-gradient(rgba(237,241,247,.045) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(237,241,247,.045) 1px, transparent 1px);
+    background-size: auto, 40px 40px, 40px 40px;
+  }
+  .eyebrow { font-size: 19px; font-weight: 500; letter-spacing: .16em; text-transform: uppercase; color: #7C95FF; margin-bottom: 34px; display: flex; align-items: center; gap: 14px; }
+  .eyebrow::before { content: ""; width: 12px; height: 12px; border-radius: 3px; background: #3355FF; }
+  h1 { font-family: "Space Grotesk", sans-serif; font-weight: 500; font-size: 66px; line-height: 1.08; letter-spacing: -.035em; }
+  h1 em { font-style: normal; color: #7C95FF; }
+  .foot { margin-top: 50px; padding-top: 26px; border-top: 1px solid rgba(237,241,247,.16); display: flex; justify-content: space-between; font-size: 21px; color: #9AA6BC; }
+  .foot b { color: #EDF1F7; font-weight: 500; }
 </style></head><body>
-  <div class="eyebrow">Marco Bacci · Consulente AI</div>
-  <h1>Porto l'AI dentro il tuo studio.<br><em>Poi me ne vado.</em></h1>
-  <div class="foot"><span>Microimprese e studi professionali</span><span>marcobacci.it</span></div>
+  <div class="eyebrow">Marco Bacci · Formazione sull'AI</div>
+  <h1>Insegno al tuo team<br>a usare l'intelligenza artificiale<br><em>sul lavoro di tutti i giorni.</em></h1>
+  <div class="foot"><span>Studi professionali e microimprese · Roma e tutta Italia</span><b>marcobacci.it</b></div>
 </body></html>

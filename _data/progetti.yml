@@ -1,0 +1,19 @@
+# Progetti mostrati nella pagina Progetti e in home.
+# Per aggiungerne uno: copia un blocco intero (dal trattino in poi) e cambia i testi.
+# immagine: facoltativa. Metti lo screenshot in assets/img/progetti/ e scrivi qui il nome del file.
+
+- nome: "WorldEconomy"
+  tag: "Dati pubblici"
+  sottotitolo: "Confronta le grandi economie del mondo"
+  descrizione: "Mette a confronto sette economie, tra cui Italia, Germania, Stati Uniti e Cina, su otto indicatori: crescita, inflazione, disoccupazione, debito pubblico e altri. I dati arrivano in automatico dalla Banca Mondiale e coprono gli anni dal 2010 al 2023."
+  cosa_mostra: "Come una fonte di dati pubblica diventa un cruscotto che chiunque sa leggere, senza fogli di calcolo da aggiornare a mano."
+  url: "/WorldEconomy/"
+  immagine: ""
+
+- nome: "CloudScanner"
+  tag: "Costi e fornitori"
+  sottotitolo: "Confronta i costi di otto fornitori cloud"
+  descrizione: "Pensato per consulenti informatici e agenzie che rivendono servizi cloud. Confronta in pochi secondi i prezzi di otto fornitori, calcola il margine di rivendita e riassume i programmi di partnership ufficiali. Si usa senza registrazione."
+  cosa_mostra: "Nasce dagli anni passati a gestire i rapporti con i grandi fornitori di tecnologia: un lavoro di confronto che prima richiedeva ore, ridotto a pochi clic."
+  url: "/CloudScanner/"
+  immagine: ""
