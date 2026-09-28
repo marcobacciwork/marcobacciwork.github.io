@@ -3,17 +3,17 @@ layout: default
 title: "Progetti"
 nav: progetti
 permalink: /progetti/
-description: "Strumenti che ho progettato e costruito con l'intelligenza artificiale: online, funzionanti e da provare."
+description: "Esempi concreti di cosa posso costruire per te con l'intelligenza artificiale: il problema, la soluzione, la tecnologia e il risultato."
 ---
 
 <section class="hero">
   <div class="wrap hero-inner">
     <p class="eyebrow" style="color:var(--brass)">Progetti</p>
-    <h1>Cosa ho<br><em>costruito</em></h1>
+    <h1>Esempi di cosa<br>posso <em>costruire</em></h1>
     <p class="lead">
-      Strumenti che ho progettato e costruito io, con l'aiuto dell'intelligenza artificiale.
-      Non sono lavori per clienti: sono progetti miei, online e funzionanti.
-      Aprili e provali, è il modo più rapido per capire cosa si può fare.
+      Due strumenti che ho progettato e costruito io, con l'aiuto dell'intelligenza artificiale.
+      Per ognuno trovi il problema di partenza, cosa ho fatto e il risultato.
+      Sono online: aprili e pensa a cosa potrebbe servire nel tuo lavoro.
     </p>
   </div>
 </section>
@@ -37,8 +37,13 @@ description: "Strumenti che ho progettato e costruito con l'intelligenza artific
         <span class="case-tag">{{ p.tag }}</span>
         <h2>{{ p.nome }}</h2>
         <p class="project-claim">{{ p.sottotitolo }}</p>
-        <p>{{ p.descrizione }}</p>
-        <p class="project-nota"><strong>Cosa mostra.</strong> {{ p.cosa_mostra }}</p>
+        <dl class="project-steps">
+          <dt>Il problema</dt><dd>{{ p.problema }}</dd>
+          <dt>Cosa ho costruito</dt><dd>{{ p.descrizione }}</dd>
+          <dt>Tecnologia</dt><dd>{{ p.tecnologia }}</dd>
+          <dt>Risultato</dt><dd>{{ p.risultato }}</dd>
+        </dl>
+        <p class="project-nota"><strong>Per il tuo lavoro.</strong> {{ p.per_te }}</p>
         <a class="btn btn-outline" href="{{ p.url | relative_url }}" target="_blank" rel="noopener">Apri il progetto <span aria-hidden="true">↗</span></a>
       </div>
     </article>

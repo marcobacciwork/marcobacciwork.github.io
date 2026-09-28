@@ -1,19 +1,27 @@
 # Progetti mostrati nella pagina Progetti e in home.
 # Per aggiungerne uno: copia un blocco intero (dal trattino in poi) e cambia i testi.
+# Schema: problema → cosa ho costruito (descrizione) → tecnologia → risultato → per_te.
+# Nel campo risultato solo fatti verificabili: niente numeri inventati.
 # immagine: facoltativa. Metti lo screenshot in assets/img/progetti/ e scrivi qui il nome del file.
 
 - nome: "WorldEconomy"
   tag: "Dati pubblici"
   sottotitolo: "Confronta le grandi economie del mondo"
-  descrizione: "Mette a confronto sette economie, tra cui Italia, Germania, Stati Uniti e Cina, su otto indicatori: crescita, inflazione, disoccupazione, debito pubblico e altri. I dati arrivano in automatico dalla Banca Mondiale e coprono gli anni dal 2010 al 2023."
-  cosa_mostra: "Come una fonte di dati pubblica diventa un cruscotto che chiunque sa leggere, senza fogli di calcolo da aggiornare a mano."
+  problema: "I dati economici pubblici esistono, ma sono sparsi in tabelle lunghe, difficili da leggere e da tenere aggiornate."
+  descrizione: "Un cruscotto che mette a confronto sette economie, tra cui Italia, Germania, Stati Uniti e Cina, su otto indicatori: crescita, inflazione, disoccupazione, debito pubblico e altri, dal 2010 al 2023."
+  tecnologia: "Pagina web leggera collegata in tempo reale alla Banca Mondiale. Codice scritto con l'aiuto dell'intelligenza artificiale."
+  risultato: "Online e gratuito. Si aggiorna da solo a ogni apertura: nessun foglio di calcolo da sistemare a mano."
+  per_te: "Un cruscotto simile può mostrarti a colpo d'occhio i numeri che oggi cerchi in più file."
   url: "/WorldEconomy/"
   immagine: ""
 
 - nome: "CloudScanner"
   tag: "Costi e fornitori"
   sottotitolo: "Confronta i costi di otto fornitori cloud"
-  descrizione: "Pensato per consulenti informatici e agenzie che rivendono servizi cloud. Confronta in pochi secondi i prezzi di otto fornitori, calcola il margine di rivendita e riassume i programmi di partnership ufficiali. Si usa senza registrazione."
-  cosa_mostra: "Nasce dagli anni passati a gestire i rapporti con i grandi fornitori di tecnologia: un lavoro di confronto che prima richiedeva ore, ridotto a pochi clic."
+  problema: "Confrontare prezzi e programmi partner di otto fornitori cloud voleva dire ore passate tra listini e documenti diversi."
+  descrizione: "Uno strumento per consulenti informatici e agenzie che rivendono servizi cloud. Confronta i prezzi di otto fornitori, calcola il margine di rivendita e riassume i programmi di partnership ufficiali."
+  tecnologia: "Pagina web costruita con l'aiuto dell'intelligenza artificiale, con dati presi dai listini e dai programmi partner ufficiali. I calcoli avvengono nel browser."
+  risultato: "Online, gratuito, si usa senza registrazione. Un confronto che richiedeva ore si fa in pochi clic."
+  per_te: "Lo stesso metodo funziona per confrontare i tuoi fornitori, le tariffe o i preventivi che ricevi."
   url: "/CloudScanner/"
   immagine: ""

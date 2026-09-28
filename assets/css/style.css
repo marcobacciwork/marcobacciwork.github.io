@@ -1665,3 +1665,80 @@ a.card:hover .card-mark { background: var(--accent); color: #fff; }
 .project-nota strong { color: var(--text); font-weight: 600; }
 
 .project-card .case-tag { align-self: flex-start; margin-bottom: 0.2rem; }
+
+/* --------------------------------------------------------------------------
+   27. Progetti: schema problema → soluzione → tecnologia → risultato
+   -------------------------------------------------------------------------- */
+.project-steps {
+  margin: 0.4rem 0 0;
+  display: grid;
+  grid-template-columns: minmax(8.5rem, auto) 1fr;
+  gap: 0.75rem 1.2rem;
+  max-width: 60ch;
+}
+
+.project-steps dt {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text);
+  padding-top: 0.2rem;
+}
+
+.project-steps dd {
+  margin: 0;
+  color: var(--text-2);
+  line-height: 1.6;
+}
+
+@media (max-width: 560px) {
+  .project-steps { grid-template-columns: 1fr; gap: 0.2rem; }
+  .project-steps dd { margin-bottom: 0.7rem; }
+}
+
+/* --------------------------------------------------------------------------
+   28. Chi sono: credenziali · Home: nota sotto la CTA, "Tutto resta tuo"
+   -------------------------------------------------------------------------- */
+.cred {
+  list-style: none;
+  margin: 2rem 0 2.2rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1px;
+  background: var(--line-deep);
+  border: 1px solid var(--line-deep);
+  max-width: 62rem;
+}
+
+.cred li {
+  background: var(--deep);
+  padding: 1rem 1.15rem;
+  font-size: 0.93rem;
+  line-height: 1.5;
+  color: var(--on-deep-2);
+}
+
+.cred li strong {
+  display: block;
+  margin-bottom: 0.25rem;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: var(--on-deep);
+}
+
+@media (max-width: 760px) {
+  .cred { grid-template-columns: 1fr; }
+}
+
+.cta-note {
+  margin: 1rem 0 0;
+  max-width: 52ch;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--on-deep-2);
+}
+
+.section .cta-note, .section-warm .cta-note { color: var(--text-2); margin-inline: auto; }
