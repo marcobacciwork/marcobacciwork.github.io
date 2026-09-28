@@ -1742,3 +1742,31 @@ a.card:hover .card-mark { background: var(--accent); color: #fff; }
 }
 
 .section .cta-note, .section-warm .cta-note { color: var(--text-2); margin-inline: auto; }
+
+/* --------------------------------------------------------------------------
+   29. Chi sono: foto nell'intestazione
+   -------------------------------------------------------------------------- */
+.bio-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(200px, 26vw, 300px);
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: end;
+}
+
+.bio-foto {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--radius, 10px);
+  border: 1px solid var(--line-deep);
+  box-shadow: 8px 8px 0 var(--accent);
+}
+
+@media (max-width: 760px) {
+  .bio-top { grid-template-columns: 1fr; }
+  .bio-foto { max-width: 260px; grid-row: 1; }
+}
+.bio-top h1 { font-size: clamp(2.3rem, 4.4vw, 3.5rem); }
+@media (max-width: 760px) { .bio-foto { max-width: 210px; } }
