@@ -121,10 +121,12 @@
       Array.prototype.forEach.call(voci, function (v, k) {
         if (v.classList.contains('acceso')) i = k;
       });
-      lista.addEventListener('mouseenter', function () { fermo = true; });
-      lista.addEventListener('mouseleave', function () { fermo = false; });
+      /* Pausa solo con un mouse vero: sul telefono il tocco simula il passaggio
+         del mouse ma non lo "toglie" mai, e la sequenza restava ferma */
+      lista.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') fermo = true; });
+      lista.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') fermo = false; });
       setInterval(function () {
-        if (fermo) return;
+        if (fermo || document.hidden) return;
         voci[i].classList.remove('acceso');
         i = (i + 1) % voci.length;
         voci[i].classList.add('acceso');
