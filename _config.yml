@@ -12,7 +12,7 @@ author:
   telefono_link: "+393522957889"     # per il clic da cellulare: solo cifre, con +39
 
 # Link esterni
-booking_url: "https://cal.com/marcobacci/call-20min"                  # DA VERIFICARE: deve essere il tuo link Cal.com vero
+booking_url: "https://cal.com/marco-bacci-ai/call-20min"
 amazon_author_url: "https://www.amazon.it/stores/author/PLACEHOLDER"  # finché resta PLACEHOLDER, il pulsante Amazon non compare
 linkedin_url: "https://www.linkedin.com/in/marcobacci94/"
 linkedin_nome: "marcobacci94"
