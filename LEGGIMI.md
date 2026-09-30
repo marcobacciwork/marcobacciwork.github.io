@@ -92,3 +92,10 @@ salvato come `og-image.png`. Il sorgente non viene pubblicato.
 - **I prezzi non compaiono** per i servizi, come da posizionamento.
 - **Accessibilità**: contrasto verificato, navigazione da tastiera, `prefers-reduced-motion`
   rispettato, salto al contenuto.
+
+## Blog
+
+- Gli articoli stanno in `_posts/`, uno per file, con il nome `AAAA-MM-GG-parole-del-titolo.md`.
+- Per scriverne uno nuovo copia `_modelli/modello-articolo.md` dentro `_posts/`, rinominalo e compila `title`, `description` e `date`.
+- L'articolo compare da solo nella pagina /blog, con indirizzo `marcobacci.it/blog/parole-del-titolo/`, e nella sitemap.
+- I meta per Google e per le anteprime social li genera `jekyll-seo-tag` dal titolo e dalla descrizione.
