@@ -1,0 +1,34 @@
+---
+layout: default
+---
+
+<article>
+  <section class="hero hero-post">
+    <div class="wrap hero-inner">
+      <p class="eyebrow" style="color:var(--brass)">
+        <a class="post-back" href="{{ '/blog/' | relative_url }}">Blog</a> · {% include data-it.html data=page.date %}
+      </p>
+      <h1>{{ page.title }}</h1>
+      {% if page.description %}<p class="lead">{{ page.description }}</p>{% endif %}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap wrap-narrow prose post-body">
+      {{ content }}
+    </div>
+  </section>
+</article>
+
+<section class="section section-warm">
+  <div class="wrap wrap-narrow" style="text-align:center">
+    <h2>Vuoi capire come applicarlo nel tuo lavoro?</h2>
+    <p class="lead" style="margin:0 auto 2rem">
+      Venti minuti di call gratuita: mi racconti come lavori e ti dico se e dove l'AI può esserti utile.
+    </p>
+    <div class="btn-row" style="justify-content:center">
+      <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Prenota una call</a>
+      <a class="btn btn-outline" href="{{ '/blog/' | relative_url }}">Altri articoli</a>
+    </div>
+  </div>
+</section>

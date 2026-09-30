@@ -1,0 +1,39 @@
+---
+layout: default
+title: "Blog"
+nav: blog
+permalink: /blog/
+description: "Articoli pratici sull'intelligenza artificiale per studi professionali e imprese: cosa funziona, cosa no e cosa chiedono le regole."
+---
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow" style="color:var(--brass)">Blog</p>
+    <h1>Intelligenza artificiale,<br>spiegata <em>sul lavoro vero</em></h1>
+    <p class="lead">
+      Articoli brevi e pratici per chi lavora in uno studio o in un'impresa:
+      cosa si può fare con l'AI, cosa conviene lasciar perdere e cosa chiedono le regole.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap wrap-narrow">
+    {% if site.posts.size > 0 %}
+    <ul class="post-list">
+      {% for post in site.posts %}
+      <li>
+        <a class="post-item" href="{{ post.url | relative_url }}">
+          <span class="post-date">{% include data-it.html data=post.date %}</span>
+          <span class="post-title">{{ post.title }}</span>
+          {% if post.description %}<span class="post-desc">{{ post.description }}</span>{% endif %}
+          <span class="link-arrow">Leggi l'articolo</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+    {% else %}
+    <p class="lead">Il primo articolo arriva a breve.</p>
+    {% endif %}
+  </div>
+</section>

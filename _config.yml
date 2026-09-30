@@ -4,6 +4,8 @@ description: "Formazione e consulenza sull'intelligenza artificiale per studi pr
 url: "https://marcobacci.it"
 baseurl: ""
 lang: it
+locale: it_IT
+timezone: Europe/Rome
 
 author:
   name: "Marco Bacci"
@@ -28,7 +30,22 @@ legal:
   sede: "Roma, Italia"
 
 plugins:
+  - jekyll-seo-tag
   - jekyll-sitemap
+
+# Blog: indirizzo e impaginazione degli articoli
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      nav: blog
+      permalink: /blog/:title/
+  - scope:
+      path: ""
+    values:
+      image: /assets/img/og-image.png
 
 exclude:
   - README.md

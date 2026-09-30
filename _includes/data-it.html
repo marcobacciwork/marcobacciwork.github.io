@@ -1,0 +1,4 @@
+{%- comment -%} Data in italiano: {% include data-it.html data=post.date %} {%- endcomment -%}
+{%- assign mesi = "gennaio,febbraio,marzo,aprile,maggio,giugno,luglio,agosto,settembre,ottobre,novembre,dicembre" | split: "," -%}
+{%- assign m = include.data | date: "%-m" | minus: 1 -%}
+<time datetime="{{ include.data | date_to_xmlschema }}">{{ include.data | date: "%-d" }} {{ mesi[m] }} {{ include.data | date: "%Y" }}</time>
