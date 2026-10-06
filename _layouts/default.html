@@ -37,6 +37,44 @@
 </head>
 
 <body>
+<div class="splash" id="splash" aria-hidden="true">
+  <div class="splash-logo">
+    <picture>
+      <source media="(max-width: 640px)" data-srcset="{{ '/assets/img/logo/logo-mb-ai-splash-verticale.svg' | relative_url }}">
+      <img data-src="{{ '/assets/img/logo/logo-mb-ai-splash.svg' | relative_url }}" width="1200" height="404" alt="">
+    </picture>
+  </div>
+  <button class="splash-salta" type="button" tabindex="-1">Salta</button>
+</div>
+<script>
+  /* Apertura con il logo animato: solo alla prima pagina della visita,
+     mai con "riduci movimento". Si chiude da sola o con un clic/tasto. */
+  (function () {
+    var d = document.documentElement, s = document.getElementById('splash');
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      if (sessionStorage.getItem('splash-vista')) return;
+      sessionStorage.setItem('splash-vista', '1');
+    } catch (e) { return; }
+    var src = s.querySelector('source'), img = s.querySelector('img');
+    src.srcset = src.getAttribute('data-srcset');
+    img.src = img.getAttribute('data-src');
+    d.classList.add('con-splash');
+    var chiuso = false;
+    function chiudi() {
+      if (chiuso) return; chiuso = true;
+      s.classList.add('via');
+      setTimeout(function () { d.classList.remove('con-splash'); s.remove(); }, 750);
+    }
+    var avviato = false;
+    function avvia() { if (avviato) return; avviato = true; setTimeout(chiudi, 5300); }
+    img.addEventListener('load', avvia);
+    img.addEventListener('error', chiudi);
+    setTimeout(avvia, 1500);
+    s.addEventListener('click', chiudi);
+    document.addEventListener('keydown', chiudi, { once: true });
+  })();
+</script>
 <a class="skip" href="#main">Vai al contenuto</a>
 
 {% include header.html %}

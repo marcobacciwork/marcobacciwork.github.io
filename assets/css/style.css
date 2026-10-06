@@ -481,24 +481,6 @@ p:last-child { margin-bottom: 0; }
   overflow: hidden;
 }
 
-/* Logo animato con motto in cima alla hero. Il file SVG è 1200×404 con margini
-   vuoti attorno: il contenitore ritaglia solo la parte disegnata (x 180–1090, y 160–300). */
-.hero-logo {
-  width: min(100%, 560px);
-  aspect-ratio: 910 / 140;
-  overflow: hidden;
-  margin-bottom: clamp(2.25rem, 5vw, 3.5rem);
-}
-
-.hero-logo img {
-  display: block;
-  width: calc(100% * 1200 / 910);
-  max-width: none;
-  height: auto;
-  margin-left: calc(-100% * 180 / 910);
-  margin-top: calc(-100% * 160 / 910);
-}
-
 .hero::before {
   content: "";
   position: absolute;
@@ -1115,6 +1097,30 @@ a.card:hover .card-mark { background: var(--accent); color: #fff; }
   font-size: 0.93rem;
 }
 
+/* Logo con motto in cima al footer, fermo. Il file SVG è 1200×404 con margini
+   vuoti attorno: il contenitore ritaglia solo la parte disegnata (x 180–1090, y 160–300). */
+.footer-brand {
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--line-deep);
+}
+
+.footer-logo {
+  display: block;
+  width: min(100%, 520px);
+  aspect-ratio: 910 / 140;
+  overflow: hidden;
+}
+
+.footer-logo img {
+  display: block;
+  width: calc(100% * 1200 / 910);
+  max-width: none;
+  height: auto;
+  margin-left: calc(-100% * 180 / 910);
+  margin-top: calc(-100% * 160 / 910);
+}
+
 .footer-grid {
   display: grid;
   gap: 2.75rem;
@@ -1161,6 +1167,69 @@ a.card:hover .card-mark { background: var(--accent); color: #fff; }
 
 .footer-bottom a { text-decoration: none; transition: color var(--dur) var(--ease); }
 .footer-bottom a:hover { color: var(--on-deep); }
+
+/* --------------------------------------------------------------------------
+   Apertura: logo animato a tutto schermo, una volta per visita.
+   La classe .con-splash la mette lo script in cima al body; senza
+   JavaScript o con "riduci movimento" l'apertura non compare.
+   -------------------------------------------------------------------------- */
+
+.splash { display: none; }
+
+html.con-splash { overflow: hidden; }
+
+html.con-splash .splash {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  background: var(--deep);
+  transition: opacity 0.7s var(--ease), visibility 0.7s;
+}
+
+html.con-splash .splash.via { opacity: 0; visibility: hidden; }
+
+.splash-logo {
+  width: min(84vw, 1040px);
+  aspect-ratio: 910 / 140;
+  overflow: hidden;
+}
+
+.splash-logo img {
+  display: block;
+  width: calc(100% * 1200 / 910);
+  max-width: none;
+  height: auto;
+  margin-left: calc(-100% * 180 / 910);
+  margin-top: calc(-100% * 160 / 910);
+}
+
+.splash-salta {
+  position: absolute;
+  right: var(--gutter);
+  bottom: var(--gutter);
+  padding: 0.55rem 1rem;
+  font: 500 0.85rem var(--sans);
+  color: var(--on-deep-2);
+  background: transparent;
+  border: 1px solid var(--line-deep);
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.splash-salta:hover,
+.splash-salta:focus-visible { color: var(--on-deep); border-color: var(--on-deep-2); }
+
+/* Telefono in verticale: logo con il motto sotto */
+@media (max-width: 640px) {
+  .splash-logo { width: 82vw; aspect-ratio: 490 / 230; }
+  .splash-logo img {
+    width: calc(100% * 1200 / 490);
+    margin-left: calc(-100% * 180 / 490);
+    margin-top: calc(-100% * 160 / 490);
+  }
+}
 
 /* --------------------------------------------------------------------------
    20. Accessibilità
