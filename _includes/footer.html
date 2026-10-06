@@ -1,6 +1,17 @@
 <footer class="site-footer">
   <div class="wrap">
 
+    <!-- Logo e motto. Parte statico; lo script in default.html avvia
+         la versione animata quando il blocco entra nello schermo. -->
+    <div class="footer-brand">
+      <div class="footer-logo">
+        <img src="{{ '/assets/img/logo/logo-mb-ai.svg' | relative_url }}"
+             data-animato="{{ '/assets/img/logo/logo-mb-ai-animato.svg' | relative_url }}"
+             width="1200" height="404" loading="lazy" decoding="async"
+             alt="MB Ai — Innovazione su misura, costruita con te.">
+      </div>
+    </div>
+
     <div class="footer-grid">
       <div>
         <h4>Cosa faccio</h4>

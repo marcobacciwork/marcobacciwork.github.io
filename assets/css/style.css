@@ -1097,6 +1097,31 @@ a.card:hover .card-mark { background: var(--accent); color: #fff; }
   font-size: 0.93rem;
 }
 
+/* Logo con motto. Il file SVG è 1200×404 con margini vuoti attorno:
+   il contenitore ritaglia solo la parte disegnata (x 180–1090, y 160–300). */
+.footer-brand {
+  padding-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  margin-bottom: clamp(2.5rem, 5vw, 3.5rem);
+  border-bottom: 1px solid var(--line-deep);
+}
+
+.footer-logo {
+  width: min(100%, 620px);
+  aspect-ratio: 910 / 140;
+  overflow: hidden;
+}
+
+.footer-logo img {
+  display: block;
+  width: calc(100% * 1200 / 910);
+  max-width: none;
+  height: auto;
+  margin-left: calc(-100% * 180 / 910);
+  margin-top: calc(-100% * 160 / 910);
+}
+
+.footer-logo img.in-attesa { visibility: hidden; }
+
 .footer-grid {
   display: grid;
   gap: 2.75rem;
