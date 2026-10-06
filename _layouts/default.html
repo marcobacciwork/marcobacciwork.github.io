@@ -123,21 +123,6 @@
       }, 2800);
     });
 
-    /* Logo nel footer: l'animazione parte quando il blocco entra nello schermo,
-       non al caricamento della pagina (altrimenti finirebbe prima che lo si veda) */
-    Array.prototype.forEach.call(document.querySelectorAll('img[data-animato]'), function (img) {
-      img.classList.add('in-attesa');
-      var avvia = new IntersectionObserver(function (voci) {
-        if (!voci[0].isIntersecting) return;
-        avvia.disconnect();
-        img.addEventListener('load', function () { img.classList.remove('in-attesa'); }, { once: true });
-        img.addEventListener('error', function () { img.classList.remove('in-attesa'); }, { once: true });
-        img.loading = 'eager';
-        img.src = img.getAttribute('data-animato');
-      }, { threshold: 0.4 });
-      avvia.observe(img.parentNode);
-    });
-
     /* Intestazione che si stacca */
     var testata = document.querySelector('.site-header');
     if (testata) {

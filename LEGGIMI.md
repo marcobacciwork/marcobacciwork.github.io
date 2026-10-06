@@ -14,7 +14,7 @@ _includes/           header.html (menu) · footer.html · social.html (pulsanti 
 assets/css/style.css Tutto il foglio di stile
 assets/fonts/        Space Grotesk e Inter ospitati sul sito
 assets/img/          favicon.svg · og-image.png · progetti/ (screenshot facoltativi)
-assets/img/logo/     logo MB Ai: statico e animato (SVG), mostrato nel footer
+assets/img/logo/     logo MB Ai: animato (in cima alla home) e statico (SVG)
 
 index.html           Home
 servizi.html         Tre servizi + formati + domande frequenti
