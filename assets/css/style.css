@@ -1162,7 +1162,7 @@ a.card:hover .card-mark { background: var(--accent); color: #fff; }
   gap: 0.6rem 1.8rem;
   justify-content: space-between;
   font-size: 0.83rem;
-  color: rgba(154, 166, 188, 0.72);
+  color: var(--on-deep-2);
 }
 
 .footer-bottom a { text-decoration: none; transition: color var(--dur) var(--ease); }

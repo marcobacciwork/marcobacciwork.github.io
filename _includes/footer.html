@@ -27,7 +27,16 @@
           <li><a href="{{ '/prenota/' | relative_url }}">Prenota una call</a></li>
           <li><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
           <li><a href="tel:{{ site.author.telefono_link }}">{{ site.author.telefono }}</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4>Dati</h4>
+        <ul>
+          <li>{{ site.author.name }}</li>
+          <li>Consulenza e formazione AI</li>
           <li>{{ site.legal.sede }}</li>
+          <li>P.IVA {{ site.legal.piva }}</li>
         </ul>
       </div>
 
