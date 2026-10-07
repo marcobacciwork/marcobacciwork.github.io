@@ -67,7 +67,7 @@
       setTimeout(function () { d.classList.remove('con-splash'); s.remove(); }, 750);
     }
     var avviato = false;
-    function avvia() { if (avviato) return; avviato = true; setTimeout(chiudi, 5300); }
+    function avvia() { if (avviato) return; avviato = true; setTimeout(chiudi, 5750); }
     img.addEventListener('load', avvia);
     img.addEventListener('error', chiudi);
     setTimeout(avvia, 1500);
