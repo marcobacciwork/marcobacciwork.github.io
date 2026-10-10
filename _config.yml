@@ -1,6 +1,6 @@
 title: "Marco Bacci"
-tagline: "Formazione e consulenza sull'intelligenza artificiale"
-description: "Formazione e consulenza sull'intelligenza artificiale per studi professionali e imprese, sul lavoro di tutti i giorni. Roma e tutta Italia."
+tagline: "Formazione, consulenza e affiancamento sull'intelligenza artificiale"
+description: "Formazione, consulenza e affiancamento sull'intelligenza artificiale per studi professionali e imprese, sul lavoro di tutti i giorni. Roma e tutta Italia."
 url: "https://marcobacci.it"
 baseurl: ""
 lang: it
@@ -9,7 +9,7 @@ timezone: Europe/Rome
 
 author:
   name: "Marco Bacci"
-  email: "marco.bacci.work@gmail.com"
+  email: "marco@marcobacci.it"
   telefono: "+39 352 295 7889"       # come si legge sul sito
   telefono_link: "+393522957889"     # per il clic da cellulare: solo cifre, con +39
 
