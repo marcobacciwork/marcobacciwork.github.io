@@ -1,0 +1,47 @@
+{
+  "handle": "@marcobacci.ai",
+  "slides": [
+    {
+      "tipo": "copertina",
+      "etichetta": "Novità AI · 12–18 ottobre",
+      "titolo": "Le novità AI della *settimana*",
+      "testo": "Claude, ChatGPT e Gemini: cosa è cambiato e cosa conta per chi lavora."
+    },
+    {
+      "tipo": "novita",
+      "etichetta": "Claude · 14 ottobre",
+      "titolo": "Titolo breve della novità (esempio)",
+      "testo": "Qui va il testo della novità: cosa cambia e perché conta per un'impresa o uno studio professionale. Massimo 30-40 parole, senza gergo.",
+      "fonte": "Fonte: blog ufficiale Anthropic"
+    },
+    {
+      "tipo": "novita",
+      "etichetta": "ChatGPT · 15 ottobre",
+      "titolo": "Seconda novità, sempre in poche parole",
+      "testo": "Un esempio di testo più lungo per controllare l'impaginazione: se la novità è disponibile solo per alcuni piani o non ancora in Italia, va scritto qui in modo chiaro.",
+      "fonte": "Fonte: note di rilascio OpenAI"
+    },
+    {
+      "tipo": "novita",
+      "etichetta": "Gemini · 16 ottobre",
+      "titolo": "Terza novità di esempio",
+      "testo": "Testo breve di prova.",
+      "fonte": "Fonte: blog Google"
+    },
+    {
+      "tipo": "pratica",
+      "titolo": "Cosa fare in *pratica*",
+      "punti": [
+        "Primo consiglio concreto da provare questa settimana.",
+        "Secondo consiglio, sempre breve.",
+        "Terzo consiglio, se serve."
+      ]
+    },
+    {
+      "tipo": "chiusura",
+      "titolo": "Ti è stato *utile*?",
+      "testo": "Ogni lunedì le novità AI che contano per chi lavora, spiegate in modo semplice.",
+      "cta": ["Salva il post per ritrovarlo", "Iscriviti alla newsletter: link in bio"]
+    }
+  ]
+}
