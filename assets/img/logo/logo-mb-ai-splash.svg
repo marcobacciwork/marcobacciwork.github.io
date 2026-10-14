@@ -19,9 +19,8 @@
 @keyframes bl{0%{opacity:1}50%{opacity:0}}
 
 .hid{opacity:0;animation:sh 1ms linear 1.25s forwards}
-.mbI{transform-box:view-box;transform-origin:315px 228px;animation:inMB 1.1s cubic-bezier(.33,0,.2,1) .1s both}
-@keyframes inMB{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
-.sgI{transform-box:view-box;transform-origin:592px 228px;animation:inSG 1.1s cubic-bezier(.33,0,.2,1) .1s both}
+.mbI path{opacity:0;transform-box:view-box;animation:inL .75s cubic-bezier(.2,.7,.2,1) both}.mbI path:nth-child(1){transform-origin:254px 228px;animation-delay:.15s}.mbI path:nth-child(2){transform-origin:391px 228px;animation-delay:.4s}@keyframes inL{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
+.sgI{transform-box:view-box;transform-origin:592px 228px;animation:inSG .9s cubic-bezier(.33,0,.2,1) .6s both}
 @keyframes inSG{from{opacity:0;transform:translateX(12px) rotate(-6deg) scale(.94)}to{opacity:1;transform:none}}
 .dvI{animation:inDV .8s ease-in-out .5s both}
 @keyframes inDV{from{opacity:0}to{opacity:1}}
