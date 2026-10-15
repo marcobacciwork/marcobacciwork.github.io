@@ -1247,11 +1247,11 @@ html.con-splash .splash.via { opacity: 0; visibility: hidden; }
 
 /* Telefono in verticale: logo con il motto sotto */
 @media (max-width: 640px) {
-  .splash-logo { width: 82vw; aspect-ratio: 490 / 230; }
+  .splash-logo { width: 84vw; aspect-ratio: 530 / 230; }
   .splash-logo img {
-    width: calc(100% * 1200 / 490);
-    margin-left: calc(-100% * 180 / 490);
-    margin-top: calc(-100% * 160 / 490);
+    width: calc(100% * 1200 / 530);
+    margin-left: calc(-100% * 150 / 530);
+    margin-top: calc(-100% * 160 / 530);
   }
 }
 
