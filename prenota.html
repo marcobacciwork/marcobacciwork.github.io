@@ -37,13 +37,42 @@ description: "Venti minuti gratuiti per raccontarmi della tua azienda e di come 
     </div>
 
     <div>
-      <div class="booking-frame">
-        <!-- Sostituire src con il proprio link Cal.com -->
-        <iframe
-          src="{{ site.booking_url }}?embed=true"
-          title="Calendario per prenotare la call"
-          loading="lazy"></iframe>
+      {% comment %}
+        Il calendario Cal.com si carica solo al clic: prima il browser non contatta
+        Cal.com, quindi nessun cookie di terze parti senza un'azione del visitatore.
+        Il link Cal.com si cambia in _config.yml (booking_url).
+      {% endcomment %}
+      <div class="booking-frame" id="booking-frame" data-src="{{ site.booking_url }}?embed=true">
+        <div class="booking-gate">
+          <p class="booking-gate-title">Scegli giorno e ora</p>
+          <p class="booking-gate-text">
+            Il calendario è fornito da Cal.com. Lo carico solo quando lo apri:
+            prima il tuo browser non contatta servizi esterni.
+          </p>
+          <a class="btn btn-primary" id="booking-open" href="{{ site.booking_url }}" target="_blank" rel="noopener">Apri il calendario</a>
+          <p class="booking-gate-note">
+            Dettagli nella <a href="{{ '/cookie-policy/' | relative_url }}">cookie policy</a>
+            e nella <a href="{{ '/privacy/' | relative_url }}">privacy policy</a>.
+          </p>
+        </div>
       </div>
+
+      <script>
+        (function () {
+          var box = document.getElementById('booking-frame');
+          var btn = document.getElementById('booking-open');
+          if (!box || !btn) return;
+          btn.addEventListener('click', function (e) {
+            e.preventDefault();
+            var f = document.createElement('iframe');
+            f.src = box.getAttribute('data-src');
+            f.title = 'Calendario per prenotare la call';
+            box.innerHTML = '';
+            box.appendChild(f);
+            f.focus();
+          });
+        })();
+      </script>
 
       <p style="margin-top:1.2rem;font-size:0.9rem;color:var(--muted)">
         Il calendario non si carica? Scrivimi a
