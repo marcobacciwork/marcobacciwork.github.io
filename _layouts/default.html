@@ -38,17 +38,17 @@
 
 <body>
 <div class="splash" id="splash" aria-hidden="true">
-  <div class="splash-logo">
-    <picture>
-      <source media="(max-width: 640px)" data-srcset="{{ '/assets/img/logo/logo-mb-ai-splash-verticale.svg' | relative_url }}">
-      <img data-src="{{ '/assets/img/logo/logo-mb-ai-splash.svg' | relative_url }}" width="1200" height="404" alt="">
-    </picture>
-  </div>
+  <div class="splash-logo"
+       data-orizzontale="{{ '/assets/img/logo/logo-mb-ai-splash.svg' | relative_url }}"
+       data-verticale="{{ '/assets/img/logo/logo-mb-ai-splash-verticale.svg' | relative_url }}"></div>
   <button class="splash-salta" type="button" tabindex="-1">Salta</button>
 </div>
 <script>
   /* Apertura con il logo animato: solo alla prima pagina della visita,
-     mai con "riduci movimento". Si chiude da sola o con un clic/tasto. */
+     mai con "riduci movimento". Si chiude da sola o con un clic/tasto.
+     Il logo viene inserito nella pagina (non come immagine) e le animazioni
+     partono solo quando l'apertura è davvero a schermo: così MB, il segno
+     e la "Ai" si vedono sempre entrare, anche su telefono. */
   (function () {
     var d = document.documentElement, s = document.getElementById('splash');
     try {
@@ -56,23 +56,49 @@
       if (sessionStorage.getItem('splash-vista')) return;
       sessionStorage.setItem('splash-vista', '1');
     } catch (e) { return; }
-    var src = s.querySelector('source'), img = s.querySelector('img');
-    src.srcset = src.getAttribute('data-srcset');
-    img.src = img.getAttribute('data-src');
+    var box = s.querySelector('.splash-logo');
+    if (!box.attachShadow || !window.fetch) return;
     d.classList.add('con-splash');
-    var chiuso = false;
+    var chiuso = false, avviato = false;
     function chiudi() {
       if (chiuso) return; chiuso = true;
       s.classList.add('via');
       setTimeout(function () { d.classList.remove('con-splash'); s.remove(); }, 750);
     }
-    var avviato = false;
-    function avvia() { if (avviato) return; avviato = true; setTimeout(chiudi, 7000); }
-    img.addEventListener('load', avvia);
-    img.addEventListener('error', chiudi);
-    setTimeout(avvia, 1500);
     s.addEventListener('click', chiudi);
     document.addEventListener('keydown', chiudi, { once: true });
+    setTimeout(function () { if (!avviato) chiudi(); }, 4000);
+    var url = window.matchMedia('(max-width: 640px)').matches
+      ? box.getAttribute('data-verticale') : box.getAttribute('data-orizzontale');
+    fetch(url).then(function (r) {
+      if (!r.ok) throw new Error(r.status);
+      return r.text();
+    }).then(function (svg) {
+      if (chiuso) return;
+      var root = box.attachShadow({ mode: 'open' });
+      root.innerHTML =
+        '<style>' +
+        'svg{display:block;max-width:none;height:auto;aspect-ratio:1200/404;' +
+        'width:calc(100% * 1200 / 910);margin-left:calc(-100% * 180 / 910);margin-top:calc(-100% * 160 / 910)}' +
+        '@media (max-width:640px){svg{width:calc(100% * 1200 / 530);' +
+        'margin-left:calc(-100% * 150 / 530);margin-top:calc(-100% * 160 / 530)}}' +
+        '.ferma,.ferma *{animation-play-state:paused!important}' +
+        '</style>' + svg;
+      var el = root.querySelector('svg');
+      if (!el) throw new Error('svg');
+      el.removeAttribute('width'); el.removeAttribute('height');
+      el.setAttribute('aria-hidden', 'true');
+      el.classList.add('ferma');
+      /* due fotogrammi: il primo è già disegnato, poi si parte da zero */
+      requestAnimationFrame(function () {
+        requestAnimationFrame(function () {
+          if (chiuso) return;
+          el.classList.remove('ferma');
+          avviato = true;
+          setTimeout(chiudi, 7000);
+        });
+      });
+    }).catch(chiudi);
   })();
 </script>
 <a class="skip" href="#main">Vai al contenuto</a>

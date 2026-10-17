@@ -1220,14 +1220,7 @@ html.con-splash .splash.via { opacity: 0; visibility: hidden; }
   overflow: hidden;
 }
 
-.splash-logo img {
-  display: block;
-  width: calc(100% * 1200 / 910);
-  max-width: none;
-  height: auto;
-  margin-left: calc(-100% * 180 / 910);
-  margin-top: calc(-100% * 160 / 910);
-}
+/* Il ritaglio del logo dentro il riquadro è nello script in _layouts/default.html */
 
 .splash-salta {
   position: absolute;
@@ -1248,11 +1241,6 @@ html.con-splash .splash.via { opacity: 0; visibility: hidden; }
 /* Telefono in verticale: logo con il motto sotto */
 @media (max-width: 640px) {
   .splash-logo { width: 84vw; aspect-ratio: 530 / 230; }
-  .splash-logo img {
-    width: calc(100% * 1200 / 530);
-    margin-left: calc(-100% * 150 / 530);
-    margin-top: calc(-100% * 160 / 530);
-  }
 }
 
 /* --------------------------------------------------------------------------
