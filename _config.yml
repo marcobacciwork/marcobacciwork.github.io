@@ -27,7 +27,7 @@ newsletter_attiva: false
 # Dati legali
 legal:
   piva: "18685861009"
-  sede: "Roma, Italia"
+  sede: "Via Francesco Vitalini 65, 00155 Roma"
 
 plugins:
   - jekyll-seo-tag

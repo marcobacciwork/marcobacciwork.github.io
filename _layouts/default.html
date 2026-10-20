@@ -27,7 +27,7 @@
   "email": {{ site.author.email | jsonify }},
   "telephone": {{ site.author.telefono_link | jsonify }},
   "vatID": "IT{{ site.legal.piva }}",
-  "address": { "@type": "PostalAddress", "addressLocality": "Roma", "addressCountry": "IT" },
+  "address": { "@type": "PostalAddress", "streetAddress": "Via Francesco Vitalini 65", "postalCode": "00155", "addressLocality": "Roma", "addressCountry": "IT" },
   "sameAs": [{{ site.linkedin_url | jsonify }}, {{ site.instagram_url | jsonify }}],
   "areaServed": "IT",
   "knowsLanguage": "it",
