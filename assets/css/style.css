@@ -507,6 +507,75 @@ p:last-child { margin-bottom: 0; }
 .hero .eyebrow { color: var(--accent-lift); }
 .hero .btn-row { margin-top: 2.6rem; }
 
+/* Riquadro di prenotazione sotto l'incipit: ben visibile, non solo un pulsante */
+.hero-prenota {
+  margin-top: 2.6rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.6rem 2.4rem;
+  align-items: center;
+  padding: clamp(1.4rem, 3.5vw, 2.1rem);
+  background: var(--deep-2);
+  border: 1px solid var(--deep-line);
+  border-left: 4px solid var(--accent);
+  border-radius: var(--radius);
+}
+
+.hero-prenota-titolo {
+  margin: 0 0 0.5rem;
+  font-family: var(--display);
+  font-size: clamp(1.25rem, 2.6vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.015em;
+  color: var(--on-deep);
+}
+
+.hero-prenota-testo > p:not(.hero-prenota-titolo) {
+  margin: 0;
+  max-width: 48ch;
+  font-size: 0.98rem;
+  line-height: 1.55;
+  color: var(--on-deep-2);
+}
+
+.hero-prenota-punti {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 1.2rem;
+  margin: 1rem 0 0;
+  padding: 0;
+  list-style: none;
+  font-size: 0.88rem;
+  color: var(--on-deep);
+}
+
+.hero-prenota-punti li::before {
+  content: "✓";
+  margin-right: 0.4rem;
+  color: var(--accent-lift);
+  font-weight: 600;
+}
+
+.hero-prenota-azioni {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-grande { padding: 1.15rem 2.3rem; font-size: 1.05rem; }
+
+.hero .hero-prenota-link { color: var(--on-deep-2); font-size: 0.9rem; }
+.hero .hero-prenota-link:hover { color: var(--on-deep); }
+
+@media (max-width: 760px) {
+  .hero-prenota { grid-template-columns: 1fr; }
+  .hero-prenota-azioni { align-items: stretch; }
+  .hero-prenota-azioni .btn { width: 100%; }
+  .hero-prenota-link { align-self: center; }
+}
+
 .hero-meta {
   margin-top: 3.2rem;
   padding-top: 1.7rem;
@@ -1311,6 +1380,7 @@ html.con-splash .splash.via { opacity: 0; visibility: hidden; }
   .js-anim .hero h1,
   .js-anim .hero .lead,
   .js-anim .hero .btn-row,
+  .js-anim .hero-prenota,
   .js-anim .hero-meta,
   .js-anim .hero .eyebrow {
     opacity: 0;
@@ -1322,6 +1392,7 @@ html.con-splash .splash.via { opacity: 0; visibility: hidden; }
   .js-anim .hero h1        { animation-delay: 0.14s; }
   .js-anim .hero .lead     { animation-delay: 0.30s; }
   .js-anim .hero .btn-row  { animation-delay: 0.44s; }
+  .js-anim .hero-prenota   { animation-delay: 0.44s; }
   .js-anim .hero-meta      { animation-delay: 0.56s; }
 
   @keyframes entra {
