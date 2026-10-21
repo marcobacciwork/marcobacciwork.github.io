@@ -1046,6 +1046,7 @@ a.card:hover .card-mark { background: var(--accent); color: #fff; }
 }
 
 .form-note a { color: var(--accent-lift); }
+.optin .form-note { font-size: 0.85rem; line-height: 1.6; margin: 1rem 0 0; }
 
 /* --------------------------------------------------------------------------
    16. Prenotazione
