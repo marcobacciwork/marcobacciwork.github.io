@@ -23,7 +23,7 @@ linkedin_nome: "marcobacci94"
 instagram_url: "https://www.instagram.com/marcobacci.ai/"
 instagram_nome: "@marcobacci.ai"
 
-# Guida gratuita in home: metti true quando il PDF esiste e il modulo Brevo è collegato
+# Iscrizione alla newsletter in home: metti true quando il modulo Brevo è collegato
 newsletter_attiva: false
 
 # Dati legali
