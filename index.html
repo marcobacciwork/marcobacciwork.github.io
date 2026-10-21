@@ -150,7 +150,7 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
       <h2>Con chi sto lavorando</h2>
     </div>
 
-    <ul class="clienti{% if clienti.size == 1 %} clienti-uno{% endif %}" role="list">
+    <ul class="clienti" role="list">
       {% for c in clienti %}
       <li class="cliente">
         {% if c.url and c.url != "" %}
@@ -163,10 +163,8 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
         {% if c.url and c.url != "" %}</a>{% else %}</span>{% endif %}
 
         <div class="cliente-testo">
-          <p class="cliente-ruolo">{{ c.ruolo }}</p>
           <h3>{{ c.nome }}</h3>
           {% if c.settore %}<p class="cliente-settore">{{ c.settore }}</p>{% endif %}
-          {% if c.frase %}<p>{{ c.frase }}</p>{% endif %}
         </div>
       </li>
       {% endfor %}

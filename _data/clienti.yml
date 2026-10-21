@@ -1,17 +1,14 @@
 # Partner e clienti mostrati in home (sezione "Partner e clienti").
 # Per aggiungerne uno: copia un blocco intero (dal trattino in poi) e cambia i testi.
 #
-# ruolo: scegli tra "Cliente", "Partner", "Cliente e partner"
 # logo:  salva il file in assets/img/clienti/ (meglio SVG, oppure PNG con sfondo trasparente,
 #        largo almeno 600 px) e scrivi qui il nome del file
-# frase: una riga su cosa fate insieme. Solo fatti veri, niente numeri non verificabili.
+# settore: attività e città, in una riga
 # url:   facoltativo. Se c'è, il logo porta al loro sito.
 #
 # Prima di pubblicare un logo serve l'ok scritto dell'azienda (basta una email).
 
 - nome: "Hotels Doctors"
-  ruolo: "Cliente e partner"
   logo: "hotels-doctors.png"
   settore: "Consulenza alberghiera · Roma"
-  frase: "Ho formato il loro team di consulenti sull'AI e li affianco nel portarla nel lavoro di tutti i giorni. Insieme la portiamo negli hotel che seguono."
   url: ""

@@ -9,7 +9,7 @@ Sito vetrina statico. Jekyll su GitHub Pages, nessun backend.
 ```
 _config.yml          Dati e link: email, telefono, P.IVA, profili social, interruttore guida
 _data/progetti.yml   I progetti mostrati nella pagina Progetti e in home
-_data/clienti.yml    Partner e clienti mostrati in home (logo, ruolo, una frase)
+_data/clienti.yml    Partner e clienti mostrati in home (logo, nome, settore)
 _layouts/default     Head, meta social, struttura pagina, animazioni
 _includes/           header.html (menu) · footer.html · social.html (pulsanti LinkedIn e Instagram)
 assets/css/style.css Tutto il foglio di stile
@@ -75,9 +75,8 @@ dopo il collegamento del dominio si aprono anche da `marcobacci.it/WorldEconomy/
 Per lo screenshot: salvalo in `assets/img/progetti/` e scrivi il nome del file nel campo `immagine`.
 
 **Nuovo partner o cliente** → salva il logo in `assets/img/clienti/`, poi in `_data/clienti.yml`
-copia un blocco e cambia nome, ruolo (Cliente / Partner / Cliente e partner), settore e frase.
-Con un solo nome la scheda è orizzontale, da due in su diventa una griglia. Prima di pubblicare
-un logo fatti dare l'ok scritto dall'azienda.
+copia un blocco e cambia nome, logo e settore. Le schede si affiancano tre per riga.
+Prima di pubblicare un logo fatti dare l'ok scritto dall'azienda.
 
 **Colori e caratteri** → le variabili in cima a `style.css`, sezione 1.
 Il foglio di stile mantiene degli alias (`--navy`, `--brass`, `--ivory`) perché alcune pagine
