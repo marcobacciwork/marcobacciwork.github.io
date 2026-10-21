@@ -252,7 +252,7 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
 <!-- ============ NEWSLETTER ============ -->
 {% comment %} Si accende da _config.yml con newsletter_attiva: true {% endcomment %}
 {% if site.newsletter_attiva %}
-<section class="section">
+<section class="section" id="newsletter">
   <div class="wrap">
     <div class="optin">
       <div>
@@ -267,10 +267,13 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
 
       <div>
         {% comment %}
-          Sostituire l'action con l'URL del modulo Brevo (modulo HTML semplice,
-          senza lo script di Brevo, così la pagina non carica risorse esterne).
+          Modulo Brevo in HTML semplice, senza lo script di Brevo: la pagina non carica
+          risorse esterne. L'indirizzo sta in _config.yml → newsletter_form_url.
+          Dopo l'invio Brevo rimanda a /grazie/, dopo la conferma a /iscrizione-confermata/.
         {% endcomment %}
-        <form action="INSERIRE_URL_MODULO_BREVO" method="POST">
+        <form action="{{ site.newsletter_form_url }}" method="POST">
+          <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+          <input type="hidden" name="locale" value="it">
           <div class="form-row">
             <label for="email" class="skip">Indirizzo email</label>
             <input class="field" type="email" id="email" name="EMAIL" required

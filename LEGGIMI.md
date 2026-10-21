@@ -24,7 +24,8 @@ progetti.html        Cosa ho costruito
 libri.html           Libri
 chi-sono.html        Storia professionale
 prenota.html         Calendario Cal.com incorporato
-grazie.html          Atterraggio dopo l'iscrizione alla newsletter (serve quando l'iscrizione è attiva)
+grazie.html          Dopo l'iscrizione alla newsletter: "controlla la posta e conferma"
+iscrizione-confermata.html  Dopo il clic sul link di conferma nell'email
 privacy.html         Bozza da far verificare
 cookie-policy.html   Valida finché non aggiungi strumenti che tracciano
 404.html             Pagina mostrata quando un indirizzo non esiste
@@ -56,8 +57,6 @@ dopo il collegamento del dominio si aprono anche da `marcobacci.it/WorldEconomy/
 |---|---|
 | `_config.yml` → `booking_url` | Il tuo link Cal.com vero. Finché l'account non esiste, il calendario in Prenota non si carica |
 | `_config.yml` → `amazon_author_url` | La tua pagina autore Amazon. Finché resta PLACEHOLDER il pulsante Amazon non compare |
-| `_config.yml` → `newsletter_attiva` | Metti `true` quando il modulo Brevo è collegato |
-| `index.html` | Cerca `INSERIRE_URL_MODULO_BREVO` e sostituisci con l'action del modulo Brevo |
 | `privacy.html` e `cookie-policy.html` | Far verificare a un professionista |
 | `assets/img/favicon.svg` | Sostituire con la nuova icona |
 

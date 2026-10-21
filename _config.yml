@@ -24,7 +24,9 @@ instagram_url: "https://www.instagram.com/marcobacci.ai/"
 instagram_nome: "@marcobacci.ai"
 
 # Iscrizione alla newsletter in home: metti true quando il modulo Brevo è collegato
-newsletter_attiva: false
+newsletter_attiva: true
+# Indirizzo del modulo Brevo "Iscrizione newsletter sito" (HTML semplice), lista Newsletter con doppia conferma
+newsletter_form_url: "https://eeb1df63.sibforms.com/serve/MUIFANal_RyAwzAbeb-qZYYQODxpD70wefYrDKoRsEDqW3kbAVwrfHGTkdBrDFwHBxBuVND11RIg6pZiiBdMd1NuoncqSlM8TCPcc9_BQnB1VrFpynZf8lTNBpOi7p5zwrp41IKK8zmW5NBSrSvT_GcGPiOHvmwatHm-MxYBtfQBjdxrj8oV0_CNK2y3heV28P5fPdteo8h-Dgu80w=="
 
 # Dati legali
 legal:
