@@ -2046,3 +2046,93 @@ html.con-splash .splash.via { opacity: 0; visibility: hidden; }
 }
 .form-consent input { margin-top: 0.2rem; flex: none; width: 1rem; height: 1rem; accent-color: var(--accent); }
 .form-consent a { color: inherit; }
+
+/* --------------------------------------------------------------------------
+   Partner e clienti (home). Dati in _data/clienti.yml
+   Un solo nome: scheda orizzontale. Da due in su: griglia di schede.
+   -------------------------------------------------------------------------- */
+.clienti-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
+
+.clienti {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: clamp(1.25rem, 2.4vw, 1.75rem);
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+}
+
+.cliente {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+  padding: clamp(1.4rem, 2.6vw, 2rem);
+}
+
+.cliente-logo {
+  display: grid;
+  place-items: center;
+  height: 112px;
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius);
+  background: var(--bg);
+}
+
+.cliente-logo img {
+  display: block;
+  max-width: 100%;
+  max-height: 88px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+}
+
+a.cliente-logo { transition: background var(--dur) var(--ease); }
+a.cliente-logo:hover { background: var(--accent-soft); }
+
+.cliente-testo h3 { margin: 0 0 0.2rem; }
+
+.cliente-ruolo {
+  display: inline-block;
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.13em;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: var(--accent-soft);
+  border-radius: 100px;
+  padding: 0.3rem 0.85rem;
+}
+
+.cliente-settore {
+  margin: 0 0 0.8rem;
+  font-size: 0.86rem;
+  color: var(--text-3);
+}
+
+.cliente-testo p:last-child {
+  margin-bottom: 0;
+  font-size: 0.96rem;
+  line-height: 1.62;
+  color: var(--text-2);
+}
+
+.cliente-testo p.cliente-settore:last-child { color: var(--text-3); }
+
+@media (min-width: 760px) {
+  .clienti-uno .cliente {
+    flex-direction: row;
+    align-items: center;
+    gap: clamp(2rem, 4vw, 3.5rem);
+  }
+  .clienti-uno .cliente-logo {
+    flex: 0 0 clamp(220px, 28%, 300px);
+    height: 160px;
+  }
+  .clienti-uno .cliente-logo img { max-height: 124px; }
+  .clienti-uno .cliente-testo { max-width: 56ch; }
+}

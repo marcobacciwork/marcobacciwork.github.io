@@ -139,6 +139,42 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
   </div>
 </section>
 
+<!-- ============ PARTNER E CLIENTI ============ -->
+{% comment %} I dati stanno in _data/clienti.yml. Se il file è vuoto la sezione non compare. {% endcomment %}
+{% assign clienti = site.data.clienti %}
+{% if clienti and clienti.size > 0 %}
+<section class="section-warm section-tight" id="clienti">
+  <div class="wrap">
+    <div class="section-head clienti-head">
+      <p class="eyebrow">Partner e clienti</p>
+      <h2>Con chi sto lavorando</h2>
+    </div>
+
+    <ul class="clienti{% if clienti.size == 1 %} clienti-uno{% endif %}" role="list">
+      {% for c in clienti %}
+      <li class="cliente">
+        {% if c.url and c.url != "" %}
+        <a class="cliente-logo" href="{{ c.url }}" target="_blank" rel="noopener">
+        {% else %}
+        <span class="cliente-logo">
+        {% endif %}
+          <img src="{{ '/assets/img/clienti/' | append: c.logo | relative_url }}"
+               alt="{{ c.nome }}" loading="lazy" decoding="async">
+        {% if c.url and c.url != "" %}</a>{% else %}</span>{% endif %}
+
+        <div class="cliente-testo">
+          <p class="cliente-ruolo">{{ c.ruolo }}</p>
+          <h3>{{ c.nome }}</h3>
+          {% if c.settore %}<p class="cliente-settore">{{ c.settore }}</p>{% endif %}
+          {% if c.frase %}<p>{{ c.frase }}</p>{% endif %}
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</section>
+{% endif %}
+
 <!-- ============ TUTTO RESTA TUO ============ -->
 <section class="section">
   <div class="wrap split">
