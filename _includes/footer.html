@@ -26,6 +26,7 @@
           <li><a href="{{ '/prenota/' | relative_url }}">Prenota una call</a></li>
           <li><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></li>
           <li><a href="tel:{{ site.author.telefono_link }}">{{ site.author.telefono }}</a></li>
+          {% if site.author.whatsapp %}<li><a href="https://wa.me/{{ site.author.whatsapp }}?text={{ site.author.whatsapp_testo }}" target="_blank" rel="noopener">Scrivimi su WhatsApp</a></li>{% endif %}
         </ul>
       </div>
 

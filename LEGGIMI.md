@@ -69,7 +69,7 @@ dopo il collegamento del dominio si aprono anche da `marcobacci.it/WorldEconomy/
 
 **Menu o footer** → `_includes/header.html` o `_includes/footer.html`, si aggiornano ovunque.
 
-**Telefono, email, P.IVA, profili social** → `_config.yml`, si aggiornano ovunque.
+**Telefono, WhatsApp, email, P.IVA, profili social** → `_config.yml`, si aggiornano ovunque.
 
 **Nuovo progetto** → in `_data/progetti.yml` copia un blocco intero e cambia i testi.
 Per lo screenshot: salvalo in `assets/img/progetti/` e scrivi il nome del file nel campo `immagine`.

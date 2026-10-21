@@ -12,6 +12,8 @@ author:
   email: "marco@marcobacci.it"
   telefono: "+39 352 295 7889"       # come si legge sul sito
   telefono_link: "+393522957889"     # per il clic da cellulare: solo cifre, con +39
+  whatsapp: "393522957889"           # WhatsApp Business: solo cifre, senza + e senza spazi
+  whatsapp_testo: "Buongiorno%20Marco%2C%20la%20contatto%20dal%20sito%20marcobacci.it."   # messaggio già scritto, codificato per il link ("Buongiorno Marco, la contatto dal sito marcobacci.it.")
 
 # Link esterni
 booking_url: "https://cal.com/marco-bacci-ai/call-20min"

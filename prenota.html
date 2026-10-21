@@ -78,7 +78,8 @@ description: "Venti minuti gratuiti per raccontarmi della tua azienda e di come 
         Il calendario non si carica? Scrivimi a
         <a href="mailto:{{ site.author.email }}" style="color:var(--brass-deep)">{{ site.author.email }}</a>
         oppure chiamami al
-        <a href="tel:{{ site.author.telefono_link }}" style="color:var(--brass-deep)">{{ site.author.telefono }}</a>.
+        <a href="tel:{{ site.author.telefono_link }}" style="color:var(--brass-deep)">{{ site.author.telefono }}</a>{% if site.author.whatsapp %},
+        anche su <a href="https://wa.me/{{ site.author.whatsapp }}?text={{ site.author.whatsapp_testo }}" target="_blank" rel="noopener" style="color:var(--brass-deep)">WhatsApp</a>{% endif %}.
       </p>
     </div>
   </div>
