@@ -22,8 +22,8 @@
 .mbI{opacity:0;transform-box:view-box;animation:inMB 1.625s cubic-bezier(.22,.7,.2,1) 0.25s both}@keyframes inMB{from{opacity:0;transform:translateX(-70px)}to{opacity:1;transform:none}}
 .sgI{transform-box:view-box;transform-origin:592px 228px;animation:inSG 1.25s cubic-bezier(.33,0,.2,1) 1s both}
 @keyframes inSG{from{opacity:0;transform:translateX(12px) rotate(-6deg) scale(.94)}to{opacity:1;transform:none}}
-.dvI{animation:inDV 1s ease-in-out 0.625s both}
-@keyframes inDV{from{opacity:0}to{opacity:1}}
+.dvI{transform-box:view-box;transform-origin:720.1px 178px;animation:inDV 1.1s cubic-bezier(.3,0,.2,1) 3.6s both}
+@keyframes inDV{0%{transform:scaleY(0);stroke-opacity:.85}45%{transform:scaleY(1);stroke-opacity:.85}100%{transform:scaleY(1);stroke-opacity:.2}}
 @media (prefers-reduced-motion:reduce){*{animation-duration:1ms!important;animation-delay:0s!important;animation-iteration-count:1!important}}
 </style>
 
