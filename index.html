@@ -77,6 +77,22 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
   </div>
 </section>
 
+<!-- ============ STRUMENTI GRATUITI (dati in _data/strumenti.yml) ============ -->
+{%- assign strumenti_online = site.data.strumenti | where: "stato", "online" %}
+{% if strumenti_online.size > 0 %}
+<section class="section section-tight" id="strumenti">
+  <div class="wrap">
+    <div class="section-head home-strumenti-head">
+      <p class="eyebrow">Strumenti gratuiti</p>
+      <h2>Prova da solo, senza registrarti</h2>
+      <p class="lead">Strumenti gratuiti per capire costi, rischi e opportunità dell'AI nel tuo lavoro.</p>
+    </div>
+    {% include strumento-card.html s=strumenti_online[0] %}
+    <p class="home-strumenti-more"><a class="link-arrow" href="{{ '/strumenti/' | relative_url }}">Tutti gli strumenti gratuiti</a></p>
+  </div>
+</section>
+{% endif %}
+
 <!-- ============ FIRMA: IL PERCORSO CHE FINISCE ============ -->
 <section class="section-dark section-tight" id="come-lavoro">
   <div class="wrap">

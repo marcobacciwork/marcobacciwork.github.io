@@ -17,6 +17,18 @@
 <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 
+{% comment %}
+  SEGNAPOSTO — Statistiche di visita senza cookie (Plausible, Umami o Cloudflare Web Analytics).
+  Per attivarle:
+  1. incolla lo script che ti dà il servizio al posto della riga "INCOLLA QUI" qui sotto;
+  2. in _config.yml scrivi il nome del servizio nel campo statistiche;
+  3. aggiorna la data nella cookie policy e fai rivedere privacy e cookie policy.
+  Finché il campo statistiche è vuoto, qui non viene pubblicato nulla.
+{% endcomment %}
+{% if site.statistiche and site.statistiche != "" %}
+<!-- INCOLLA QUI lo script delle statistiche -->
+{% endif %}
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",

@@ -28,6 +28,12 @@ newsletter_attiva: true
 # Indirizzo del modulo Brevo "Iscrizione newsletter sito" (HTML semplice), lista Newsletter con doppia conferma
 newsletter_form_url: "https://eeb1df63.sibforms.com/serve/MUIFANal_RyAwzAbeb-qZYYQODxpD70wefYrDKoRsEDqW3kbAVwrfHGTkdBrDFwHBxBuVND11RIg6pZiiBdMd1NuoncqSlM8TCPcc9_BQnB1VrFpynZf8lTNBpOi7p5zwrp41IKK8zmW5NBSrSvT_GcGPiOHvmwatHm-MxYBtfQBjdxrj8oV0_CNK2y3heV28P5fPdteo8h-Dgu80w=="
 
+# Statistiche di visita senza cookie: lascia "" finché non scegli il servizio.
+# Per attivarle: 1) scrivi qui il nome del servizio (es. "Plausible Analytics");
+# 2) incolla lo script nel segnaposto in _layouts/default.html;
+# 3) fai rivedere privacy e cookie policy (il testo cambia da solo in base a questo campo).
+statistiche: ""
+
 # Dati legali
 legal:
   piva: "18685861009"
@@ -55,3 +61,4 @@ exclude:
   - README.md
   - LEGGIMI.md
   - assets/img/og-image.source.html
+  - assets/img/og-strumenti.source.html

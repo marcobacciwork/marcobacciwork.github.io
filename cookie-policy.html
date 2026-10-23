@@ -26,7 +26,8 @@ description: "Quali cookie usa questo sito e perché non compare un banner."
     <h2>Perché non c'è un banner</h2>
     <p>
       Questo sito non usa cookie di profilazione né strumenti che seguono
-      i visitatori da un sito all'altro, e non usa strumenti di statistica.
+      i visitatori da un sito all'altro{% if site.statistiche and site.statistiche != "" %}; le statistiche di visita
+      ({{ site.statistiche }}) funzionano senza cookie{% else %}, e non usa strumenti di statistica{% endif %}.
       Senza trattamenti che richiedono il consenso, il banner non è dovuto
       e sarebbe solo un ostacolo alla lettura.
     </p>

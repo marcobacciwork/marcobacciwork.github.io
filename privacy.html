@@ -86,15 +86,53 @@ description: "Come tratto i dati personali raccolti tramite questo sito."
       solo per capire quali argomenti interessano di più, non per pubblicità.
     </p>
 
+    {%- assign strumenti_online = site.data.strumenti | where: "stato", "online" %}
+    {% if strumenti_online.size > 0 %}
+    <h3>Strumenti gratuiti</h3>
+    {% comment %}
+      Nota per Marco (non pubblicata): le frasi di questa sezione valgono solo se
+      ogni strumento fa i calcoli nel browser e non invia i dati inseriti a nessun server.
+      Controllalo per ogni nuovo strumento prima di metterlo "online" in _data/strumenti.yml.
+    {% endcomment %}
+    <p>
+      Gli strumenti gratuiti che trovi nella pagina <a href="{{ '/strumenti/' | relative_url }}">Strumenti</a>
+      si usano senza registrazione e non impostano cookie. Sono ospitati da GitHub Pages, come il resto del sito.
+      I dati che inserisci per i calcoli vengono elaborati nel tuo browser: non li ricevo e non li conservo.
+    </p>
+    <p>
+      Se uno strumento ti offre di ricevere i risultati via email, i dati del modulo
+      (indirizzo email ed eventuali campi che compili) arrivano a Brevo e li uso per mandarti il report.
+      Il report parte solo dopo che confermi l'indirizzo dal collegamento che ricevi via email.
+      La base giuridica è la tua richiesta. Ricevere il report non ti iscrive alla newsletter:
+      l'iscrizione è una scelta separata, con un consenso a parte.
+    </p>
+    <p>
+      Se da uno strumento prenoti una call, valgono le regole descritte sopra per le prenotazioni.
+    </p>
+    {% endif %}
+
     <h3>Statistiche di visita</h3>
+    {% if site.statistiche and site.statistiche != "" %}
+    <p>
+      Per sapere quante persone visitano il sito e quali pagine leggono uso {{ site.statistiche }},
+      un servizio di statistiche che non usa cookie e non salva informazioni nel tuo browser.
+      Raccoglie solo dati aggregati, come la pagina visitata, il sito di provenienza,
+      il tipo di dispositivo e il paese, senza identificarti e senza seguirti su altri siti.
+      La base giuridica è il mio legittimo interesse a capire come viene usato il sito.
+    </p>
+    <p>
+      Il sito non usa cookie di profilazione né pixel pubblicitari.
+    </p>
+    {% else %}
     <p>
       Il sito non usa strumenti di statistica, cookie di profilazione
       o pixel pubblicitari.
     </p>
+    {% endif %}
 
     <h2>A chi arrivano i dati</h2>
     <p>
-      I fornitori citati sopra (GitHub, Cal.com, Google, Make.com, OVHcloud, Brevo)
+      I fornitori citati sopra (GitHub, Cal.com, Google, Make.com, OVHcloud, Brevo{% if site.statistiche and site.statistiche != "" %}, {{ site.statistiche }}{% endif %})
       trattano i dati per mio conto, come responsabili del trattamento, e solo per i servizi indicati.
       WhatsApp fa eccezione: come scritto sopra, tratta i dati dei messaggi come titolare autonomo.
       I tuoi dati non vengono venduti né ceduti ad altri.
@@ -109,7 +147,8 @@ description: "Come tratto i dati personali raccolti tramite questo sito."
     <p>
       I caratteri tipografici e i fogli di stile sono ospitati direttamente sul sito.
       Aprendo le pagine il tuo browser contatta solo il server che ospita il sito,
-      salvo quando apri il calendario di prenotazione o usi il modulo di iscrizione.
+      salvo quando apri il calendario di prenotazione o usi il modulo di iscrizione{% if site.statistiche and site.statistiche != "" %},
+      e il servizio di statistiche indicato sopra{% endif %}.
     </p>
 
     <h2>Decisioni automatiche</h2>
@@ -120,6 +159,7 @@ description: "Come tratto i dati personali raccolti tramite questo sito."
     <h2>Per quanto tempo conservo i dati</h2>
     <ul>
       <li>Iscrizione alla newsletter: fino alla revoca del consenso</li>
+      {% if strumenti_online.size > 0 %}<li>Richieste di report dagli strumenti gratuiti: il tempo necessario a inviare il report, poi cancellazione</li>{% endif %}
       <li>Corrispondenza, richieste e prenotazioni: il tempo necessario alla gestione, poi cancellazione</li>
       <li>Documenti contrattuali e fiscali: per i termini previsti dalla legge</li>
     </ul>
@@ -139,7 +179,7 @@ description: "Come tratto i dati personali raccolti tramite questo sito."
     </p>
 
     <h2>Aggiornamenti</h2>
-    <p>Ultimo aggiornamento: 21 ottobre 2026. Le modifiche vengono pubblicate su questa pagina.</p>
+    <p>Ultimo aggiornamento: 23 ottobre 2026. Le modifiche vengono pubblicate su questa pagina.</p>
 
   </div>
 </section>

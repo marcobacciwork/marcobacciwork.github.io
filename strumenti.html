@@ -1,0 +1,46 @@
+---
+layout: default
+title: "Strumenti gratuiti"
+nav: strumenti
+permalink: /strumenti/
+description: "Strumenti gratuiti per capire costi, rischi e opportunità dell'intelligenza artificiale in studi professionali e imprese. Senza registrazione."
+image: /assets/img/og-strumenti.png
+---
+{%- assign strumenti_online = site.data.strumenti | where: "stato", "online" -%}
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow" style="color:var(--brass)">Strumenti gratuiti</p>
+    <h1>Capire l'AI<br><em>con i tuoi numeri</em></h1>
+    <p class="lead">
+      Piccoli strumenti gratuiti per farti un'idea di costi, rischi e opportunità
+      dell'intelligenza artificiale nel tuo studio o nella tua impresa.
+      Li apri e li usi subito: nessuna registrazione.
+    </p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    {% if strumenti_online.size > 0 %}
+    <div class="strumenti-grid">
+      {% for s in strumenti_online %}
+        {% include strumento-card.html s=s %}
+      {% endfor %}
+    </div>
+    {% else %}
+    <p class="lead strumenti-vuoto">Il primo strumento è in arrivo. Torna a trovarmi tra qualche giorno.</p>
+    {% endif %}
+  </div>
+</section>
+
+<section class="section section-warm">
+  <div class="wrap wrap-narrow" style="text-align:center">
+    <h2>Vuoi applicarlo al tuo caso?</h2>
+    <p class="lead" style="margin:0 auto 2rem">
+      Gli strumenti danno una prima idea. In una call gratuita di 20 minuti
+      guardiamo i numeri del tuo lavoro e ti dico dove l'AI ha senso e dove no.
+    </p>
+    <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Prenota una call</a>
+  </div>
+</section>

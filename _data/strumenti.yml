@@ -1,0 +1,29 @@
+# Strumenti gratuiti mostrati nella pagina /strumenti/ e in home.
+#
+# Per aggiungerne uno: copia un blocco intero (dal trattino in poi) e cambia i valori.
+# Compaiono SOLO gli strumenti con  stato: "online".
+# Con  stato: "in_arrivo"  lo strumento resta nascosto (pagina, home, menu e footer).
+# Finché nessuno strumento è "online", la voce "Strumenti" non compare nel menu e in home.
+#
+# Campi:
+#   nome           nome dello strumento
+#   slug           la parte finale dell'indirizzo (es. tokenometro → marcobacci.it/tokenometro/)
+#   url            link interno, SENZA parametri UTM (gli UTM vanno solo nei link da LinkedIn/Instagram)
+#   descrizione    una frase semplice: cosa fa
+#   per_chi        una frase: a chi serve
+#   immagine       facoltativa: file in assets/img/strumenti/ (consigliato 1600×1000).
+#                  Se vuota, l'anteprima mostra il nome su fondo blu notte.
+#   stato          online | in_arrivo
+#   aggiornato_il  data nel formato AAAA-MM-GG
+#   tag            etichetta breve (es. "Costi")
+
+- nome: "Tokenometro"
+  slug: "tokenometro"
+  url: "/tokenometro/"
+  # BOZZA da confermare con Marco prima di mettere lo stato "online"
+  descrizione: "Stima quanto costa usare l'intelligenza artificiale nel tuo lavoro, partendo dai testi che fai elaborare ogni giorno."
+  per_chi: "Titolari e responsabili che devono capire quanto spendere per l'AI prima di sceglierla."
+  immagine: ""
+  stato: "in_arrivo"
+  aggiornato_il: 2026-10-23
+  tag: "Costi"

@@ -2105,3 +2105,101 @@ a.cliente-logo:hover { background: var(--accent-soft); }
   font-size: 0.9rem;
   color: var(--text-3);
 }
+
+/* --------------------------------------------------------------------------
+   Strumenti gratuiti (pagina /strumenti/ e blocco in home).
+   Dati in _data/strumenti.yml, scheda in _includes/strumento-card.html.
+   L'anteprima senza immagine riusa il fondo a griglia dei Progetti.
+   -------------------------------------------------------------------------- */
+.strumenti-grid {
+  display: grid;
+  gap: clamp(1.5rem, 2.6vw, 2rem);
+  grid-template-columns: minmax(0, 1fr);
+}
+
+@media (min-width: 900px) {
+  .strumenti-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+.strumenti-vuoto { margin: 0; }
+
+.strumento {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.strumento-preview {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  aspect-ratio: 16 / 9;
+  padding: clamp(1.25rem, 3vw, 1.75rem);
+  text-decoration: none;
+  color: var(--on-deep);
+  background-color: var(--deep);
+  background-image:
+    radial-gradient(circle at 85% 15%, rgba(51, 85, 255, 0.35) 0%, transparent 45%),
+    linear-gradient(rgba(237, 241, 247, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(237, 241, 247, 0.05) 1px, transparent 1px);
+  background-size: auto, 32px 32px, 32px 32px;
+}
+
+.strumento-preview img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top;
+}
+
+.strumento-preview-nome {
+  font-family: var(--display);
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 500;
+  letter-spacing: -0.035em;
+  line-height: 1;
+}
+
+.strumento-body {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex: 1;
+  padding: clamp(1.5rem, 3vw, 2rem);
+}
+
+.strumento-body .case-tag { margin-bottom: 0.8rem; }
+.strumento-body h3 { margin: 0 0 0.5rem; }
+
+.strumento-body p {
+  margin: 0 0 0.9rem;
+  font-size: 0.96rem;
+  line-height: 1.62;
+  color: var(--text-2);
+  max-width: 54ch;
+}
+
+.strumento-perchi strong { color: var(--text); font-weight: 600; }
+
+.strumento-body .strumento-data {
+  font-size: 0.85rem;
+  color: var(--text-3);
+  margin-bottom: 1.4rem;
+}
+
+.strumento-body .btn { margin-top: auto; }
+
+/* Home: una scheda sola, testo accanto all'anteprima su schermi larghi */
+#strumenti .home-strumenti-head { margin-bottom: clamp(2rem, 4vw, 3rem); }
+
+@media (min-width: 900px) {
+  #strumenti .strumento { flex-direction: row; }
+  #strumenti .strumento-preview { flex: 0 0 48%; aspect-ratio: auto; min-height: 300px; }
+}
+
+.home-strumenti-more { margin: 1.5rem 0 0; }

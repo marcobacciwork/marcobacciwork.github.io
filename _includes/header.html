@@ -7,6 +7,8 @@
     <div class="header-right">
     <nav class="nav" id="nav" aria-label="Navigazione principale">
       <a href="{{ '/servizi/' | relative_url }}" {% if page.nav == 'servizi' %}aria-current="page"{% endif %}>Servizi</a>
+      {%- assign strumenti_online = site.data.strumenti | where: "stato", "online" %}
+      {% if strumenti_online.size > 0 %}<a href="{{ '/strumenti/' | relative_url }}" {% if page.nav == 'strumenti' %}aria-current="page"{% endif %}>Strumenti</a>{% endif %}
       <a href="{{ '/progetti/' | relative_url }}" {% if page.nav == 'progetti' %}aria-current="page"{% endif %}>Progetti</a>
       <a href="{{ '/libri/' | relative_url }}" {% if page.nav == 'libri' %}aria-current="page"{% endif %}>Libri</a>
       <a href="{{ '/chi-sono/' | relative_url }}" {% if page.nav == 'chi-sono' %}aria-current="page"{% endif %}>Chi sono</a>

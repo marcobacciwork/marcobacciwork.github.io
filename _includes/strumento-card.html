@@ -1,0 +1,24 @@
+{%- comment -%}
+  Scheda di uno strumento gratuito. Uso: {% include strumento-card.html s=strumento %}
+  Dati in _data/strumenti.yml
+{%- endcomment -%}
+{%- assign s = include.s -%}
+<article class="strumento">
+  <a class="strumento-preview" href="{{ s.url | relative_url }}" tabindex="-1" aria-hidden="true">
+    {% if s.immagine and s.immagine != "" %}
+    <img src="{{ '/assets/img/strumenti/' | append: s.immagine | relative_url }}" alt="" loading="lazy" width="1600" height="1000">
+    {% else %}
+    <span class="project-bar"><i></i><i></i><i></i></span>
+    <span class="strumento-preview-nome">{{ s.nome }}</span>
+    {% endif %}
+  </a>
+
+  <div class="strumento-body">
+    {% if s.tag %}<span class="case-tag">{{ s.tag }}</span>{% endif %}
+    <h3>{{ s.nome }}</h3>
+    <p class="strumento-desc">{{ s.descrizione }}</p>
+    {% if s.per_chi %}<p class="strumento-perchi"><strong>Per chi è.</strong> {{ s.per_chi }}</p>{% endif %}
+    {% if s.aggiornato_il %}<p class="strumento-data">Aggiornato il {% include data-it.html data=s.aggiornato_il %}</p>{% endif %}
+    <a class="btn btn-primary" href="{{ s.url | relative_url }}">Prova lo strumento</a>
+  </div>
+</article>
