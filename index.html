@@ -10,7 +10,8 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
     <h1>Porto l'intelligenza artificiale<br>nel tuo lavoro<br><em>di tutti i giorni.</em></h1>
 
     <p class="lead">
-      Formazione, consulenza e affiancamento per studi professionali e imprese.
+      Formazione, consulenza e affiancamento per studi professionali e imprese:
+      commercialisti, avvocati, consulenti del lavoro, studi tecnici e aziende di ogni settore.
       Parto da come lavori oggi, individuo dove l'AI può essere utile
       e ti aiuto a portarla nel lavoro di tutti i giorni.
       Senza corsi generici e senza legarti a me.
@@ -38,31 +39,6 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
       <span>Studi professionali e imprese</span>
       <span>Roma e tutta Italia</span>
     </p>
-  </div>
-</section>
-
-<!-- ============ PER CHI ============ -->
-<section class="section">
-  <div class="wrap split">
-    <div>
-      <p class="eyebrow">Per chi lavoro</p>
-      <h2>Studi e imprese, dove il tempo non avanza</h2>
-    </div>
-
-    <div>
-      <p class="lead" style="max-width:56ch;margin-bottom:2rem">
-        Commercialisti, avvocati, consulenti del lavoro, studi tecnici e imprese
-        di ogni settore. Posti dove non c'è un ufficio informatico né un ufficio formazione,
-        e ogni ora sottratta alle pratiche deve tradursi in un valore concreto.
-      </p>
-
-      <ul class="bars">
-        <li>L'AI è già nel tuo studio. Trasformala in un vantaggio concreto</li>
-        <li class="acceso">Nessuno sa dirti con certezza cosa si può caricare e cosa no</li>
-        <li>I corsi e gli strumenti che hai visto parlavano di tutto, tranne che del tuo lavoro</li>
-        <li>Ti serve un riferimento anche dopo, senza restare legato a un contratto</li>
-      </ul>
-    </div>
   </div>
 </section>
 
@@ -171,83 +147,6 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
   </div>
 </section>
 {% endif %}
-
-<!-- ============ TUTTO RESTA TUO ============ -->
-<section class="section">
-  <div class="wrap split">
-    <div>
-      <p class="eyebrow">Il mio impegno</p>
-      <h2>Non devi dipendere da me.</h2>
-    </div>
-
-    <div>
-      <p class="lead" style="max-width:56ch;margin-bottom:2rem">
-        Quello che imposto deve continuare a funzionare anche quando il mio lavoro è finito.
-        Per questo account, materiali, procedure e configurazioni restano a te
-        e documento quello che serve per usarli.
-      </p>
-
-      <ul class="ticks">
-        <li>Gli abbonamenti agli strumenti sono intestati a te: li paghi direttamente, senza ricarichi</li>
-        <li>Accessi, impostazioni e documentazione restano tuoi</li>
-        <li>Istruzioni e procedure sono scritte: se cambi strumento, il lavoro fatto non si butta</li>
-        <li>L'assistenza successiva è una scelta, non un vincolo</li>
-      </ul>
-
-      <p style="margin-top:2rem">
-        <a class="link-arrow" href="{{ '/chi-sono/' | relative_url }}">Scopri chi sono e come lavoro</a>
-      </p>
-    </div>
-  </div>
-</section>
-
-<!-- ============ PROGETTI ============ -->
-<section class="section section-warm">
-  <div class="wrap">
-    <div class="section-head">
-      <p class="eyebrow">Laboratorio</p>
-      <h2>Progetti che ho costruito</h2>
-      <p class="lead">
-        Per ora qui trovi due progetti personali, non casi cliente.
-        Li uso per sperimentare strumenti e soluzioni partendo da problemi concreti.
-        Sono online: puoi aprirli e vedere come lavoro.
-      </p>
-    </div>
-
-    <div class="grid grid-2">
-      {% for p in site.data.progetti %}
-      <a class="card project-card" href="{{ p.url | relative_url }}" target="_blank" rel="noopener">
-        <span class="case-tag">{{ p.tag }}</span>
-        <h3>{{ p.nome }}</h3>
-        <p>{{ p.sottotitolo }}</p>
-        <span class="link-arrow">Apri il progetto</span>
-      </a>
-      {% endfor %}
-    </div>
-
-    <p style="margin-top:2.2rem">
-      <a class="link-arrow" href="{{ '/progetti/' | relative_url }}">Problema, soluzione e risultato</a>
-    </p>
-  </div>
-</section>
-
-<!-- ============ LIBRI (autorità) ============ -->
-<section class="section-dark section-tight">
-  <div class="wrap split">
-    <div>
-      <p class="eyebrow">Pubblicazioni</p>
-      <h2 style="color:var(--ivory)">Scrivo di AI per chi non è tecnico</h2>
-    </div>
-    <div>
-      <p class="lead" style="max-width:56ch;margin-bottom:1.8rem">
-        Libri brevi per professionisti che vogliono capire cosa possono farci davvero,
-        senza gergo e senza promesse gonfiate. Sto chiudendo anche una guida
-        al regolamento europeo sull'intelligenza artificiale, scritta partendo dal testo ufficiale.
-      </p>
-      <a class="link-arrow" href="{{ '/libri/' | relative_url }}">Vedi i libri</a>
-    </div>
-  </div>
-</section>
 
 <!-- ============ NEWSLETTER ============ -->
 {% comment %} Si accende da _config.yml con newsletter_attiva: true {% endcomment %}
