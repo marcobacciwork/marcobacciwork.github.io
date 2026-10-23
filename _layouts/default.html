@@ -39,8 +39,8 @@
 <body>
 <div class="splash" id="splash" aria-hidden="true">
   <div class="splash-logo"
-       data-orizzontale="{{ '/assets/img/logo/logo-mb-ai-splash.svg' | relative_url }}"
-       data-verticale="{{ '/assets/img/logo/logo-mb-ai-splash-verticale.svg' | relative_url }}"></div>
+       data-orizzontale="{{ '/assets/img/logo/logo-mb-ai-splash.svg' | relative_url }}?v=3"
+       data-verticale="{{ '/assets/img/logo/logo-mb-ai-splash-verticale.svg' | relative_url }}?v=3"></div>
   <button class="splash-salta" type="button" tabindex="-1">Salta</button>
 </div>
 <script>
@@ -95,7 +95,7 @@
           if (chiuso) return;
           el.classList.remove('ferma');
           avviato = true;
-          setTimeout(chiudi, 7000);
+          setTimeout(chiudi, 7600);
         });
       });
     }).catch(chiudi);
