@@ -87,7 +87,8 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
       <h2>Prova da solo, senza registrarti</h2>
       <p class="lead">Strumenti gratuiti per capire costi, rischi e opportunità dell'AI nel tuo lavoro.</p>
     </div>
-    {% include strumento-card.html s=strumenti_online[0] %}
+    {%- assign primo_strumento = strumenti_online.first %}
+    {% include strumento-card.html s=primo_strumento %}
     <p class="home-strumenti-more"><a class="link-arrow" href="{{ '/strumenti/' | relative_url }}">Tutti gli strumenti gratuiti</a></p>
   </div>
 </section>
