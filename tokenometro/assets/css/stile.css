@@ -443,6 +443,167 @@ td .nota { display: block; color: var(--text-2); font-size: 0.8rem; margin-top: 
 .trappola { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .modulo .btn { width: 100%; margin-top: 0.6rem; }
 
+/* ==========================================================================
+   Calcolatore semplificato (ottobre 2026)
+   Scelte a sinistra, risultato a destra sempre visibile; su telefono una colonna
+   con barra del costo in basso.
+   ========================================================================== */
+
+.intro { padding-block: clamp(1.6rem, 5vw, 2.8rem) clamp(1rem, 2.5vw, 1.6rem); }
+.intro h1 { font-size: clamp(2.1rem, 7vw, 3.3rem); margin-bottom: 0.4em; }
+.intro .lead { margin-bottom: 0; }
+
+.calcolatore { padding-bottom: clamp(1.6rem, 4vw, 3rem); }
+.calc { display: grid; gap: 1rem; align-items: start; }
+@media (min-width: 960px) {
+  .calc { grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr); gap: 1.5rem; }
+  .calc-esito { position: sticky; top: 78px; }
+}
+.calc-scelte { display: grid; gap: 1rem; }
+
+.scelta {
+  margin: 0; min-width: 0;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg);
+  padding: 1.15rem 1.15rem 1.25rem;
+}
+.scelta legend {
+  float: left; width: 100%; padding: 0; margin-bottom: 0.9rem;
+  font-family: var(--display); font-weight: 700; font-size: 1.12rem; letter-spacing: -0.02em;
+  display: flex; align-items: center; gap: 0.6rem;
+}
+.scelta legend + * { clear: both; }
+
+/* 1. Attività: tessere compatte */
+.calc .scenari { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 0.5rem; }
+.calc .scenario {
+  display: flex; align-items: center; min-height: 58px;
+  padding: 0.7rem 0.85rem; border-radius: var(--radius);
+  border: 1px solid var(--line-strong); background: var(--surface); cursor: pointer;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease), box-shadow var(--dur) var(--ease);
+}
+.calc .scenario input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.calc .scenario-nome { font-weight: 600; font-size: 0.93rem; line-height: 1.3; }
+.calc .scenario:hover { border-color: var(--accent-lift); }
+.calc .scenario:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.calc .scenario:has(input:checked) .scenario-nome { color: var(--accent-deep); }
+.scenario-spiega { margin: 0.75rem 0 0; font-size: 0.88rem; color: var(--text-2); }
+.scenario-spiega:empty { display: none; }
+
+/* 2. Quante volte: numero grande + cursore */
+.quante { display: grid; gap: 0.9rem; }
+.quante-numero { display: flex; align-items: baseline; gap: 0.6rem; flex-wrap: wrap; }
+.quante-numero input {
+  width: 6.5ch; min-height: 52px; padding: 0.3rem 0.6rem;
+  font-family: var(--display); font-size: 1.9rem; font-weight: 700; letter-spacing: -0.02em;
+  border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--surface);
+  -moz-appearance: textfield;
+}
+.quante-numero input::-webkit-outer-spin-button,
+.quante-numero input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+.quante-numero input:focus { outline: 2px solid var(--accent); outline-offset: 1px; border-color: var(--accent); }
+.quante-numero span { color: var(--text-2); font-weight: 500; }
+.quante input[type="range"] { width: 100%; accent-color: var(--accent); height: 32px; margin: 0; cursor: pointer; }
+
+/* 3. Modelli: schede */
+.modelli { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.5rem; }
+.modello {
+  position: relative; display: flex; flex-direction: column; gap: 0.15rem;
+  padding: 0.75rem 0.85rem; min-height: 64px; border-radius: var(--radius);
+  border: 1px solid var(--line-strong); background: var(--surface); cursor: pointer;
+  transition: border-color var(--dur) var(--ease), background var(--dur) var(--ease);
+}
+.modello input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.modello-nome { font-weight: 650; font-size: 0.98rem; }
+.modello-profilo { font-size: 0.8rem; color: var(--text-2); line-height: 1.3; }
+.modello-consigliato {
+  align-self: flex-start; margin-top: 0.35rem; padding: 0.05rem 0.45rem; border-radius: 999px;
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase;
+  background: #E6F4EA; color: #1E5B32;
+}
+.modello:hover { border-color: var(--accent-lift); }
+.modello:has(input:checked) { border-color: var(--accent); background: var(--accent-soft); box-shadow: inset 0 0 0 1px var(--accent); }
+.modello-vecchio .modello-nome { font-weight: 500; }
+.calc .scenario:has(input:focus-visible), .modello:has(input:focus-visible) { outline: 2px solid var(--accent); outline-offset: 2px; }
+
+/* Risultato */
+.calc-esito .esito { padding: clamp(1.2rem, 3vw, 1.6rem); box-shadow: 0 10px 30px rgba(15, 23, 42, 0.06); }
+.calc-esito .cifra { font-size: clamp(2.8rem, 11vw, 3.8rem); color: var(--text); margin: 0.15rem 0 0.35rem; }
+.calc-esito .sotto { margin-bottom: 1.2rem; }
+.mini-titolo {
+  font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-2);
+  margin: 0 0 0.6rem; display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;
+}
+.confronto-mini { padding-top: 1.1rem; border-top: 1px solid var(--line); }
+
+.calc .barre { display: grid; gap: 0.3rem; background: none; border: 0; padding: 0; }
+.calc .barra {
+  display: grid; grid-template-columns: 5.6rem minmax(0, 1fr) auto; grid-template-areas: "nome pista valore";
+  align-items: center; gap: 0.6rem; width: 100%;
+  padding: 0.4rem 0.5rem; border: 1px solid transparent; border-radius: 6px;
+  background: none; text-align: left; cursor: pointer; font: inherit; color: inherit;
+}
+.calc .barra:hover { background: var(--bg-alt); }
+.calc .barra.selezionata { background: var(--accent-soft); border-color: #CBD5FF; }
+.calc .barra-nome { font-size: 0.88rem; font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.calc .barra.selezionata .barra-nome { font-weight: 650; color: var(--accent-deep); }
+.calc .barra-pista { height: 10px; background: var(--bg-alt); border-radius: 5px; overflow: hidden; }
+.calc .barra.selezionata .barra-pista { background: #DCE2FF; }
+.calc .barra-fill { border-radius: 5px; background: var(--accent-lift); }
+.calc .barra.selezionata .barra-fill { background: var(--accent); }
+.calc .barra-valore { font-size: 0.88rem; font-weight: 600; font-variant-numeric: tabular-nums; }
+.calc .barra:hover .barra-fill { filter: none; box-shadow: none; }
+
+.ambiente { margin-top: 1.1rem; padding-top: 1.1rem; border-top: 1px solid var(--line); }
+.ambiente-lista { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; }
+.ambiente-lista li { display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.6rem; font-size: 0.92rem; }
+.amb-nome { color: var(--text-2); min-width: 4.2rem; }
+.amb-valore { font-weight: 650; }
+.amb-paragone { font-size: 0.84rem; color: var(--text-2); }
+.amb-paragone:not(:empty)::before { content: "· "; }
+
+.calc-esito .note-calcolo { margin-top: 0.9rem; }
+.legenda { margin: 1rem 0 0; padding-top: 0.9rem; border-top: 1px solid var(--line); font-size: 0.8rem; line-height: 1.75; color: var(--text-2); }
+.legenda .badge { margin-right: 0.15rem; }
+.calc-esito .condividi { margin-top: 1rem; gap: 0.45rem; }
+.calc-esito .condividi .btn-piccolo { padding: 0.5rem 0.8rem; font-size: 0.84rem; min-height: 38px; }
+
+/* Personalizza e dettagli: chiusi di base */
+.extra { padding-top: 0; }
+.blocco.extra + .blocco { border-top: 1px solid var(--line); }
+.apri { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); margin-bottom: 0.75rem; }
+.apri > summary {
+  list-style: none; cursor: pointer; padding: 1rem 1.15rem; min-height: 44px;
+  font-family: var(--display); font-weight: 700; font-size: 1.05rem; letter-spacing: -0.02em;
+  display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 0.7rem;
+}
+.apri > summary::-webkit-details-marker { display: none; }
+.apri > summary::before { content: "+"; font-family: var(--sans); font-weight: 500; color: var(--accent); width: 1rem; }
+.apri[open] > summary::before { content: "−"; }
+.apri > summary small { font-family: var(--sans); font-weight: 400; font-size: 0.84rem; color: var(--text-2); letter-spacing: 0; }
+.apri-corpo { padding: 0 1.15rem 1.2rem; border-top: 1px solid var(--line); padding-top: 1.1rem; }
+.griglia-opzioni { display: grid; gap: 1.5rem; }
+@media (min-width: 820px) { .griglia-opzioni { grid-template-columns: 1fr 1fr; gap: 2rem; } }
+.apri-corpo.tecnico { margin-top: 0; }
+.apri-corpo.tecnico h3:first-of-type { margin-top: 0.6rem; }
+.paragoni-lista { padding-left: 1.1rem; font-size: 0.93rem; }
+.paragoni-lista li { margin-bottom: 0.35rem; }
+.paragoni-lista small { color: var(--text-3); }
+
+.azioni .btn-row { margin-top: 1.2rem; }
+
+/* Barra del costo su telefono */
+.barra-costo {
+  position: fixed; left: 0.75rem; right: 0.75rem; bottom: calc(0.75rem + env(safe-area-inset-bottom));
+  z-index: 40; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 0.85rem 1.1rem; border-radius: var(--radius-lg);
+  background: var(--deep); color: var(--on-deep); text-decoration: none; font-size: 0.95rem;
+  box-shadow: 0 10px 30px rgba(15, 23, 42, 0.3);
+}
+.barra-costo strong { color: #fff; font-size: 1.1rem; }
+.barra-costo span:last-child { color: var(--accent-lift); font-weight: 500; }
+.barra-costo[hidden] { display: none; }
+@media (min-width: 960px) { .barra-costo { display: none !important; } }
+
 /* ---------- Report (solo stampa) ---------- */
 
 .report { display: none; }

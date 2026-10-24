@@ -21,6 +21,17 @@ const stato = {
 };
 let ultimo = null; // ultimo calcolo, per report ed esportazioni
 
+/* Descrizioni brevi dei modelli, per chi non li conosce */
+const PROFILI = {
+  Haiku: "Veloce ed economico",
+  Sonnet: "Equilibrato",
+  Opus: "Per lavori complessi",
+  Fable: "Il più potente",
+};
+/* Passi del cursore "quante volte al giorno": fitti all'inizio, larghi in fondo */
+const PASSI_BASE = [1, 2, 3, 5, 10, 15, 20, 30, 40, 50, 75, 100, 150, 200, 300, 500, 750, 1000, 2000, 5000];
+let passi = PASSI_BASE.slice();
+
 /* ---------------- Formattazione ---------------- */
 
 const nf = (opts) => new Intl.NumberFormat(LOCALE, opts);
@@ -86,7 +97,7 @@ function parametriScenario() {
   p.set("modello", stato.modello);
   p.set("richieste", String(stato.richieste));
   if (stato.giorni !== v(P.volumi.giorni_lavorativi_mese)) p.set("giorni", String(stato.giorni));
-  p.set("modo", stato.modo);
+  if (stato.modo === "tecnico") p.set("modo", "tecnico");
   if (!stato.cache) p.set("cache", "0");
   if (stato.batch) p.set("batch", "1");
   if (stato.rete !== "usa") p.set("rete", stato.rete);
@@ -96,7 +107,6 @@ function parametriScenario() {
   if (stato.qs !== v(s.quota_cache_scrittura)) p.set("cs", String(Math.round(stato.qs * 100)));
   if (stato.chiamate !== v(s.chiamate_per_richiesta)) p.set("chiamate", String(stato.chiamate));
   if (stato.mostraPrecedenti) p.set("mostra", "tutti");
-  if (stato.metrica !== "costo") p.set("metrica", stato.metrica);
   return p;
 }
 function linkScenario() { return `${CONFIG.urlStrumento}?${parametriScenario().toString()}`; }
@@ -168,19 +178,33 @@ function costruisciScenari() {
     <label class="scenario">
       <input type="radio" name="scenario" value="${esc(s.id)}">
       <span class="scenario-nome">${esc(s.nome)}</span>
-      <span class="scenario-desc">${esc(s.descrizione)}</span>
     </label>`).join("");
 }
 
 function costruisciModelli() {
-  const sel = $("#modello");
+  const box = $("#modelli");
   const suggerito = scenarioPerId(P, stato.scenario).modello_suggerito;
-  const opt = (m) => `<option value="${esc(m.id)}">${esc(m.nome)}${m.id === suggerito ? " (consigliato)" : ""}${m.stato === "deprecato" ? " (deprecato)" : ""}</option>`;
-  const attuali = P.modelli.filter((m) => m.in_evidenza);
-  const precedenti = P.modelli.filter((m) => !m.in_evidenza);
-  sel.innerHTML = `<optgroup label="Modelli attuali">${attuali.map(opt).join("")}</optgroup>` +
-    (stato.mostraPrecedenti ? `<optgroup label="Modelli precedenti">${precedenti.map(opt).join("")}</optgroup>` : "");
-  sel.value = stato.modello;
+  const prezzo = (m) => v(m.prezzi.input);
+  const visibili = P.modelli
+    .filter((m) => m.in_evidenza || stato.mostraPrecedenti)
+    .sort((x, y) => (y.in_evidenza - x.in_evidenza) || (prezzo(x) - prezzo(y))); // attuali prima, dal più economico
+  box.innerHTML = visibili.map((m) => `
+    <label class="modello${m.in_evidenza ? "" : " modello-vecchio"}">
+      <input type="radio" name="modello" value="${esc(m.id)}"${m.id === stato.modello ? " checked" : ""}>
+      <span class="modello-nome">${esc(m.nome.replace(/^Claude /, ""))}</span>
+      <span class="modello-profilo">${esc(m.in_evidenza ? (PROFILI[m.famiglia] || "") : (m.stato === "deprecato" ? "Precedente, deprecato" : "Precedente"))}</span>
+      ${m.id === suggerito ? '<span class="modello-consigliato">Consigliato</span>' : ""}
+    </label>`).join("");
+}
+
+/* Cursore: aggiunge il valore attuale ai passi se non c'è già */
+function sincronizzaCursore() {
+  passi = PASSI_BASE.slice();
+  if (!passi.includes(stato.richieste)) passi = [...passi, stato.richieste].sort((a, b) => a - b);
+  const range = $("#richieste-range");
+  range.max = String(passi.length - 1);
+  range.value = String(passi.indexOf(stato.richieste));
+  range.setAttribute("aria-valuetext", `${numero(stato.richieste)} richieste al giorno`);
 }
 
 function sincronizzaControlli() {
@@ -188,28 +212,26 @@ function sincronizzaControlli() {
   costruisciModelli();
   $("#mostra-precedenti").checked = stato.mostraPrecedenti;
   $("#richieste").value = stato.richieste;
+  sincronizzaCursore();
   $("#giorni").value = stato.giorni;
   $("#cache").checked = stato.cache;
   $("#batch").checked = stato.batch;
   document.querySelectorAll('input[name="rete"]').forEach((r) => { r.checked = r.value === stato.rete; });
-  document.querySelectorAll('input[name="metrica"]').forEach((r) => { r.checked = r.value === stato.metrica; });
   $("#tin").value = stato.tin;
   $("#tout").value = stato.tout;
   $("#ql").value = Math.round(stato.ql * 100);
   $("#qs").value = Math.round(stato.qs * 100);
   $("#chiamate").value = stato.chiamate;
-  impostaModo(stato.modo, false);
-}
-
-function impostaModo(modo, ricalcola = true) {
-  stato.modo = modo;
-  document.body.dataset.modo = modo;
-  document.querySelectorAll(".modo-btn").forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.modo === modo)));
-  if (ricalcola) aggiorna();
+  $("#dettagli-tecnici").open = stato.modo === "tecnico";
 }
 
 function collegaEventi() {
-  document.querySelectorAll(".modo-btn").forEach((b) => b.addEventListener("click", () => impostaModo(b.dataset.modo)));
+  $("#dettagli-tecnici").addEventListener("toggle", (e) => {
+    const modo = e.target.open ? "tecnico" : "semplice";
+    if (modo === stato.modo) return;
+    stato.modo = modo;
+    aggiorna();
+  });
 
   $("#scenari").addEventListener("change", (e) => {
     if (e.target.name !== "scenario") return;
@@ -217,7 +239,24 @@ function collegaEventi() {
     sincronizzaControlli();
     aggiorna();
   });
-  $("#modello").addEventListener("change", (e) => { stato.modello = e.target.value; aggiorna(); });
+  $("#modelli").addEventListener("change", (e) => {
+    if (e.target.name !== "modello") return;
+    stato.modello = e.target.value;
+    aggiorna();
+  });
+  $("#barre").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-modello]");
+    if (!b) return;
+    stato.modello = b.dataset.modello;
+    costruisciModelli();
+    aggiorna();
+  });
+  $("#richieste-range").addEventListener("input", (e) => {
+    stato.richieste = passi[Number(e.target.value)] ?? stato.richieste;
+    $("#richieste").value = stato.richieste;
+    e.target.setAttribute("aria-valuetext", `${numero(stato.richieste)} richieste al giorno`);
+    aggiorna();
+  });
   $("#mostra-precedenti").addEventListener("change", (e) => {
     stato.mostraPrecedenti = e.target.checked;
     if (!stato.mostraPrecedenti && !modelloPerId(P, stato.modello).in_evidenza) {
@@ -239,6 +278,7 @@ function collegaEventi() {
       const n = intero(e.target.value, min, max);
       if (n === null) return;
       stato[chiave] = n;
+      if (chiave === "richieste") sincronizzaCursore();
       aggiorna();
     });
     $(sel).addEventListener("change", (e) => { e.target.value = stato[chiave]; });
@@ -255,7 +295,6 @@ function collegaEventi() {
   $("#cache").addEventListener("change", (e) => { stato.cache = e.target.checked; aggiorna(); });
   $("#batch").addEventListener("change", (e) => { stato.batch = e.target.checked; aggiorna(); });
   document.querySelectorAll('input[name="rete"]').forEach((r) => r.addEventListener("change", () => { stato.rete = r.value; aggiorna(); }));
-  document.querySelectorAll('input[name="metrica"]').forEach((r) => r.addEventListener("change", () => { stato.metrica = r.value; aggiorna(); }));
   $("#ripristina").addEventListener("click", () => {
     const modelloScelto = stato.modello;
     applicaScenario(scenarioPerId(P, stato.scenario), { forzaModello: false });
@@ -273,7 +312,7 @@ function collegaEventi() {
   document.querySelectorAll("[data-chiudi]").forEach((b) => b.addEventListener("click", chiudiModulo));
   $("#dialogo-email").addEventListener("click", (e) => { if (e.target.id === "dialogo-email") chiudiModulo(); });
   $("#modulo-brevo").addEventListener("submit", inviaModulo);
-  collegaTooltip();
+  collegaBarraCosto();
 }
 
 /* ---------------- Calcolo e risultati ---------------- */
@@ -289,35 +328,35 @@ function aggiorna() {
   const r = calcolaRichiesta(P, modello, ingresso(), opzioni());
   const periodi = scala(r, stato.richieste, stato.giorni, v(P.volumi.mesi_anno));
   ultimo = { modello, scen, r, periodi };
+  const m = periodi.mese, a = periodi.anno;
 
-  // Riepilogo
-  $("#riepilogo").textContent =
-    `${scen.nome} · ${modello.nome} · ${numero(stato.richieste)} richieste al giorno · ${stato.giorni} giorni al mese` +
-    `${stato.cache ? " · con caching" : ""}${stato.batch ? " · in batch" : ""}`;
+  // Scelte
+  $("#scenario-desc").textContent = scen.descrizione;
+  $("#quante-unita").textContent = stato.richieste === 1 ? "richiesta al giorno" : "richieste al giorno";
+  $("#quante-aiuto").textContent =
+    `In un mese: ${numero(stato.richieste * stato.giorni)} richieste (${stato.giorni} giorni lavorativi).`;
 
   // Costo
-  const m = periodi.mese, a = periodi.anno;
   $("#costo-mese").textContent = euro(m.eur.totale);
-  $("#mini-costo").innerHTML = `${esc(scen.nome)} con ${esc(modello.nome)}: <strong>${euro(m.eur.totale)} al mese</strong>`;
-  $("#costo-dettaglio").textContent =
-    `circa ${dollari(m.usd.totale)} · ${euro(a.eur.totale)} all'anno · ${euro(r.eur.totale, true)} a richiesta`;
+  $("#costo-dettaglio").textContent = `${euro(a.eur.totale)} all'anno · con ${modello.nome}`;
+  $("#barra-costo-testo").innerHTML = `<strong>${euro(m.eur.totale)}</strong> al mese`;
+  $("#riepilogo").textContent =
+    `${scen.nome} · ${modello.nome} · ${numero(stato.richieste)} richieste al giorno · ${stato.giorni} giorni al mese` +
+    `${stato.cache ? " · con caching" : ""}${stato.batch ? " · in batch" : ""}. ` +
+    `Costo: circa ${dollari(m.usd.totale)} al mese, ${euro(r.eur.totale, true)} a richiesta, ${token(m.token.totale)} di token al mese.`;
 
-  // Tessere
-  $("#token-mese").textContent = token(m.token.totale);
-  $("#token-dettaglio").textContent = `${token(r.token.totale)} a richiesta`;
+  // Ambiente: valore centrale (minimo e massimo nei dettagli tecnici)
   $("#energia-mese").textContent = energia(m.energia.centrale);
-  $("#energia-range").textContent = `tra ${energia(m.energia.min)} e ${energia(m.energia.max)}`;
   $("#co2-mese").textContent = co2(m.co2.centrale);
-  $("#co2-range").textContent = `tra ${co2(m.co2.min)} e ${co2(m.co2.max)}`;
   $("#acqua-mese").textContent = acqua(m.acqua.centrale);
-  $("#acqua-range").textContent = `tra ${acqua(m.acqua.min)} e ${acqua(m.acqua.max)}`;
+  const ricariche = m.energia.centrale / v(P.paragoni.ricarica_smartphone);
+  $("#energia-paragone").textContent = stato.richieste && ricariche > 0
+    ? `come ricaricare uno smartphone ${ricariche >= 0.95 && ricariche < 1.5 ? "1 volta" : `${sig(ricariche, 2)} volte`}`
+    : "";
 
-  // Aiuto modello
-  const pr = modello.prezzi;
-  $("#aiuto-modello").textContent =
-    `Listino: ${sig(v(pr.input))} $ per milione di token in ingresso, ${sig(v(pr.output))} $ in uscita. ` +
-    `Contesto massimo: ${token(v(modello.contesto_max))} di token.`;
-  $("#nota-scenario").textContent = scen.token_input.nota ? `Ipotesi dello scenario: ${scen.token_input.nota}` : "";
+  $("#nota-scenario").textContent = scen.token_input.nota
+    ? `Ipotesi per "${scen.nome}": ${scen.token_input.nota}`
+    : "";
 
   disegnaParagoni(r, m);
   disegnaNote(modello, r);
@@ -447,28 +486,17 @@ function datiConfronto() {
 }
 
 function disegnaConfronto() {
-  const dati = datiConfronto();
-  const valore = (d) => (stato.metrica === "costo" ? d.mese.eur.totale : d.mese.energia.centrale);
-  const fmt = (d) => (stato.metrica === "costo" ? euro(d.mese.eur.totale) : energia(d.mese.energia.centrale));
-  dati.sort((a, b) => valore(b) - valore(a));
-  const max = Math.max(...dati.map(valore), 0);
-  const scen = scenarioPerId(P, stato.scenario);
-  $("#confronto-sottotitolo").textContent =
-    `${scen.nome}, ${numero(stato.richieste)} richieste al giorno per ${stato.giorni} giorni${stato.cache ? ", con caching" : ""}${stato.batch ? ", in batch" : ""}.`;
-  $("#barre").innerHTML = dati.map((d, i) => {
+  const dati = datiConfronto().sort((a, b) => a.mese.eur.totale - b.mese.eur.totale);
+  const max = Math.max(...dati.map((d) => d.mese.eur.totale), 0);
+  $("#barre").innerHTML = dati.map((d) => {
     const sel = d.m.id === stato.modello;
-    const w = max > 0 ? Math.max(0.4, (valore(d) / max) * 100) : 0;
-    return `<div class="barra${sel ? " selezionata" : ""}" role="listitem" tabindex="0" data-i="${i}">
-      <span class="barra-nome">${esc(d.m.nome)}${sel ? "<small>selezionato</small>" : ""}${d.m.stato === "deprecato" ? "<small>deprecato</small>" : ""}</span>
+    const w = max > 0 ? Math.max(1, (d.mese.eur.totale / max) * 100) : 0;
+    return `<button type="button" class="barra${sel ? " selezionata" : ""}" data-modello="${esc(d.m.id)}" aria-pressed="${sel}">
+      <span class="barra-nome">${esc(d.m.nome.replace(/^Claude /, ""))}</span>
       <span class="barra-pista"><span class="barra-fill" style="width:${w.toFixed(2)}%"></span></span>
-      <span class="barra-valore">${fmt(d)}</span>
-    </div>`;
+      <span class="barra-valore">${euro(d.mese.eur.totale)}</span>
+    </button>`;
   }).join("");
-  $("#barre").dataset.metrica = stato.metrica;
-  datiTooltip = dati;
-  $("#confronto-nota").textContent = stato.metrica === "costo"
-    ? "Costi dal listino ufficiale. Il modello selezionato è in blu scuro."
-    : "Energia stimata (valore centrale): per ogni modello è proporzionale al prezzo, un'ipotesi spiegata nel metodo. Passa sopra una barra per vedere minimo e massimo.";
 
   $("#tab-confronto").innerHTML =
     `<thead><tr><th>Modello</th><th class="num">€ al mese</th><th class="num">$ al mese</th><th class="num">Energia min</th><th class="num">Energia centrale</th><th class="num">Energia max</th><th class="num">F_modello</th></tr></thead><tbody>` +
@@ -476,36 +504,14 @@ function disegnaConfronto() {
     `</tbody><caption>Valori al mese per lo scenario selezionato.</caption>`;
 }
 
-let datiTooltip = [];
-function collegaTooltip() {
-  const tip = $("#tooltip");
-  const barre = $("#barre");
-  const mostra = (el, x, y) => {
-    const d = datiTooltip[Number(el.dataset.i)];
-    if (!d) return;
-    tip.innerHTML = `<strong>${esc(d.m.nome)}</strong><br>` +
-      `Costo: ${euro(d.mese.eur.totale)} al mese (${euro(d.r.eur.totale, true)} a richiesta)<br>` +
-      `Energia: ${energia(d.mese.energia.centrale)} al mese<br><small>stima tra ${energia(d.mese.energia.min)} e ${energia(d.mese.energia.max)}</small>`;
-    tip.hidden = false;
-    const w = tip.offsetWidth, h = tip.offsetHeight;
-    const left = Math.min(window.innerWidth - w - 8, Math.max(8, x + 14));
-    const top = y - h - 12 < 8 ? y + 18 : y - h - 12;
-    tip.style.left = `${left}px`;
-    tip.style.top = `${top}px`;
-  };
-  barre.addEventListener("pointermove", (e) => {
-    const el = e.target.closest(".barra");
-    if (el) mostra(el, e.clientX, e.clientY); else tip.hidden = true;
-  });
-  barre.addEventListener("pointerleave", () => { tip.hidden = true; });
-  barre.addEventListener("focusin", (e) => {
-    const el = e.target.closest(".barra");
-    if (!el) return;
-    const r = el.getBoundingClientRect();
-    mostra(el, r.left + 20, r.top);
-  });
-  barre.addEventListener("focusout", () => { tip.hidden = true; });
-  window.addEventListener("scroll", () => { tip.hidden = true; }, { passive: true });
+/* Su telefono: barra in basso con il costo, quando le scelte sono a schermo ma il risultato no */
+function collegaBarraCosto() {
+  const barra = $("#barra-costo");
+  if (!("IntersectionObserver" in window)) return;
+  let esitoVisibile = true, scelteVisibili = false;
+  const aggiornaBarra = () => { barra.hidden = esitoVisibile || !scelteVisibili; };
+  new IntersectionObserver(([e]) => { esitoVisibile = e.isIntersecting; aggiornaBarra(); }, { threshold: 0.2 }).observe($("#t-risultato"));
+  new IntersectionObserver(([e]) => { scelteVisibili = e.isIntersecting; aggiornaBarra(); }).observe($("#impostazioni"));
 }
 
 /* ---------------- Tassa dell'italiano ---------------- */
