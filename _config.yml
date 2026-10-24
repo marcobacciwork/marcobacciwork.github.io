@@ -62,3 +62,6 @@ exclude:
   - LEGGIMI.md
   - assets/img/og-image.source.html
   - assets/img/og-strumenti.source.html
+  # Tokenometro: file di servizio, non pubblicati
+  - tokenometro/README.md
+  - tokenometro/strumenti

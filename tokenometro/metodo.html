@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Metodo e fonti · Tokenometro · Marco Bacci</title>
+<meta name="description" content="Come il Tokenometro calcola costi, token, energia, CO2 e acqua dei modelli Claude: formule, ipotesi, fonti e limiti.">
+<link rel="canonical" href="https://marcobacci.it/tokenometro/metodo.html">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#F8F9FA">
+
+<meta property="og:type" content="article">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Marco Bacci">
+<meta property="og:title" content="Tokenometro: metodo e fonti">
+<meta property="og:description" content="Formule, ipotesi, fonti e limiti delle stime di costo, energia, CO2 e acqua dei modelli Claude.">
+<meta property="og:url" content="https://marcobacci.it/tokenometro/metodo.html">
+<meta property="og:image" content="https://marcobacci.it/tokenometro/assets/img/og-tokenometro.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://marcobacci.it/tokenometro/assets/img/og-tokenometro.png">
+
+<link rel="icon" href="assets/img/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/stile.css">
+
+<!--
+  SEGNAPOSTO — Statistiche di visita senza cookie: stesso script di index.html.
+  <script defer src="INCOLLA-QUI-LO-SCRIPT-DELLE-STATISTICHE"></script>
+-->
+
+<script type="module" src="assets/js/metodo.js"></script>
+</head>
+
+<body class="pagina-metodo">
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="https://marcobacci.it/?utm_source=tokenometro&amp;utm_medium=strumento" aria-label="Marco Bacci, vai al sito">
+      Marco Bacci<span class="brand-dot" aria-hidden="true"></span>
+    </a>
+    <a class="torna" href="./">← Torna al Tokenometro</a>
+  </div>
+</header>
+
+<main id="contenuto" class="metodo">
+  <section class="intro">
+    <div class="wrap">
+      <p class="eyebrow">Tokenometro · metodo e fonti</p>
+      <h1>Come calcolo<br><em>i numeri</em></h1>
+      <p class="lead">
+        Prezzi e limiti dei modelli sono ufficiali. Energia, CO2 e acqua sono stime:
+        Anthropic non pubblica dati energetici per richiesta. Qui trovi formule, ipotesi, fonti e limiti.
+      </p>
+      <p class="aiuto">Dati aggiornati al <strong data-ultimo-aggiornamento>23 ottobre 2026</strong>.</p>
+      <nav class="indice" aria-label="Indice">
+        <a href="#prezzi">Prezzi</a><a href="#scenari">Scenari</a><a href="#energia">Energia</a>
+        <a href="#co2">CO2</a><a href="#acqua">Acqua</a><a href="#paragoni">Paragoni</a>
+        <a href="#limiti">Limiti</a><a href="#fonti">Fonti</a>
+      </nav>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <p class="errore" id="errore-caricamento" hidden></p>
+  </div>
+
+  <section class="blocco" id="come-leggere">
+    <div class="wrap testo">
+      <h2>Come leggere le etichette</h2>
+      <p>Ogni numero ha un tipo e un livello di fiducia:</p>
+      <ul class="punti">
+        <li><span class="badge badge-ufficiale">ufficiale</span> pubblicato da chi produce il dato (Anthropic, Google, EPA, ISPRA, BCE…);</li>
+        <li><span class="badge badge-terzi">stima di terzi</span> stima pubblicata in uno studio o rapporto di altri;</li>
+        <li><span class="badge badge-stima">stima nostra</span> ipotesi mia, dichiarata e spiegata qui sotto.</li>
+      </ul>
+      <p>Per energia, CO2 e acqua mostro sempre un <strong>minimo</strong>, un valore <strong>centrale</strong> e un <strong>massimo</strong>. Il minimo usa tutti i parametri minimi, il massimo tutti i massimi.</p>
+    </div>
+  </section>
+
+  <section class="blocco" id="prezzi">
+    <div class="wrap testo">
+      <h2>Prezzi, token ed euro</h2>
+      <p>I prezzi vengono solo dalla <a href="https://platform.claude.com/docs/en/about-claude/pricing" target="_blank" rel="noopener">pagina prezzi ufficiale di Anthropic</a> e dalle pagine dei singoli modelli. Sono in dollari per milione di token (MTok).</p>
+      <div class="formula">Costo = Σ (token × prezzo per milione) ÷ 1.000.000 × sconto batch ÷ cambio BCE</div>
+      <ul class="punti">
+        <li><strong>Caching dei prompt.</strong> Le parti del testo che si ripetono (istruzioni, documenti fissi) vengono scritte in cache una volta, a <span data-v="regole_prezzo.cache_scrittura_5m_moltiplicatore"></span>× il prezzo d'ingresso, e poi rilette a una frazione del prezzo (di norma <span data-v="regole_prezzo.cache_lettura_moltiplicatore"></span>×). Uso la cache da 5 minuti.</li>
+        <li><strong>Batch.</strong> L'elaborazione in differita costa il 50% in meno (moltiplicatore <span data-v="regole_prezzo.batch_moltiplicatore"></span>), anche sulla cache.</li>
+        <li><strong>Tokenizer.</strong> Dai modelli 4.7 in poi Anthropic usa un tokenizer nuovo che conta circa il 30% di token in più sullo stesso testo (fattore <span data-v="regole_prezzo.tokenizer_nuovo_fattore"></span>). I token degli scenari sono espressi con il tokenizer nuovo; per i modelli più vecchi li divido per questo fattore.</li>
+        <li><strong>Haiku 5.5</strong> ha due fasce di prezzo: oltre i 100.000 token di prompt in una chiamata si applicano prezzi più alti.</li>
+        <li><strong>Euro.</strong> Converto con il tasso di riferimento della BCE: 1 € = <span data-v="cambio.usd_per_eur"></span> $ (<span data-cambio-data></span>).</li>
+      </ul>
+      <h3>Modelli inclusi</h3>
+      <p>Tutti i modelli Claude disponibili via API al momento dell'aggiornamento, tranne quelli riservati a organizzazioni verificate e quelli ritirati.</p>
+      <div class="tabella-wrap"><table id="tab-modelli"></table></div>
+      <h3>Modelli esclusi</h3>
+      <ul class="punti" id="lista-esclusi"></ul>
+    </div>
+  </section>
+
+  <section class="blocco" id="scenari">
+    <div class="wrap testo">
+      <h2>Gli scenari</h2>
+      <p>Ogni scenario ha valori predefiniti di token in ingresso e in uscita per richiesta. Sono <strong>ipotesi mie</strong>, pensate per attività tipiche di uno studio o di un'impresa: nella vista tecnica puoi cambiarle.</p>
+      <p>I token in uscita comprendono anche i token di ragionamento, che Anthropic fa pagare come uscita. Le quote di cache indicano quanta parte dell'ingresso viene riletta (o scritta) in cache quando il caching è attivo.</p>
+      <div class="tabella-wrap"><table id="tab-scenari"></table></div>
+      <p class="aiuto">Giorni lavorativi al mese predefiniti: <span data-v="volumi.giorni_lavorativi_mese"></span>. L'anno vale 12 mesi.</p>
+    </div>
+  </section>
+
+  <section class="blocco" id="energia">
+    <div class="wrap testo">
+      <h2>Energia</h2>
+      <p>Anthropic non pubblica quanta energia consuma una richiesta. Parto quindi dall'unica misura ufficiale di un grande fornitore: secondo <a href="https://arxiv.org/abs/2508.15734" target="_blank" rel="noopener">Google (2025)</a> la richiesta testuale mediana di Gemini consuma <span data-v="energia.riscontri.google_gemini_mediana.energia"></span> Wh, compresi server, macchine di riserva e raffreddamento.</p>
+      <p>Google non dice quanti token ha quella richiesta. Prendo il profilo di una richiesta tipica da uno <a href="https://arxiv.org/abs/2509.20241" target="_blank" rel="noopener">studio Microsoft (Oviedo et al., 2025)</a>: <span data-v="energia.richiesta_di_riferimento.token_input"></span> token in ingresso e <span data-v="energia.richiesta_di_riferimento.token_output"></span> in uscita. L'ipotesi più debole di tutto il calcolo è questa: <em>che una richiesta così, servita da Claude Sonnet 5.5, consumi come la richiesta mediana di Gemini.</em></p>
+
+      <h3>Formula</h3>
+      <div class="formula">
+        e_uscita = E_rif ÷ (300 + r × 500)  ·  e_ingresso = r × e_uscita<br>
+        Energia server = [T_uscita·e_uscita + T_ingresso·e_ingresso + T_scritti·e_ingresso·k_scr + T_letti·e_ingresso·k_lett] × F_modello<br>
+        Energia totale = Energia server × PUE
+      </div>
+      <ul class="punti">
+        <li><strong>E_rif</strong> è l'energia dei server per la richiesta di riferimento, senza il raffreddamento del data center.</li>
+        <li><strong>r</strong> dice quanto costa in energia un token in ingresso rispetto a uno in uscita. Il valore centrale l'ho ricavato dai dati di throughput pubblicati da NVIDIA per modelli aperti su server pieni di lavoro.</li>
+        <li><strong>k_scr</strong> e <strong>k_lett</strong> pesano i token scritti e letti dalla cache. Per la lettura non ho trovato misure pubbliche: uso i rapporti di prezzo come indicazione e lascio un massimo prudente (nessun risparmio).</li>
+        <li><strong>F_modello</strong> è il rapporto tra il prezzo d'ingresso del modello e quello di Sonnet 5.5. È un'ipotesi: il prezzo dice qualcosa sulla potenza di calcolo, ma riflette anche scelte commerciali.</li>
+        <li><strong>PUE</strong> è il consumo del data center rispetto ai soli server: minimo Google, centrale AWS, massimo Microsoft, i tre cloud su cui Claude è disponibile.</li>
+        <li>Il batch riduce il prezzo, ma non assumo una riduzione dell'energia.</li>
+      </ul>
+      <h3>Parametri</h3>
+      <div class="tabella-wrap"><table id="tab-energia"></table></div>
+      <h3>Riscontri</h3>
+      <p>Con questi parametri, la richiesta di riferimento su Sonnet 5.5 vale <span id="riscontro-sonnet"></span> (centrale), contro i <span data-v="energia.riscontri.google_gemini_mediana.energia"></span> Wh misurati da Google e la mediana di <span data-v="energia.riscontri.microsoft_frontiera_mediana"></span> Wh stimata da Microsoft per i grandi modelli.</p>
+    </div>
+  </section>
+
+  <section class="blocco" id="co2">
+    <div class="wrap testo">
+      <h2>CO2</h2>
+      <div class="formula">CO2 (g) = Energia totale (kWh) × intensità della rete elettrica (g/kWh)</div>
+      <p>Uso il metodo basato sul luogo: le emissioni medie della rete, senza contare gli acquisti di energia rinnovabile dei fornitori. Il valore predefinito è la rete USA; quella italiana è un confronto, perché Anthropic non dice dove viene servita ogni richiesta.</p>
+      <div class="tabella-wrap"><table id="tab-co2"></table></div>
+      <p class="aiuto">Non includo le emissioni per fabbricare l'hardware né quelle dell'addestramento dei modelli.</p>
+    </div>
+  </section>
+
+  <section class="blocco" id="acqua">
+    <div class="wrap testo">
+      <h2>Acqua</h2>
+      <div class="formula">Acqua = Energia server (kWh) × WUE + Energia totale (kWh) × acqua per produrre l'elettricità (L/kWh)</div>
+      <p>Due voci: l'acqua usata per raffreddare i server (WUE) e quella consumata dalle centrali per produrre l'elettricità. La seconda di solito pesa di più.</p>
+      <div class="tabella-wrap"><table id="tab-acqua"></table></div>
+      <p class="aiuto">Per l'Italia non ho trovato una fonte primaria verificabile sull'acqua per produrre elettricità: uso sempre il valore USA.</p>
+    </div>
+  </section>
+
+  <section class="blocco" id="paragoni">
+    <div class="wrap testo">
+      <h2>Paragoni</h2>
+      <p>Nella vista semplice traduco l'energia in oggetti di tutti i giorni.</p>
+      <div class="tabella-wrap"><table id="tab-paragoni"></table></div>
+    </div>
+  </section>
+
+  <section class="blocco" id="limiti">
+    <div class="wrap testo">
+      <h2>Limiti</h2>
+      <ul class="punti">
+        <li><strong>Nessun dato energetico di Anthropic.</strong> Tutte le cifre di energia, CO2 e acqua sono stime, con margini ampi.</li>
+        <li><strong>Il punto di partenza è Google, non Claude.</strong> La richiesta mediana di Gemini fa da riferimento; modelli, hardware e data center di Claude possono essere diversi.</li>
+        <li><strong>Il prezzo come indicatore del calcolo</strong> esagera probabilmente le differenze tra modelli: per esempio, Haiku 5.5 risulta 20 volte più efficiente di Sonnet 5.5.</li>
+        <li><strong>Cache in lettura:</strong> non esistono misure pubbliche dell'energia per token letto dalla cache. Negli scenari con molta cache (come l'agente di programmazione) il massimo è molto più alto del centrale.</li>
+        <li><strong>Token di ragionamento.</strong> Fable 5.1 e Opus 5.5 ragionano sempre. Uso gli stessi token in uscita per tutti i modelli, quindi per loro il costo reale può essere più alto.</li>
+        <li><strong>Tokenizer.</strong> Il 30% in più del tokenizer nuovo è un valore medio indicato da Anthropic; cambia con lingua e contenuto.</li>
+        <li><strong>Luogo dei data center sconosciuto:</strong> PUE, WUE e rete elettrica sono medie dei fornitori, non dei data center che servono davvero Claude.</li>
+        <li><strong>Acqua per l'elettricità:</strong> i valori USA vengono da uno studio che cita WRI e LBNL; i documenti originali non erano leggibili in automatico.</li>
+        <li><strong>Fuori dal calcolo:</strong> addestramento dei modelli, rete internet, dispositivi di chi usa l'AI, fabbricazione dell'hardware.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="blocco" id="fonti">
+    <div class="wrap testo">
+      <h2>Fonti</h2>
+      <ol class="fonti" id="lista-fonti"></ol>
+      <h3>Fonti valutate e scartate</h3>
+      <ul class="punti" id="lista-scartate"></ul>
+      <p class="aiuto">Tutti i numeri stanno nel file <a href="data/parametri.json">data/parametri.json</a>, con valore, unità, fonte, data di verifica, tipo e livello di fiducia.</p>
+    </div>
+  </section>
+
+  <section class="blocco">
+    <div class="wrap testo">
+      <h2>Vuoi applicarlo al tuo caso?</h2>
+      <p>Gli scenari sono indicativi: con i numeri veri del tuo lavoro la stima cambia.</p>
+      <a class="btn btn-primary" href="https://marcobacci.it/prenota/?utm_source=tokenometro&amp;utm_medium=strumento" target="_blank" rel="noopener">Prenota una call</a>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <a class="footer-logo" href="https://marcobacci.it/?utm_source=tokenometro&amp;utm_medium=strumento" aria-label="MB Ai, vai al sito di Marco Bacci">
+        <img src="assets/img/logo-mb-ai.svg" width="1200" height="404" loading="lazy" decoding="async" alt="MB Ai — Innovazione su misura, costruita con te.">
+      </a>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <h4>Tokenometro</h4>
+        <ul>
+          <li><a href="./">Torna allo strumento</a></li>
+          <li class="dati-aggiornati">Dati aggiornati al <span data-ultimo-aggiornamento>23 ottobre 2026</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Marco Bacci</h4>
+        <ul>
+          <li><a href="https://marcobacci.it/?utm_source=tokenometro&amp;utm_medium=strumento">Il sito</a></li>
+          <li><a href="https://marcobacci.it/strumenti/?utm_source=tokenometro&amp;utm_medium=strumento">Tutti gli strumenti</a></li>
+          <li><a href="mailto:marco@marcobacci.it">marco@marcobacci.it</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Progetto indipendente, non affiliato ad Anthropic.</span>
+      <span><a href="https://marcobacci.it/privacy/?utm_source=tokenometro&amp;utm_medium=strumento">Informativa privacy</a> · Nessun cookie</span>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

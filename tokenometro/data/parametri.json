@@ -1,0 +1,2574 @@
+{
+  "meta": {
+    "progetto": "Tokenometro (nome provvisorio)",
+    "versione_dati": "2026-10-23",
+    "ultimo_aggiornamento": "2026-10-23",
+    "lingua": "it",
+    "avviso": "Progetto indipendente, non affiliato ad Anthropic. Anthropic non pubblica dati energetici per richiesta: energia, CO2 e acqua sono stime.",
+    "campi_di_ogni_dato": [
+      {
+        "campo": "valore",
+        "significato": "numero (o testo per le ipotesi)"
+      },
+      {
+        "campo": "unita",
+        "significato": "unità di misura"
+      },
+      {
+        "campo": "fonte",
+        "significato": "URL della fonte; 'metodo.html#…' per le ipotesi nostre spiegate nella pagina Metodo"
+      },
+      {
+        "campo": "data_verifica",
+        "significato": "AAAA-MM-GG"
+      },
+      {
+        "campo": "tipo",
+        "significato": "ufficiale | stima nostra | stima di terzi"
+      },
+      {
+        "campo": "fiducia",
+        "significato": "alta | media | bassa"
+      },
+      {
+        "campo": "nota",
+        "significato": "facoltativa"
+      }
+    ]
+  },
+  "cambio": {
+    "usd_per_eur": {
+      "valore": 1.1205,
+      "unita": "USD per 1 EUR",
+      "fonte": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.fr.html",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "alta",
+      "nota": "Tasso di riferimento BCE del 22/10/2026. Per convertire USD → EUR si divide per questo valore."
+    },
+    "data_riferimento": "2026-10-22"
+  },
+  "regole_prezzo": {
+    "unita_prezzi": "USD per milione di token (MTok)",
+    "batch_moltiplicatore": {
+      "valore": 0.5,
+      "unita": "moltiplicatore su input e output",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "alta",
+      "nota": "Sconto del 50%. Si somma alla cache: in batch anche i prezzi di cache vanno moltiplicati per 0,5."
+    },
+    "cache_scrittura_5m_moltiplicatore": {
+      "valore": 1.25,
+      "unita": "× prezzo input base",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "alta"
+    },
+    "cache_scrittura_1h_moltiplicatore": {
+      "valore": 2.0,
+      "unita": "× prezzo input base",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "alta"
+    },
+    "cache_lettura_moltiplicatore": {
+      "valore": 0.1,
+      "unita": "× prezzo input base",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "alta",
+      "nota": "Eccezioni già incluse nei prezzi per modello: 0,05× per Opus 5.5 e Sonnet 5.5; 0,025× per Fable 5.1 e Mythos 5.1."
+    },
+    "cache_durata_predefinita": "5m",
+    "tokenizer_nuovo_fattore": {
+      "valore": 1.3,
+      "unita": "token sullo stesso testo, tokenizer nuovo / tokenizer precedente",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "media",
+      "nota": "Anthropic scrive 'circa il 30% in più', variabile per contenuto e lingua. I modelli dalla 4.7 in poi usano il tokenizer nuovo; Sonnet 4.6 e precedenti il vecchio. I token degli scenari sono espressi nel tokenizer nuovo: per i modelli col tokenizer precedente si dividono per questo fattore."
+    }
+  },
+  "modelli": [
+    {
+      "id": "claude-fable-5-1",
+      "nome": "Claude Fable 5.1",
+      "famiglia": "Fable",
+      "stato": "attivo",
+      "in_evidenza": true,
+      "tokenizer": "nuovo",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/fable-5-1/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 10,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 50,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 12.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 20,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null,
+      "nota": "Ragionamento adattivo sempre attivo: i token di ragionamento si pagano come output."
+    },
+    {
+      "id": "claude-opus-5-5",
+      "nome": "Claude Opus 5.5",
+      "famiglia": "Opus",
+      "stato": "attivo",
+      "in_evidenza": true,
+      "tokenizer": "nuovo",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-5-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 4,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 20,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 8,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.2,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 2,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 10,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null,
+      "nota": "Ragionamento adattivo sempre attivo: i token di ragionamento si pagano come output."
+    },
+    {
+      "id": "claude-sonnet-5-5",
+      "nome": "Claude Sonnet 5.5",
+      "famiglia": "Sonnet",
+      "stato": "attivo",
+      "in_evidenza": true,
+      "tokenizer": "nuovo",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/sonnet-5-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 2,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 10,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 2.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 4,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.1,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 1,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null
+    },
+    {
+      "id": "claude-haiku-5-5",
+      "nome": "Claude Haiku 5.5",
+      "famiglia": "Haiku",
+      "stato": "attivo",
+      "in_evidenza": true,
+      "tokenizer": "nuovo",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 0.1,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 0.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 0.125,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 0.2,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.01,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 0.05,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 0.25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": {
+        "soglia_token_prompt": {
+          "valore": 100000,
+          "unita": "token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta",
+          "nota": "Sopra la soglia (contando anche letture e scritture in cache) tutta la richiesta paga i prezzi seguenti."
+        },
+        "input": {
+          "valore": 0.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 2.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 0.625,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 1,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.05,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 0.25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 1.25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      }
+    },
+    {
+      "id": "claude-fable-5",
+      "nome": "Claude Fable 5",
+      "famiglia": "Fable",
+      "stato": "attivo (legacy)",
+      "in_evidenza": false,
+      "tokenizer": "nuovo",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/fable-5/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/fable-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/fable-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 10,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 50,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 12.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 20,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 1,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null
+    },
+    {
+      "id": "claude-opus-5",
+      "nome": "Claude Opus 5",
+      "famiglia": "Opus",
+      "stato": "attivo (legacy)",
+      "in_evidenza": false,
+      "tokenizer": "nuovo",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/opus-5/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 6.25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 10,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 2.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 12.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null,
+      "output_max_batch_beta": {
+        "valore": 300000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "Solo con Batch API e intestazione beta output-300k-2026-03-24"
+      }
+    },
+    {
+      "id": "claude-opus-4-8",
+      "nome": "Claude Opus 4.8",
+      "famiglia": "Opus",
+      "stato": "attivo (legacy)",
+      "in_evidenza": false,
+      "tokenizer": "nuovo",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/opus-4-8/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-8/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-8/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 6.25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 10,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 2.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 12.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null,
+      "output_max_batch_beta": {
+        "valore": 300000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-8/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "Solo con Batch API e intestazione beta output-300k-2026-03-24"
+      }
+    },
+    {
+      "id": "claude-opus-4-7",
+      "nome": "Claude Opus 4.7",
+      "famiglia": "Opus",
+      "stato": "attivo (legacy)",
+      "in_evidenza": false,
+      "tokenizer": "nuovo",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/opus-4-7/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-7/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-7/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 6.25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 10,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 2.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 12.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null,
+      "output_max_batch_beta": {
+        "valore": 300000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-7/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "Solo con Batch API e intestazione beta output-300k-2026-03-24"
+      }
+    },
+    {
+      "id": "claude-opus-4-6",
+      "nome": "Claude Opus 4.6",
+      "famiglia": "Opus",
+      "stato": "attivo (legacy)",
+      "in_evidenza": false,
+      "tokenizer": "precedente",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/opus-4-6/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-6/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-6/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 6.25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 10,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 2.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 12.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null,
+      "output_max_batch_beta": {
+        "valore": 300000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-6/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "Solo con Batch API e intestazione beta output-300k-2026-03-24"
+      }
+    },
+    {
+      "id": "claude-opus-4-5-20251101",
+      "nome": "Claude Opus 4.5",
+      "famiglia": "Opus",
+      "stato": "attivo (legacy)",
+      "in_evidenza": false,
+      "tokenizer": "precedente",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/opus-4-5/overview",
+      "contesto_max": {
+        "valore": 200000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 64000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/opus-4-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 6.25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 10,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 2.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 12.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null,
+      "nota": "Ritiro non prima del 24/11/2026: da ricontrollare a fine novembre."
+    },
+    {
+      "id": "claude-sonnet-5",
+      "nome": "Claude Sonnet 5",
+      "famiglia": "Sonnet",
+      "stato": "attivo (legacy)",
+      "in_evidenza": false,
+      "tokenizer": "nuovo",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 2,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 10,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 2.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 4,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.2,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 1,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null,
+      "output_max_batch_beta": {
+        "valore": 300000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "Solo con Batch API e intestazione beta output-300k-2026-03-24"
+      }
+    },
+    {
+      "id": "claude-sonnet-4-6",
+      "nome": "Claude Sonnet 4.6",
+      "famiglia": "Sonnet",
+      "stato": "attivo (legacy)",
+      "in_evidenza": false,
+      "tokenizer": "precedente",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/sonnet-4-6/overview",
+      "contesto_max": {
+        "valore": 1000000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/sonnet-4-6/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 128000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/sonnet-4-6/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 3,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 15,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 3.75,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 6,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.3,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 1.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 7.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null,
+      "output_max_batch_beta": {
+        "valore": 300000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/sonnet-4-6/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "Solo con Batch API e intestazione beta output-300k-2026-03-24"
+      }
+    },
+    {
+      "id": "claude-sonnet-4-5-20250929",
+      "nome": "Claude Sonnet 4.5",
+      "famiglia": "Sonnet",
+      "stato": "deprecato",
+      "in_evidenza": false,
+      "tokenizer": "precedente",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/sonnet-4-5/overview",
+      "contesto_max": {
+        "valore": 200000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/sonnet-4-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 64000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/sonnet-4-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 3,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 15,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 3.75,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 6,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.3,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 1.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 7.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null,
+      "nota": "Deprecato il 30/09/2026, ritiro il 30/11/2026: da togliere dopo quella data."
+    },
+    {
+      "id": "claude-haiku-4-5-20251001",
+      "nome": "Claude Haiku 4.5",
+      "famiglia": "Haiku",
+      "stato": "attivo (legacy)",
+      "in_evidenza": false,
+      "tokenizer": "precedente",
+      "pagina_documentazione": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+      "contesto_max": {
+        "valore": 200000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "output_max": {
+        "valore": 64000,
+        "unita": "token",
+        "fonte": "https://platform.claude.com/docs/en/models/haiku-4-5/overview",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      "prezzi": {
+        "input": {
+          "valore": 1,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "output": {
+          "valore": 5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_5m": {
+          "valore": 1.25,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_scrittura_1h": {
+          "valore": 2,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "cache_lettura": {
+          "valore": 0.1,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_input": {
+          "valore": 0.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        },
+        "batch_output": {
+          "valore": 2.5,
+          "unita": "USD per milione di token",
+          "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta"
+        }
+      },
+      "prezzi_prompt_lunghi": null
+    }
+  ],
+  "modelli_esclusi": [
+    {
+      "id": "claude-mythos-5-1",
+      "motivo": "Disponibile solo per organizzazioni verificate (programmi di verifica Anthropic). Stesso modello, specifiche e prezzi di Claude Fable 5.1.",
+      "fonte": "https://platform.claude.com/docs/en/models/mythos-5-1/overview",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "claude-mythos-5",
+      "motivo": "Disponibile solo per organizzazioni verificate. Stesso modello, specifiche e prezzi di Claude Fable 5.",
+      "fonte": "https://platform.claude.com/docs/en/models/mythos-5/overview",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "claude-mythos-preview",
+      "motivo": "Deprecato dal 09/06/2026, accesso ristretto, assente dal listino.",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "claude-opus-4-1-20250805",
+      "motivo": "Ritirato il 05/08/2026 (ancora presente nella tabella prezzi).",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "claude-opus-4-20250514",
+      "motivo": "Ritirato il 15/06/2026 (ancora presente nella tabella prezzi).",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "claude-sonnet-4-20250514",
+      "motivo": "Ritirato il 15/06/2026 (ancora presente nella tabella prezzi).",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "claude-3-5-haiku-20241022",
+      "motivo": "Ritirato il 19/02/2026 (ancora presente nella tabella prezzi come Haiku 3.5).",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "data_verifica": "2026-10-23"
+    }
+  ],
+  "energia": {
+    "formula": "Energia richiesta (Wh) = [Tout·e_out + Tin·e_in + Tcw·e_in·k_cw + Tcr·e_in·k_cr] · F_modello · PUE. e_out = E_rif / (Tout_rif + r·Tin_rif); e_in = r·e_out. F_modello = prezzo input del modello / prezzo input del modello di riferimento. Minimo, centrale e massimo usano ciascuno i propri valori (min con min, max con max).",
+    "ipotesi_richiesta_di_riferimento": {
+      "valore": "La richiesta mediana misurata da Google su Gemini equivale a una richiesta di 500 token in ingresso e 300 in uscita servita da Claude Sonnet 5.5",
+      "unita": "ipotesi",
+      "fonte": "metodo.html#energia",
+      "data_verifica": "2026-10-23",
+      "tipo": "stima nostra",
+      "fiducia": "bassa",
+      "nota": "Google non pubblica né i token della richiesta mediana né il modello che la serve; Anthropic non pubblica dati energetici. È l'ipotesi più debole del calcolo."
+    },
+    "modello_riferimento": "claude-sonnet-5-5",
+    "richiesta_di_riferimento": {
+      "token_input": {
+        "valore": 500,
+        "unita": "token",
+        "fonte": "https://arxiv.org/abs/2509.20241",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima di terzi",
+        "fiducia": "media",
+        "nota": "Oviedo et al. (Microsoft), richiesta 'tradizionale': input fisso a 500 token."
+      },
+      "token_output": {
+        "valore": 300,
+        "unita": "token",
+        "fonte": "https://arxiv.org/abs/2509.20241",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima di terzi",
+        "fiducia": "media",
+        "nota": "Oviedo et al., mediana dei token in uscita = 300 (IQR 129–618)."
+      }
+    },
+    "energia_it_richiesta_riferimento": {
+      "min": {
+        "valore": 0.1,
+        "unita": "Wh per richiesta",
+        "fonte": "https://arxiv.org/abs/2508.15734",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "media",
+        "nota": "Google, 'Existing Approach': solo acceleratori attivi nel 10% dei data center più efficienti, maggio 2025. Confine di misura stretto: lo usiamo come limite inferiore."
+      },
+      "centrale": {
+        "valore": 0.22,
+        "unita": "Wh per richiesta",
+        "fonte": "https://arxiv.org/abs/2508.15734",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "media",
+        "nota": "Google, richiesta mediana Gemini Apps (maggio 2025): 0,24 Wh totali − 0,02 Wh di overhead del data center = 0,22 Wh di energia dei server (acceleratori 0,14 + CPU/DRAM 0,06 + macchine inattive 0,02). Il PUE si applica dopo."
+      },
+      "max": {
+        "valore": 0.6,
+        "unita": "Wh per richiesta",
+        "fonte": "https://arxiv.org/abs/2509.20241",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima di terzi",
+        "fiducia": "media",
+        "nota": "Oviedo et al. (Microsoft, 2025): 75° percentile per modelli >200 miliardi di parametri su nodi H100. Include già il PUE dello studio: lo trattiamo come energia dei server, quindi il massimo è prudenziale (leggermente sovrastimato)."
+      }
+    },
+    "rapporto_input_su_output": {
+      "descrizione": "Energia di un token in ingresso rispetto a un token in uscita.",
+      "min": {
+        "valore": 0.2,
+        "unita": "rapporto",
+        "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Segnale di mercato: Anthropic fa pagare l'input 1/5 dell'output. Non è una misura energetica."
+      },
+      "centrale": {
+        "valore": 0.5,
+        "unita": "rapporto",
+        "fonte": "https://github.com/NVIDIA/TensorRT-LLM/blob/release/0.19/docs/source/performance/perf-overview.md",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "media",
+        "nota": "Regressione nostra sui dati di throughput NVIDIA TensorRT-LLM (Llama 3.1 405B e 70B, FP8, 8×H100, nodi saturi) riportati anche in Oviedo et al., Tab. S1: 405B → 0,54; 70B → 0,50 (input fino a 5.000 token). Il throughput NVIDIA è 'Total Output Throughput (tokens/sec)'."
+      },
+      "max": {
+        "valore": 0.62,
+        "unita": "rapporto",
+        "fonte": "https://github.com/NVIDIA/TensorRT-LLM/blob/release/0.19/docs/source/performance/perf-overview.md",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "media",
+        "nota": "Stessa regressione su tutti i punti del 405B, incluso il caso con 20.000 token in ingresso."
+      }
+    },
+    "rapporto_cache_scrittura_su_input": {
+      "min": {
+        "valore": 1.0,
+        "unita": "rapporto",
+        "fonte": "metodo.html#energia",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "media",
+        "nota": "Un token scritto in cache viene elaborato come un normale token in ingresso."
+      },
+      "centrale": {
+        "valore": 1.0,
+        "unita": "rapporto",
+        "fonte": "metodo.html#energia",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "media"
+      },
+      "max": {
+        "valore": 1.25,
+        "unita": "rapporto",
+        "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Costo aggiuntivo di memorizzazione stimato col sovrapprezzo di scrittura (1,25×). Nessuna misura energetica."
+      }
+    },
+    "rapporto_cache_lettura_su_input": {
+      "min": {
+        "valore": 0.025,
+        "unita": "rapporto",
+        "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "NESSUNA FONTE PRIMARIA TROVATA. Usiamo il moltiplicatore di prezzo più basso (Fable 5.1) come segnale."
+      },
+      "centrale": {
+        "valore": 0.1,
+        "unita": "rapporto",
+        "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "NESSUNA FONTE PRIMARIA TROVATA. Moltiplicatore di prezzo standard per la lettura dalla cache."
+      },
+      "max": {
+        "valore": 1.0,
+        "unita": "rapporto",
+        "fonte": "metodo.html#energia",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Ipotesi prudenziale: nessun risparmio energetico dalla cache."
+      }
+    },
+    "coefficienti_wh_per_token": {
+      "solo_lettura": true,
+      "nota": "Calcolati dai valori sopra con la formula; l'interfaccia li ricalcola. Servono per la verifica.",
+      "output": {
+        "min": {
+          "valore": 0.00025,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "media"
+        },
+        "centrale": {
+          "valore": 0.0004,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "media"
+        },
+        "max": {
+          "valore": 0.000984,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "media"
+        }
+      },
+      "input": {
+        "min": {
+          "valore": 5e-05,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "media"
+        },
+        "centrale": {
+          "valore": 0.0002,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "media"
+        },
+        "max": {
+          "valore": 0.00061,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "media"
+        }
+      },
+      "cache_scrittura": {
+        "min": {
+          "valore": 5e-05,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "media"
+        },
+        "centrale": {
+          "valore": 0.0002,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "media"
+        },
+        "max": {
+          "valore": 0.000762,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "media"
+        }
+      },
+      "cache_lettura": {
+        "min": {
+          "valore": 1.25e-06,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "bassa"
+        },
+        "centrale": {
+          "valore": 2e-05,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "bassa"
+        },
+        "max": {
+          "valore": 0.00061,
+          "unita": "Wh per token",
+          "fonte": "metodo.html#energia",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima nostra",
+          "fiducia": "bassa"
+        }
+      }
+    },
+    "fattore_modello": {
+      "metodo": "prezzo input del modello / prezzo input di Claude Sonnet 5.5 (per Haiku 5.5 si usa la fascia fino a 100.000 token)",
+      "tipo": "stima nostra",
+      "fiducia": "bassa",
+      "fonte": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "data_verifica": "2026-10-23",
+      "nota": "Il prezzo riflette anche margini e posizionamento commerciale, non solo la potenza di calcolo. Esempio: Haiku 5.5 risulta 20 volte più efficiente di Sonnet 5.5, Fable 5.1 5 volte meno."
+    },
+    "pue": {
+      "descrizione": "Power Usage Effectiveness: energia totale del data center / energia dei server. Centrale = valore intermedio tra i tre cloud su cui Claude è disponibile.",
+      "min": {
+        "valore": 1.09,
+        "unita": "rapporto",
+        "fonte": "https://www.datacenters.google/efficiency",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "Google, media flotta sui 12 mesi al 2° trimestre 2026."
+      },
+      "centrale": {
+        "valore": 1.14,
+        "unita": "rapporto",
+        "fonte": "https://aws.amazon.com/sustainability/",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "AWS, media globale 2025."
+      },
+      "max": {
+        "valore": 1.17,
+        "unita": "rapporto",
+        "fonte": "https://datacenters.microsoft.com/sustainability/efficiency/",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "Microsoft, media globale anno fiscale 2025 (lug 2024–giu 2025)."
+      },
+      "nota_infrastruttura": {
+        "valore": "Claude è disponibile su AWS (Bedrock), Google Cloud (Vertex AI) e Microsoft Azure (Foundry); Anthropic usa oltre un milione di chip Trainium2 di Amazon per addestrare e servire Claude",
+        "unita": "testo",
+        "fonte": "https://www.anthropic.com/news/anthropic-amazon-compute",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "Anthropic non dice in quali data center gira ogni richiesta: il PUE effettivo non è noto."
+      }
+    },
+    "batch_fattore_energia": {
+      "valore": 1.0,
+      "unita": "moltiplicatore",
+      "fonte": "metodo.html#energia",
+      "data_verifica": "2026-10-23",
+      "tipo": "stima nostra",
+      "fiducia": "bassa",
+      "nota": "Nessuna fonte: lo sconto batch riduce il prezzo, non assumiamo una riduzione di energia."
+    },
+    "riscontri": {
+      "google_gemini_mediana": {
+        "energia": {
+          "valore": 0.24,
+          "unita": "Wh per richiesta",
+          "fonte": "https://arxiv.org/abs/2508.15734",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta",
+          "nota": "Gemini Apps, testo, maggio 2025, approccio completo."
+        },
+        "co2": {
+          "valore": 0.03,
+          "unita": "gCO2e per richiesta",
+          "fonte": "https://arxiv.org/abs/2508.15734",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta",
+          "nota": "Basato sul mercato (con acquisti di energia pulita), include emissioni incorporate dell'hardware."
+        },
+        "acqua": {
+          "valore": 0.26,
+          "unita": "mL per richiesta",
+          "fonte": "https://arxiv.org/abs/2508.15734",
+          "data_verifica": "2026-10-23",
+          "tipo": "ufficiale",
+          "fiducia": "alta",
+          "nota": "Solo raffreddamento in loco (WUE), esclusa l'acqua per produrre elettricità."
+        }
+      },
+      "microsoft_frontiera_mediana": {
+        "valore": 0.31,
+        "unita": "Wh per richiesta",
+        "fonte": "https://arxiv.org/abs/2509.20241",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima di terzi",
+        "fiducia": "media",
+        "nota": "Oviedo et al., modelli >200B, IQR 0,16–0,60 Wh; richieste lunghe di ragionamento (5.000 token in uscita): 3,91 Wh."
+      }
+    }
+  },
+  "co2": {
+    "formula": "CO2 (g) = Energia totale (kWh) × intensità della rete (g/kWh)",
+    "usa": {
+      "valore": 349.7,
+      "unita": "gCO2e per kWh",
+      "fonte": "https://www.epa.gov/egrid/summary-data",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "alta",
+      "nota": "EPA eGRID2023 (ultima edizione, rev. 2 del 12/06/2025): tasso medio nazionale di emissione 770,884 lb CO2e/MWh × 0,45359 = 349,7 g/kWh. Base: generazione netta, metodo basato sulla localizzazione. Perdite di rete USA: 4,2% (non incluse)."
+    },
+    "italia": {
+      "valore": 215.6,
+      "unita": "gCO2 per kWh",
+      "fonte": "https://www.isprambiente.gov.it/it/pubblicazioni/rapporti/settore-elettrico-emissioni-di-co2-e-altri-impatti-edizione-2026",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "alta",
+      "nota": "ISPRA, Rapporto 430/2026, Tab. 1.9, produzione elettrica netta totale, anno 2024 (consolidato). Stima preliminare 2025: 220,1. Solo CO2 (non CO2e): differenza trascurabile (negli USA 0,5%)."
+    },
+    "predefinito": "usa",
+    "nota": "L'interruttore Italia è uno scenario 'come se': Anthropic non dichiara dove vengono servite le richieste. Non includiamo le emissioni di fabbricazione dell'hardware (Google le stima intorno al 30% del totale)."
+  },
+  "acqua": {
+    "formula": "Acqua (L) = Energia server (kWh) × WUE + Energia totale (kWh) × acqua per produrre elettricità (L/kWh)",
+    "wue_raffreddamento": {
+      "min": {
+        "valore": 0.12,
+        "unita": "L per kWh di energia IT",
+        "fonte": "https://aws.amazon.com/sustainability/",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "media",
+        "nota": "AWS, media globale 2025. Attenzione: è acqua PRELEVATA, non consumata."
+      },
+      "centrale": {
+        "valore": 0.27,
+        "unita": "L per kWh di energia IT",
+        "fonte": "https://datacenters.microsoft.com/sustainability/efficiency/",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "media",
+        "nota": "Microsoft, media globale anno fiscale 2025."
+      },
+      "max": {
+        "valore": 1.15,
+        "unita": "L per kWh di energia IT",
+        "fonte": "https://arxiv.org/abs/2508.15734",
+        "data_verifica": "2026-10-23",
+        "tipo": "ufficiale",
+        "fiducia": "alta",
+        "nota": "Google, WUE categoria 2 (acqua consumata), 2023 e 2024, dal paper sulla richiesta Gemini."
+      }
+    },
+    "acqua_produzione_elettrica": {
+      "usa": {
+        "min": {
+          "valore": 3.14,
+          "unita": "L per kWh",
+          "fonte": "https://arxiv.org/abs/2304.03271",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima di terzi",
+          "fiducia": "media",
+          "nota": "Media USA (consumo) dal WRI (Reig et al., 2020), riportata da Li et al. (2025). Documento WRI originale NON letto: il sito ne blocca la lettura automatica."
+        },
+        "centrale": {
+          "valore": 3.14,
+          "unita": "L per kWh",
+          "fonte": "https://arxiv.org/abs/2304.03271",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima di terzi",
+          "fiducia": "media",
+          "nota": "Come sopra."
+        },
+        "max": {
+          "valore": 4.35,
+          "unita": "L per kWh",
+          "fonte": "https://arxiv.org/abs/2304.03271",
+          "data_verifica": "2026-10-23",
+          "tipo": "stima di terzi",
+          "fiducia": "bassa",
+          "nota": "Valore LBNL (Shehabi et al., 2024) riportato da Li et al. Rapporto LBNL originale NON verificato direttamente (PDF non leggibile da qui)."
+        }
+      },
+      "italia": null,
+      "nota_italia": "Nessuna fonte primaria verificabile trovata per l'Italia: l'acqua per la produzione elettrica usa sempre il valore USA."
+    }
+  },
+  "paragoni": {
+    "lampadina_led": {
+      "valore": 10,
+      "unita": "W",
+      "fonte": "https://www.energy.gov/energysaver/led-lighting",
+      "data_verifica": "2026-10-23",
+      "tipo": "stima nostra",
+      "fiducia": "media",
+      "nota": "Lampadina LED tipica che sostituisce una vecchia da 60 W. Il DOE indica che i LED consumano almeno il 75% in meno (quindi ≤15 W): 10 W è un valore tipico, scelto da noi."
+    },
+    "ricarica_smartphone": {
+      "valore": 19.4,
+      "unita": "Wh per ricarica completa",
+      "fonte": "https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator-calculations-and-references",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "alta",
+      "nota": "EPA, calcolatore di equivalenze (aggiornato 04/08/2026): 0,019 kWh per ricarica, misurato alla presa."
+    },
+    "ricerca_google": {
+      "valore": 0.3,
+      "unita": "Wh per ricerca",
+      "fonte": "https://googleblog.blogspot.com/2009/01/powering-google-search.html",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "bassa",
+      "nota": "Dato Google del 2009 (0,0003 kWh): è l'unico pubblicato ma è vecchio; probabilmente oggi è inferiore."
+    },
+    "goccia_acqua": {
+      "valore": 0.05,
+      "unita": "mL",
+      "fonte": "https://arxiv.org/abs/2508.15734",
+      "data_verifica": "2026-10-23",
+      "tipo": "stima di terzi",
+      "fiducia": "media",
+      "nota": "Goccia standard usata da Google nel paper."
+    }
+  },
+  "volumi": {
+    "giorni_lavorativi_mese": {
+      "valore": 22,
+      "unita": "giorni",
+      "fonte": "metodo.html#scenari",
+      "data_verifica": "2026-10-23",
+      "tipo": "stima nostra",
+      "fiducia": "media",
+      "nota": "Media indicativa di giorni lavorativi al mese."
+    },
+    "mesi_anno": {
+      "valore": 12,
+      "unita": "mesi",
+      "fonte": "metodo.html#scenari",
+      "data_verifica": "2026-10-23",
+      "tipo": "stima nostra",
+      "fiducia": "alta"
+    },
+    "nota": "Le richieste al giorno predefinite sono indicate in ogni scenario e sono modificabili."
+  },
+  "scenari": [
+    {
+      "id": "email",
+      "nome": "Rispondere alle email",
+      "descrizione": "Claude legge un'email (con lo scambio precedente) e prepara una bozza di risposta nel tono dello studio.",
+      "modello_suggerito": "claude-haiku-5-5",
+      "chiamate_per_richiesta": {
+        "valore": 1,
+        "unita": "chiamate",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      },
+      "token_input": {
+        "valore": 2000,
+        "unita": "token per richiesta",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Istruzioni e tono ~800 + email con scambio precedente ~1.200."
+      },
+      "token_output": {
+        "valore": 600,
+        "unita": "token per richiesta",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Bozza ~350 parole, compresi eventuali token di ragionamento."
+      },
+      "quota_cache_lettura": {
+        "valore": 0.35,
+        "unita": "quota dei token in ingresso",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Le istruzioni fisse vengono rilette dalla cache."
+      },
+      "quota_cache_scrittura": {
+        "valore": 0.05,
+        "unita": "quota dei token in ingresso",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Rinnovo periodico della cache (scade dopo 5 minuti senza uso)."
+      },
+      "richieste_al_giorno": {
+        "valore": 40,
+        "unita": "richieste",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      }
+    },
+    {
+      "id": "pdf",
+      "nome": "Riassumere un PDF di 20 pagine",
+      "descrizione": "Claude legge un documento di 20 pagine e ne scrive una sintesi strutturata.",
+      "modello_suggerito": "claude-sonnet-5-5",
+      "chiamate_per_richiesta": {
+        "valore": 1,
+        "unita": "chiamate",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      },
+      "token_input": {
+        "valore": 16500,
+        "unita": "token per richiesta",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "~800 token per pagina di testo italiano × 20 + istruzioni ~500."
+      },
+      "token_output": {
+        "valore": 900,
+        "unita": "token per richiesta",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Sintesi di ~1 pagina, compresi eventuali token di ragionamento."
+      },
+      "quota_cache_lettura": {
+        "valore": 0.02,
+        "unita": "quota dei token in ingresso",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Ogni PDF è diverso: in cache vanno solo le istruzioni."
+      },
+      "quota_cache_scrittura": {
+        "valore": 0.01,
+        "unita": "quota dei token in ingresso",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      },
+      "richieste_al_giorno": {
+        "valore": 10,
+        "unita": "richieste",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      }
+    },
+    {
+      "id": "chatbot",
+      "nome": "Chatbot per i clienti",
+      "descrizione": "Una risposta del chatbot sul sito o su WhatsApp. Ogni messaggio del cliente è una richiesta.",
+      "modello_suggerito": "claude-haiku-5-5",
+      "chiamate_per_richiesta": {
+        "valore": 1,
+        "unita": "chiamate",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      },
+      "token_input": {
+        "valore": 4000,
+        "unita": "token per richiesta",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Istruzioni e informazioni aziendali ~3.000 + conversazione ~1.000."
+      },
+      "token_output": {
+        "valore": 300,
+        "unita": "token per richiesta",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Risposta breve."
+      },
+      "quota_cache_lettura": {
+        "valore": 0.7,
+        "unita": "quota dei token in ingresso",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Istruzioni e informazioni aziendali sempre uguali."
+      },
+      "quota_cache_scrittura": {
+        "valore": 0.05,
+        "unita": "quota dei token in ingresso",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      },
+      "richieste_al_giorno": {
+        "valore": 200,
+        "unita": "richieste",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      }
+    },
+    {
+      "id": "contratti",
+      "nome": "Analisi di contratti",
+      "descrizione": "Claude esamina un contratto di circa 25 pagine con una checklist di clausole e segnala i punti critici.",
+      "modello_suggerito": "claude-opus-5-5",
+      "chiamate_per_richiesta": {
+        "valore": 1,
+        "unita": "chiamate",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      },
+      "token_input": {
+        "valore": 22000,
+        "unita": "token per richiesta",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Contratto ~20.000 + checklist e istruzioni ~2.000."
+      },
+      "token_output": {
+        "valore": 2500,
+        "unita": "token per richiesta",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Relazione con le clausole critiche, compreso il ragionamento."
+      },
+      "quota_cache_lettura": {
+        "valore": 0.08,
+        "unita": "quota dei token in ingresso",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Solo checklist e istruzioni sono riutilizzabili."
+      },
+      "quota_cache_scrittura": {
+        "valore": 0.02,
+        "unita": "quota dei token in ingresso",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      },
+      "richieste_al_giorno": {
+        "valore": 5,
+        "unita": "richieste",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      }
+    },
+    {
+      "id": "agente_codice",
+      "nome": "Agente di programmazione",
+      "descrizione": "Un'attività completa di un agente che scrive o corregge codice: circa 20 passaggi del modello che rileggono il progetto.",
+      "modello_suggerito": "claude-opus-5-5",
+      "chiamate_per_richiesta": {
+        "valore": 20,
+        "unita": "chiamate",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Serve anche per la fascia di prezzo di Haiku 5.5: ~30.000 token per chiamata, sotto la soglia di 100.000."
+      },
+      "token_input": {
+        "valore": 600000,
+        "unita": "token per richiesta",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "20 chiamate × ~30.000 token di contesto (codice, istruzioni, cronologia)."
+      },
+      "token_output": {
+        "valore": 20000,
+        "unita": "token per richiesta",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Codice, spiegazioni e ragionamento sui 20 passaggi."
+      },
+      "quota_cache_lettura": {
+        "valore": 0.9,
+        "unita": "quota dei token in ingresso",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa",
+        "nota": "Il contesto cresce e viene riletto a ogni passaggio."
+      },
+      "quota_cache_scrittura": {
+        "valore": 0.05,
+        "unita": "quota dei token in ingresso",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      },
+      "richieste_al_giorno": {
+        "valore": 15,
+        "unita": "richieste",
+        "fonte": "metodo.html#scenari",
+        "data_verifica": "2026-10-23",
+        "tipo": "stima nostra",
+        "fiducia": "bassa"
+      }
+    }
+  ],
+  "tassa_italiano": {
+    "descrizione": "Lo stesso testo in italiano e in inglese: quanti token in più costa l'italiano.",
+    "testo_it": "Gentile cliente, la ringraziamo per averci inviato la documentazione per la dichiarazione dei redditi. Dopo una prima verifica, abbiamo notato che mancano ancora le ricevute delle spese mediche e il contratto di affitto aggiornato. Le chiediamo cortesemente di farci avere questi documenti entro venerdì, così da rispettare la scadenza di presentazione. Se ha dubbi o preferisce fissare un appuntamento in studio, può rispondere a questa email oppure chiamarci in orario d'ufficio. Restiamo a disposizione per qualsiasi chiarimento. Cordiali saluti.",
+    "testo_en": "Dear client, thank you for sending us the documents for your tax return. After an initial review, we noticed that the receipts for your medical expenses and the updated rental agreement are still missing. We kindly ask you to send us these documents by Friday, so that we can meet the filing deadline. If you have any questions or would prefer to book an appointment at our office, you can reply to this email or call us during office hours. We remain available for any clarification. Kind regards.",
+    "metodo": {
+      "valore": "Conteggio con l'endpoint ufficiale POST /v1/messages/count_tokens, una volta per modello. Token netti = token del testo − token di un messaggio minimo ('.'), per togliere la formattazione del messaggio.",
+      "unita": "metodo",
+      "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+      "data_verifica": "2026-10-23",
+      "tipo": "ufficiale",
+      "fiducia": "alta",
+      "nota": "Script: strumenti/misura_token.py, da lanciare in locale con la propria chiave. Nessuna chiave nel browser."
+    },
+    "stato": "da misurare",
+    "misure": [
+      {
+        "modello": "claude-fable-5-1",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-opus-5-5",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-sonnet-5-5",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-haiku-5-5",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-fable-5",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-opus-5",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-opus-4-8",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-opus-4-7",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-opus-4-6",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-opus-4-5-20251101",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-sonnet-5",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-sonnet-4-6",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-sonnet-4-5-20250929",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      },
+      {
+        "modello": "claude-haiku-4-5-20251001",
+        "token_it": null,
+        "token_en": null,
+        "overhead_messaggio": null,
+        "token_it_netti": null,
+        "token_en_netti": null,
+        "data_misura": null,
+        "fonte": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+        "tipo": "ufficiale",
+        "fiducia": "alta"
+      }
+    ]
+  },
+  "fonti": [
+    {
+      "id": "anthropic_prezzi",
+      "titolo": "Pricing – Claude Platform Docs",
+      "autore": "Anthropic",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "anthropic_modelli",
+      "titolo": "Models overview e pagine dei singoli modelli",
+      "autore": "Anthropic",
+      "url": "https://platform.claude.com/docs/en/models/overview",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "anthropic_deprecazioni",
+      "titolo": "Model deprecations",
+      "autore": "Anthropic",
+      "url": "https://platform.claude.com/docs/en/about-claude/model-deprecations",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "anthropic_conteggio",
+      "titolo": "Token counting",
+      "autore": "Anthropic",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "google_2025",
+      "titolo": "Measuring the environmental impact of delivering AI at Google Scale",
+      "autore": "Elsworth et al. (Google)",
+      "anno": 2025,
+      "url": "https://arxiv.org/abs/2508.15734",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "oviedo_2025",
+      "titolo": "Energy Use of AI Inference: Efficiency Pathways and Test-Time Scaling",
+      "autore": "Oviedo et al. (Microsoft)",
+      "anno": 2025,
+      "url": "https://arxiv.org/abs/2509.20241",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "nvidia_trtllm",
+      "titolo": "TensorRT-LLM 0.19 – Performance overview",
+      "autore": "NVIDIA",
+      "anno": 2025,
+      "url": "https://github.com/NVIDIA/TensorRT-LLM/blob/release/0.19/docs/source/performance/perf-overview.md",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "google_pue",
+      "titolo": "Power usage effectiveness – Google Data Centers",
+      "autore": "Google",
+      "url": "https://www.datacenters.google/efficiency",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "aws_sostenibilita",
+      "titolo": "AWS Sustainability",
+      "autore": "Amazon Web Services",
+      "url": "https://aws.amazon.com/sustainability/",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "microsoft_efficienza",
+      "titolo": "Measuring energy and water efficiency for Microsoft datacenters",
+      "autore": "Microsoft",
+      "url": "https://datacenters.microsoft.com/sustainability/efficiency/",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "epa_egrid",
+      "titolo": "eGRID Summary Data (eGRID2023)",
+      "autore": "US EPA",
+      "url": "https://www.epa.gov/egrid/summary-data",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "ispra_2026",
+      "titolo": "Settore elettrico: emissioni di CO2 e altri impatti. Edizione 2026 (Rapporti 430/2026)",
+      "autore": "ISPRA",
+      "anno": 2026,
+      "url": "https://www.isprambiente.gov.it/it/pubblicazioni/rapporti/settore-elettrico-emissioni-di-co2-e-altri-impatti-edizione-2026",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "li_2025",
+      "titolo": "Making AI Less 'Thirsty'",
+      "autore": "Li, Yang, Islam, Ren",
+      "anno": 2025,
+      "url": "https://arxiv.org/abs/2304.03271",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "bce_usd",
+      "titolo": "Tassi di cambio di riferimento dell'euro – dollaro USA",
+      "autore": "Banca centrale europea",
+      "url": "https://www.ecb.europa.eu/stats/policy_and_exchange_rates/euro_reference_exchange_rates/html/eurofxref-graph-usd.fr.html",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "epa_equivalenze",
+      "titolo": "Greenhouse Gas Equivalencies Calculator – Calculations and References",
+      "autore": "US EPA",
+      "url": "https://www.epa.gov/energy/greenhouse-gas-equivalencies-calculator-calculations-and-references",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "google_ricerca_2009",
+      "titolo": "Powering a Google search",
+      "autore": "Urs Hölzle (Google)",
+      "anno": 2009,
+      "url": "https://googleblog.blogspot.com/2009/01/powering-google-search.html",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "doe_led",
+      "titolo": "LED Lighting – Energy Saver",
+      "autore": "US Department of Energy",
+      "url": "https://www.energy.gov/energysaver/led-lighting",
+      "data_verifica": "2026-10-23"
+    },
+    {
+      "id": "anthropic_compute",
+      "titolo": "Anthropic and Amazon expand compute partnership",
+      "autore": "Anthropic",
+      "anno": 2026,
+      "url": "https://www.anthropic.com/news/anthropic-amazon-compute",
+      "data_verifica": "2026-10-23"
+    }
+  ],
+  "fonti_scartate": [
+    {
+      "fonte": "Zhang, 'Can I Buy Your KV Cache?' (arXiv 2606.13361)",
+      "motivo": "Misura tempi su un portatile (Apple M1 Pro) con un modello piccolo, non energia in un data center: non adatta per il coefficiente della cache."
+    },
+    {
+      "fonte": "PrefixBench-H100 (arXiv 2609.19657)",
+      "motivo": "Misura il risparmio per richiesta (24–31%) a concorrenza 1, non per token: non convertibile in un coefficiente."
+    },
+    {
+      "fonte": "WRI, Guidance for Calculating Water Use Embedded in Purchased Electricity (2020)",
+      "motivo": "Il sito blocca la lettura automatica: valore USA preso da Li et al.; valore Italia non disponibile."
+    },
+    {
+      "fonte": "LBNL, 2024 United States Data Center Energy Usage Report",
+      "motivo": "PDF non leggibile da qui: il valore 4,35 L/kWh è preso da Li et al. Da verificare a mano (sezione 5)."
+    },
+    {
+      "fonte": "Dichiarazione di Sam Altman (0,34 Wh per richiesta ChatGPT)",
+      "motivo": "Nessun metodo pubblicato."
+    }
+  ]
+}

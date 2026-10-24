@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Tokenometro · Quanto costa e quanto consuma l'AI · Marco Bacci</title>
+<meta name="description" content="Simulatore gratuito: costo in euro, token e stima di energia, CO2 e acqua dei modelli Claude per attività reali di studi e imprese. Senza registrazione.">
+<link rel="canonical" href="https://marcobacci.it/tokenometro/">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#F8F9FA">
+
+<!-- Anteprima per LinkedIn e altri social (gli URL assoluti qui sono obbligatori) -->
+<meta property="og:type" content="website">
+<meta property="og:locale" content="it_IT">
+<meta property="og:site_name" content="Marco Bacci">
+<meta property="og:title" content="Tokenometro: quanto costa e quanto consuma l'AI?">
+<meta property="og:description" content="Costo in euro, token, energia, CO2 e acqua dei modelli Claude per attività reali. Gratuito, senza registrazione.">
+<meta property="og:url" content="https://marcobacci.it/tokenometro/">
+<meta property="og:image" content="https://marcobacci.it/tokenometro/assets/img/og-tokenometro.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Tokenometro: quanto costa e quanto consuma l'AI nel tuo lavoro. Strumento gratuito di Marco Bacci.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Tokenometro: quanto costa e quanto consuma l'AI?">
+<meta name="twitter:description" content="Costo in euro, token, energia, CO2 e acqua dei modelli Claude per attività reali. Gratuito, senza registrazione.">
+<meta name="twitter:image" content="https://marcobacci.it/tokenometro/assets/img/og-tokenometro.png">
+
+<link rel="icon" href="assets/img/favicon-192.png" type="image/png" sizes="192x192">
+<link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/inter.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/space-grotesk.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/stile.css">
+
+<!--
+  SEGNAPOSTO — Statistiche di visita senza cookie (Plausible, Umami o Cloudflare Web Analytics).
+  Per attivarle: togli il commento alla riga qui sotto e incolla lo script del servizio,
+  poi aggiorna privacy e cookie policy del sito (oggi dicono che non usi statistiche).
+  <script defer src="INCOLLA-QUI-LO-SCRIPT-DELLE-STATISTICHE"></script>
+-->
+
+<script type="module" src="assets/js/app.js"></script>
+</head>
+
+<body data-modo="semplice">
+<a class="salta" href="#contenuto">Vai al contenuto</a>
+
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="https://marcobacci.it/?utm_source=tokenometro&amp;utm_medium=strumento" aria-label="Marco Bacci, vai al sito">
+      Marco Bacci<span class="brand-dot" aria-hidden="true"></span>
+    </a>
+    <a class="torna" href="https://marcobacci.it/strumenti/?utm_source=tokenometro&amp;utm_medium=strumento">← Tutti gli strumenti</a>
+  </div>
+</header>
+
+<main id="contenuto">
+
+  <!-- ============ INTRO ============ -->
+  <section class="intro">
+    <div class="wrap">
+      <p class="eyebrow">Tokenometro · strumento gratuito</p>
+      <h1>Quanto costa l'AI<br><em>nel tuo lavoro?</em></h1>
+      <p class="lead">
+        Scegli un'attività e un modello Claude: vedi subito il costo in euro, i token usati
+        e una stima di energia, CO2 e acqua. Senza registrazione: i calcoli restano nel tuo browser.
+      </p>
+
+      <div class="modo" role="group" aria-label="Livello di dettaglio">
+        <button type="button" class="modo-btn" data-modo="semplice" aria-pressed="true">Semplice</button>
+        <button type="button" class="modo-btn" data-modo="tecnico" aria-pressed="false">Tecnico</button>
+      </div>
+
+      <a class="vai-risultato" href="#t-risultato">
+        <span id="mini-costo">Calcolo in corso…</span>
+        <span aria-hidden="true">Vedi il risultato ↓</span>
+      </a>
+
+      <p class="avviso" id="avviso-banner" hidden></p>
+    </div>
+  </section>
+
+  <noscript>
+    <div class="wrap"><p class="errore">Il Tokenometro fa i calcoli nel browser: per usarlo serve JavaScript attivo.</p></div>
+  </noscript>
+  <div class="wrap"><p class="errore" id="errore-caricamento" hidden></p></div>
+
+  <!-- ============ IMPOSTAZIONI ============ -->
+  <section class="blocco" aria-labelledby="t-impostazioni">
+    <div class="wrap">
+      <h2 class="visually-hidden" id="t-impostazioni">Il tuo scenario</h2>
+      <form id="impostazioni" class="impostazioni" autocomplete="off" onsubmit="return false">
+
+        <fieldset class="passo">
+          <legend><span class="passo-num">1</span> Cosa vuoi far fare all'AI?</legend>
+          <div class="scenari" id="scenari"></div>
+        </fieldset>
+
+        <fieldset class="passo">
+          <legend><span class="passo-num">2</span> Con quale modello?</legend>
+          <label class="campo">
+            <span class="campo-etichetta">Modello Claude</span>
+            <select id="modello" name="modello"></select>
+          </label>
+          <p class="aiuto" id="aiuto-modello"></p>
+          <label class="spunta">
+            <input type="checkbox" id="mostra-precedenti">
+            <span>Mostra anche i modelli precedenti</span>
+          </label>
+        </fieldset>
+
+        <fieldset class="passo">
+          <legend><span class="passo-num">3</span> Quanto spesso?</legend>
+          <div class="due-colonne">
+            <label class="campo">
+              <span class="campo-etichetta">Richieste al giorno</span>
+              <input type="number" id="richieste" name="richieste" min="0" max="1000000" step="1" inputmode="numeric">
+            </label>
+            <label class="campo">
+              <span class="campo-etichetta">Giorni lavorativi al mese</span>
+              <input type="number" id="giorni" name="giorni" min="1" max="31" step="1" inputmode="numeric">
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="passo">
+          <legend><span class="passo-num">4</span> Opzioni</legend>
+          <label class="spunta">
+            <input type="checkbox" id="cache" checked>
+            <span><strong>Caching dei prompt</strong><br>
+            <small>Riusa le parti che non cambiano, come istruzioni e documenti fissi: costa meno e consuma meno.</small></span>
+          </label>
+          <label class="spunta">
+            <input type="checkbox" id="batch">
+            <span><strong>Elaborazione in batch</strong><br>
+            <small>Le richieste vengono elaborate in differita, non in tempo reale, con lo sconto del 50%.</small></span>
+          </label>
+          <div class="campo">
+            <span class="campo-etichetta" id="et-rete">Rete elettrica per la CO2</span>
+            <div class="segmenti" role="radiogroup" aria-labelledby="et-rete">
+              <label><input type="radio" name="rete" value="usa" checked><span>USA</span></label>
+              <label><input type="radio" name="rete" value="italia"><span>Italia</span></label>
+            </div>
+            <p class="aiuto">Anthropic non dice in quale Paese viene servita ogni richiesta: la rete USA è il riferimento, quella italiana un confronto.</p>
+          </div>
+        </fieldset>
+
+        <fieldset class="passo solo-tecnico">
+          <legend><span class="passo-num">5</span> Token per richiesta</legend>
+          <p class="aiuto">Valori dello scenario, dichiarati come ipotesi: puoi cambiarli. Sono espressi nel tokenizer dei modelli attuali.</p>
+          <div class="due-colonne">
+            <label class="campo">
+              <span class="campo-etichetta">Token in ingresso</span>
+              <input type="number" id="tin" min="0" max="5000000" step="1" inputmode="numeric">
+            </label>
+            <label class="campo">
+              <span class="campo-etichetta">Token in uscita</span>
+              <input type="number" id="tout" min="0" max="1000000" step="1" inputmode="numeric">
+            </label>
+            <label class="campo">
+              <span class="campo-etichetta">Letti dalla cache (%)</span>
+              <input type="number" id="ql" min="0" max="100" step="1" inputmode="decimal">
+            </label>
+            <label class="campo">
+              <span class="campo-etichetta">Scritti in cache (%)</span>
+              <input type="number" id="qs" min="0" max="100" step="1" inputmode="decimal">
+            </label>
+            <label class="campo">
+              <span class="campo-etichetta">Chiamate al modello per richiesta</span>
+              <input type="number" id="chiamate" min="1" max="1000" step="1" inputmode="numeric">
+            </label>
+          </div>
+          <p class="aiuto" id="nota-scenario"></p>
+          <button type="button" class="btn btn-outline btn-piccolo" id="ripristina">Ripristina i valori dello scenario</button>
+        </fieldset>
+      </form>
+    </div>
+  </section>
+
+  <!-- ============ RISULTATO ============ -->
+  <section class="blocco risultato" aria-labelledby="t-risultato">
+    <div class="wrap">
+      <h2 id="t-risultato">Il risultato</h2>
+      <p class="riepilogo" id="riepilogo"></p>
+
+      <div class="esito" aria-live="polite">
+        <div class="hero-costo">
+          <p class="etichetta">Costo al mese</p>
+          <p class="cifra" id="costo-mese">–</p>
+          <p class="sotto" id="costo-dettaglio"></p>
+        </div>
+
+        <div class="tessere">
+          <div class="tessera">
+            <p class="etichetta">Token al mese</p>
+            <p class="valore" id="token-mese">–</p>
+            <p class="sotto" id="token-dettaglio"></p>
+          </div>
+          <div class="tessera">
+            <p class="etichetta">Energia al mese <a class="stima" href="metodo.html#energia">Stima</a></p>
+            <p class="valore" id="energia-mese">–</p>
+            <p class="sotto" id="energia-range"></p>
+          </div>
+          <div class="tessera">
+            <p class="etichetta">CO2 al mese <a class="stima" href="metodo.html#co2">Stima</a></p>
+            <p class="valore" id="co2-mese">–</p>
+            <p class="sotto" id="co2-range"></p>
+          </div>
+          <div class="tessera">
+            <p class="etichetta">Acqua al mese <a class="stima" href="metodo.html#acqua">Stima</a></p>
+            <p class="valore" id="acqua-mese">–</p>
+            <p class="sotto" id="acqua-range"></p>
+          </div>
+        </div>
+
+        <div class="paragoni solo-semplice">
+          <h3>Per farti un'idea</h3>
+          <ul id="paragoni"></ul>
+        </div>
+
+        <ul class="note-calcolo" id="note-calcolo"></ul>
+
+        <p class="nota-metodo">
+          Prezzi dal listino ufficiale Anthropic. Energia, CO2 e acqua sono stime:
+          Anthropic non pubblica dati energetici per richiesta.
+          <a href="metodo.html">Come li calcolo</a>
+        </p>
+      </div>
+
+      <!-- Dettaglio tecnico -->
+      <div class="tecnico solo-tecnico">
+        <h3>Token</h3>
+        <div class="tabella-wrap"><table id="tab-token"></table></div>
+
+        <h3>Costi</h3>
+        <div class="tabella-wrap"><table id="tab-costi"></table></div>
+
+        <h3>Energia, CO2 e acqua: minimo, centrale, massimo</h3>
+        <div class="tabella-wrap"><table id="tab-stime"></table></div>
+
+        <h3>Formule e coefficienti usati</h3>
+        <div class="formula" id="formula"></div>
+        <div class="tabella-wrap"><table id="tab-coeff"></table></div>
+
+        <div class="btn-row">
+          <button type="button" class="btn btn-outline btn-piccolo" id="esporta-csv">Esporta CSV</button>
+          <button type="button" class="btn btn-outline btn-piccolo" id="esporta-json">Esporta JSON</button>
+        </div>
+      </div>
+
+      <div class="condividi">
+        <button type="button" class="btn btn-outline btn-piccolo" id="copia-link">Copia link di questo scenario</button>
+        <a class="btn btn-outline btn-piccolo" id="condividi-linkedin" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fmarcobacci.it%2Ftokenometro%2F" target="_blank" rel="noopener">Condividi su LinkedIn</a>
+        <span class="toast" id="toast" role="status" aria-live="polite"></span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CONVERSIONE ============ -->
+  <section class="blocco azioni" aria-labelledby="t-azioni">
+    <div class="wrap">
+      <h2 id="t-azioni">Vuoi capire quanto costerebbe l'AI nel tuo studio o nella tua azienda?</h2>
+      <p class="lead">Questi sono scenari tipo. Con i numeri veri del tuo lavoro la stima cambia.</p>
+      <div class="azioni-griglia">
+        <button type="button" class="azione" id="cta-report">
+          <span class="azione-titolo">Scarica il report</span>
+          <span class="azione-testo">Un PDF con scenario, risultati, metodo e il link per riaprirlo.</span>
+        </button>
+        <button type="button" class="azione" id="cta-email">
+          <span class="azione-titolo">Ricevi il link al tuo scenario e gli aggiornamenti</span>
+          <span class="azione-testo">Te lo mando via email. Gli aggiornamenti solo se li scegli.</span>
+        </button>
+      </div>
+      <p class="azioni-call">Preferisci parlarne? <a class="link-arrow" href="https://marcobacci.it/prenota/?utm_source=tokenometro&amp;utm_medium=strumento" target="_blank" rel="noopener">Prenota una call</a></p>
+    </div>
+  </section>
+
+  <!-- ============ CONFRONTO ============ -->
+  <section class="blocco" aria-labelledby="t-confronto">
+    <div class="wrap">
+      <h2 id="t-confronto">Lo stesso scenario su tutti i modelli</h2>
+      <p class="lead" id="confronto-sottotitolo"></p>
+      <div class="segmenti segmenti-metrica" role="radiogroup" aria-label="Cosa confrontare">
+        <label><input type="radio" name="metrica" value="costo" checked><span>Costo al mese</span></label>
+        <label><input type="radio" name="metrica" value="energia"><span>Energia al mese</span></label>
+      </div>
+      <div class="barre" id="barre" role="list"></div>
+      <p class="aiuto" id="confronto-nota"></p>
+      <div class="tabella-wrap solo-tecnico"><table id="tab-confronto"></table></div>
+      <div class="tooltip" id="tooltip" role="tooltip" hidden></div>
+    </div>
+  </section>
+
+  <!-- ============ TASSA DELL'ITALIANO (compare solo con misure salvate) ============ -->
+  <section class="blocco" id="tassa" aria-labelledby="t-tassa" hidden>
+    <div class="wrap">
+      <h2 id="t-tassa">La tassa dell'italiano</h2>
+      <p class="lead">Lo stesso testo in italiano e in inglese: l'italiano usa più token, quindi costa di più.</p>
+      <div class="testi-tassa">
+        <figure><figcaption>Italiano</figcaption><blockquote id="tassa-it"></blockquote></figure>
+        <figure><figcaption>Inglese</figcaption><blockquote id="tassa-en"></blockquote></figure>
+      </div>
+      <div class="tabella-wrap"><table id="tab-tassa"></table></div>
+      <p class="aiuto" id="tassa-nota"></p>
+    </div>
+  </section>
+
+  <!-- ============ METODO IN BREVE ============ -->
+  <section class="blocco metodo-breve" aria-labelledby="t-metodo">
+    <div class="wrap">
+      <h2 id="t-metodo">Da dove vengono i numeri</h2>
+      <ul class="punti">
+        <li><strong>Prezzi e limiti dei modelli:</strong> solo dalla documentazione ufficiale di Anthropic.</li>
+        <li><strong>Euro:</strong> cambio di riferimento della Banca centrale europea, con la sua data.</li>
+        <li><strong>Energia, CO2 e acqua:</strong> stime basate su misure pubblicate da Google e su studi tecnici. Per questo trovi sempre un minimo e un massimo.</li>
+      </ul>
+      <a class="link-arrow" href="metodo.html">Leggi il metodo completo, con formule e fonti</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <div class="footer-brand">
+      <a class="footer-logo" href="https://marcobacci.it/?utm_source=tokenometro&amp;utm_medium=strumento" aria-label="MB Ai, vai al sito di Marco Bacci">
+        <img src="assets/img/logo-mb-ai.svg" width="1200" height="404" loading="lazy" decoding="async" alt="MB Ai — Innovazione su misura, costruita con te.">
+      </a>
+    </div>
+    <div class="footer-grid">
+      <div>
+        <h4>Tokenometro</h4>
+        <ul>
+          <li><a href="metodo.html">Metodo e fonti</a></li>
+          <li class="dati-aggiornati">Dati aggiornati al <span data-ultimo-aggiornamento>23 ottobre 2026</span></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Marco Bacci</h4>
+        <ul>
+          <li><a href="https://marcobacci.it/?utm_source=tokenometro&amp;utm_medium=strumento">Il sito</a></li>
+          <li><a href="https://marcobacci.it/strumenti/?utm_source=tokenometro&amp;utm_medium=strumento">Tutti gli strumenti</a></li>
+          <li><a href="mailto:marco@marcobacci.it">marco@marcobacci.it</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Progetto indipendente, non affiliato ad Anthropic.</span>
+      <span><a href="https://marcobacci.it/privacy/?utm_source=tokenometro&amp;utm_medium=strumento">Informativa privacy</a> · Nessun cookie</span>
+    </div>
+  </div>
+</footer>
+
+<!-- ============ MODULO EMAIL (Brevo, HTML semplice: nessuno script esterno) ============ -->
+<dialog class="dialogo" id="dialogo-email" aria-labelledby="t-dialogo">
+  <form class="modulo" id="modulo-brevo" method="POST" action="" target="invio-brevo">
+    <button type="button" class="chiudi" data-chiudi aria-label="Chiudi">×</button>
+    <h2 id="t-dialogo">Ricevi il link al tuo scenario</h2>
+    <p>Ti mando via email il link per riaprire questo scenario. Prima ricevi un'email per confermare l'indirizzo.</p>
+
+    <!-- Campi tecnici: non toccarli. Il primo è una trappola per i bot (resta vuoto). -->
+    <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" class="trappola">
+    <input type="hidden" name="locale" value="it">
+    <input type="hidden" name="SCENARIO_URL" id="campo-scenario-url" value="">
+    <input type="hidden" name="FONTE" value="tokenometro">
+
+    <label class="campo">
+      <span class="campo-etichetta">La tua email</span>
+      <input type="email" name="EMAIL" id="campo-email" required autocomplete="email" placeholder="nome@esempio.it">
+    </label>
+    <label class="spunta">
+      <input type="checkbox" required>
+      <span>Voglio ricevere il link a questo scenario. Ho letto
+      <a href="https://marcobacci.it/privacy/?utm_source=tokenometro&amp;utm_medium=strumento" target="_blank" rel="noopener">come tratti i dati</a>.</span>
+    </label>
+    <label class="spunta">
+      <input type="checkbox" name="AGGIORNAMENTI" value="1">
+      <span>Avvisami anche quando aggiorno dati e modelli del Tokenometro. Facoltativo: ti cancelli con un clic.</span>
+    </label>
+    <button type="submit" class="btn btn-primary" id="invia-email">Inviami il link</button>
+    <p class="aiuto" id="modulo-stato" role="status"></p>
+  </form>
+  <iframe name="invio-brevo" id="invio-brevo" title="Invio del modulo" hidden></iframe>
+</dialog>
+
+<!-- ============ REPORT PER LA STAMPA (compare solo nel PDF) ============ -->
+<section id="report" class="report" aria-hidden="true"></section>
+
+</body>
+</html>
