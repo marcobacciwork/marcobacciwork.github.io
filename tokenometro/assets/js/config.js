@@ -32,6 +32,6 @@ export const CONFIG = {
     email: "marco@marcobacci.it",
     telefono: "+39 352 295 7889",
     sito: "marcobacci.it",
-    linkedin: "linkedin.com/in/marcobacci94",
+    linkedin: "linkedin.com/in/marcobacci-ai",
   },
 };
