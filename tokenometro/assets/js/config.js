@@ -14,7 +14,8 @@ export const CONFIG = {
   prenota: "https://marcobacci.it/prenota/",
 
   // Parametri aggiunti a tutti i link verso marcobacci.it
-  utm: { utm_source: "tokenometro", utm_medium: "strumento" },
+  // Vuoto di proposito: niente UTM sui link interni verso marcobacci.it (si usano solo dai canali esterni)
+  utm: {},
 
   // Parametri aggiunti al link condiviso con il pulsante "Condividi su LinkedIn"
   utmCondivisione: { utm_source: "linkedin", utm_medium: "condivisione" },
