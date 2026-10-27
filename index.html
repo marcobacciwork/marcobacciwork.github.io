@@ -168,48 +168,7 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
 <!-- ============ NEWSLETTER ============ -->
 {% comment %} Si accende da _config.yml con newsletter_attiva: true {% endcomment %}
 {% if site.newsletter_attiva %}
-<section class="section" id="newsletter">
-  <div class="wrap">
-    <div class="optin">
-      <div>
-        <p class="eyebrow" style="color:var(--brass)">Newsletter</p>
-        <h2>Le novità AI della settimana, in cinque minuti</h2>
-        <p>
-          Ogni lunedì ti scrivo cosa è cambiato su Claude, ChatGPT e Gemini
-          e cosa significa per il lavoro di uno studio o di un'impresa.
-          Solo novità verificate, con il link alla fonte.
-        </p>
-      </div>
-
-      <div>
-        {% comment %}
-          Modulo Brevo in HTML semplice, senza lo script di Brevo: la pagina non carica
-          risorse esterne. L'indirizzo sta in _config.yml → newsletter_form_url.
-          Dopo l'invio Brevo rimanda a /grazie/, dopo la conferma a /iscrizione-confermata/.
-        {% endcomment %}
-        <form action="{{ site.newsletter_form_url }}" method="POST">
-          <input type="text" name="email_address_check" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
-          <input type="hidden" name="locale" value="it">
-          <div class="form-row">
-            <label for="email" class="skip">Indirizzo email</label>
-            <input class="field" type="email" id="email" name="EMAIL" required
-                   placeholder="La tua email" autocomplete="email">
-            <button class="btn btn-primary" type="submit">Iscriviti</button>
-          </div>
-          <label class="form-consent">
-            <input type="checkbox" required>
-            <span>Acconsento a ricevere la newsletter settimanale. Ho letto
-            <a href="{{ '/privacy/' | relative_url }}">come tratti i dati</a>.</span>
-          </label>
-          <p class="form-note">
-            Prima ti arriva un'email per confermare l'indirizzo.
-            Niente pubblicità, e ti cancelli con un clic.
-          </p>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
+{% include newsletter-box.html %}
 {% endif %}
 
 <!-- ============ CHIUSURA ============ -->
