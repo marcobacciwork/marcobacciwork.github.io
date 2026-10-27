@@ -32,8 +32,8 @@ cookie-policy.html   Valida finché non aggiungi strumenti che tracciano
 ```
 
 Il sito non vende prodotti: niente shop e niente link di affiliazione, per restare
-dentro i codici ATECO attuali (62.20.10 e 90.11.09) senza iscrizione alla Gestione
-commercianti INPS. I libri si vendono su Amazon.
+dentro i codici ATECO attuali (62.20.10 e 85.59.20, dal 20/10/2026) senza iscrizione
+alla Gestione commercianti INPS. I libri si vendono su Amazon (royalties fatturate sul 62.20.10).
 
 ---
 
