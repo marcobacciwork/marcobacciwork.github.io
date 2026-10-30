@@ -1,0 +1,67 @@
+---
+layout: default
+title: "Esempi per il tuo lavoro"
+nav: esempi
+permalink: /esempi/
+description: "Esempi concreti di cosa può fare l'intelligenza artificiale per hotel, imprese edili e impiantisti, officine e artigiani, studi tecnici. Mestiere per mestiere."
+---
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow" style="color:var(--brass)">Esempi</p>
+    <h1>Cosa posso fare per te,<br><em>mestiere per mestiere</em></h1>
+    <p class="lead">
+      Qualche esempio concreto di come l'AI entra nel lavoro di tutti i giorni.
+      Ognuno parte da una cosa che fai già e la rende più veloce.
+      Prima che qualcosa arrivi a un cliente lo controlla sempre una persona.
+    </p>
+
+    <nav class="esempi-salti" aria-label="Vai al tuo mestiere">
+      {% for m in site.data.esempi %}
+      <a href="#{{ m.id }}">{{ m.nome }}</a>
+      {% endfor %}
+    </nav>
+  </div>
+</section>
+
+{% for m in site.data.esempi %}
+<section class="section{% cycle ' section-warm', '' %} esempi-mestiere" id="{{ m.id }}">
+  <div class="wrap split">
+    <div>
+      <p class="eyebrow">{{ m.chi }}</p>
+      <h2>{{ m.nome }}</h2>
+    </div>
+    <div>
+      <ul class="ticks esempi-lista">
+        {% for e in m.esempi %}
+        <li>{{ e }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</section>
+{% endfor %}
+
+<section class="section-dark section-tight">
+  <div class="wrap wrap-narrow">
+    <p class="eyebrow">E poi?</p>
+    <h2 style="color:var(--ivory)">Ogni esempio può diventare un corso, un assistente o un'automazione</h2>
+    <p class="lead" style="margin-bottom:1.5rem">
+      Posso insegnare al tuo team a farlo da solo, preparare un assistente AI
+      già impostato sul tuo lavoro oppure costruire un'automazione che lavora al posto tuo.
+      Accessi, configurazioni e istruzioni restano a te.
+    </p>
+    <a class="link-arrow" href="{{ '/servizi/' | relative_url }}">Vedi i servizi</a>
+  </div>
+</section>
+
+<section class="section section-warm">
+  <div class="wrap wrap-narrow" style="text-align:center">
+    <h2>Il tuo mestiere non c'è?</h2>
+    <p class="lead" style="margin:0 auto 2rem">
+      Questi sono solo esempi. In una call gratuita di 20 minuti mi racconti come lavori
+      e ti dico dove vedo un uso concreto dell'AI, e dove invece non la userei.
+    </p>
+    <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Scegli un orario</a>
+  </div>
+</section>

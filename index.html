@@ -1,7 +1,7 @@
 ---
 layout: default
 nav: home
-description: "Formazione, consulenza e affiancamento sull'intelligenza artificiale per studi professionali e imprese, costruiti sul lavoro che fai ogni giorno. Roma e tutta Italia."
+description: "Formazione, consulenza e affiancamento sull'intelligenza artificiale per imprese e liberi professionisti, costruiti sul lavoro che fai ogni giorno. Roma e tutta Italia."
 ---
 
 <!-- ============ HERO ============ -->
@@ -10,8 +10,8 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
     <h1>Porto l'intelligenza artificiale<br>nel tuo lavoro<br><em>di tutti i giorni.</em></h1>
 
     <p class="lead">
-      Formazione, consulenza e affiancamento per studi professionali e imprese:
-      commercialisti, avvocati, consulenti del lavoro, studi tecnici e aziende di ogni settore.
+      Formazione, consulenza e affiancamento per imprese e liberi professionisti:
+      hotel e strutture ricettive, imprese edili e impiantisti, officine, artigiani e studi tecnici.
       Parto da come lavori oggi, individuo dove l'AI può essere utile
       e ti aiuto a portarla nel lavoro di tutti i giorni.
       Senza corsi generici e senza legarti a me.
@@ -36,7 +36,7 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
 
     <p class="hero-meta">
       <span>Formazione · Affiancamento · Progetti AI</span>
-      <span>Studi professionali e imprese</span>
+      <span>Imprese e liberi professionisti</span>
       <span>Roma e tutta Italia</span>
     </p>
   </div>
@@ -74,6 +74,26 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
       </a>
 
     </div>
+
+    <!-- Esempi per mestiere (dati in _data/esempi.yml) -->
+    {% if site.data.esempi and site.data.esempi.size > 0 %}
+    <div class="home-esempi">
+      <div class="home-esempi-head">
+        <h3>Esempi per il tuo lavoro</h3>
+        <p>Cosa vuol dire in pratica, mestiere per mestiere.</p>
+      </div>
+      <div class="grid">
+        {% for m in site.data.esempi %}
+        <a class="card" href="{{ '/esempi/' | relative_url }}#{{ m.id }}">
+          <h4>{{ m.nome }}</h4>
+          <p class="card-chi">{{ m.chi }}</p>
+          <p class="card-esempio">{{ m.esempi.first }}</p>
+          <span class="link-arrow">Vedi gli esempi</span>
+        </a>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
   </div>
 </section>
 

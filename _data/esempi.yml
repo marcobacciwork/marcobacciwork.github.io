@@ -1,0 +1,41 @@
+# Esempi di cosa posso fare, mestiere per mestiere.
+# Li usano la pagina /esempi/ (esempi.html) e il blocco "Esempi per il tuo lavoro" in home.
+# Per aggiungere un mestiere copia un blocco intero. "id" diventa l'ancora: /esempi/#id
+# Regole: solo cose che so fare davvero, niente numeri o risultati promessi, niente clienti nominati.
+# Come si costruisce ogni esempio: documento interno "Come lo faccio" (non pubblicato).
+
+- id: hotel
+  nome: "Hotel e strutture ricettive"
+  chi: "Hotel, B&B, case vacanza"
+  esempi:
+    - "Risposte alle email degli ospiti in più lingue, nel tono della tua struttura"
+    - "Risposte alle recensioni online, da controllare e pubblicare"
+    - "Richieste e prenotazioni raccolte in automatico in un foglio ordinato"
+    - "Descrizioni di camere e offerte, e post per i social, in italiano e in inglese"
+
+- id: edili-impiantisti
+  nome: "Imprese edili e impiantisti"
+  chi: "Imprese edili, elettricisti, idraulici, serramentisti"
+  esempi:
+    - "Preventivi chiari scritti partendo dal sopralluogo e da una nota vocale"
+    - "Rapportini di lavoro compilati a fine giornata da un vocale"
+    - "L'elenco dei documenti di cantiere da preparare, così niente resta indietro"
+    - "Aggiornamenti ai clienti su tempi e avanzamento dei lavori, scritti in un minuto"
+
+- id: officine-artigiani
+  nome: "Officine e artigiani"
+  chi: "Officine, botteghe, laboratori"
+  esempi:
+    - "Preventivi chiari scritti partendo da una nota vocale"
+    - "Risposte pronte alle domande che i clienti fanno sempre, via WhatsApp o email"
+    - "I clienti con scadenze in arrivo (tagliando, revisione, manutenzione) e un messaggio pronto per chi ha accettato di essere ricontattato"
+    - "Fatture dei fornitori lette e riassunte: costi e scadenze di pagamento"
+
+- id: studi-tecnici
+  nome: "Studi tecnici"
+  chi: "Geometri, architetti, ingegneri"
+  esempi:
+    - "Prima bozza di relazioni tecniche partendo dai tuoi appunti"
+    - "Normative e capitolati lunghi: solo i punti che riguardano il tuo progetto"
+    - "Verbali di sopralluoghi e riunioni scritti da una nota vocale"
+    - "Bandi e gare: l'elenco dei requisiti e dei documenti da preparare"
