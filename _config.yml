@@ -64,6 +64,11 @@ defaults:
       path: ""
     values:
       image: /assets/img/og-image.png
+  # Slide dei caroselli social (social/AAAA-MM-GG/): non collegate dal sito, fuori dalla mappa per Google
+  - scope:
+      path: "social"
+    values:
+      sitemap: false
 
 exclude:
   - README.md

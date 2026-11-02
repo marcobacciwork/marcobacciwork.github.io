@@ -105,3 +105,10 @@ salvato come `og-image.png`. Il sorgente non viene pubblicato.
 - Per scriverne uno nuovo copia `_modelli/modello-articolo.md` dentro `_posts/`, rinominalo e compila `title`, `description` e `date`.
 - L'articolo compare da solo nella pagina /blog, con indirizzo `marcobacci.it/blog/parole-del-titolo/`, e nella sitemap.
 - I meta per Google e per le anteprime social li genera `jekyll-seo-tag` dal titolo e dalla descrizione.
+
+## Cartella social/
+
+- Contiene le slide del carosello settimanale (`social/AAAA-MM-GG/slide-01.png` … e `carosello.pdf`), caricate dall'automazione della domenica.
+- Servono a Metricool per pubblicare su Instagram (prende le immagini dal link) e a Marco per scaricare il PDF da pubblicare su LinkedIn.
+- Non sono collegate da nessuna pagina e sono escluse dalla mappa del sito; chi ha il link esatto però le vede: metterci solo contenuti già pubblici.
+- Ogni domenica l'automazione cancella le cartelle delle settimane precedenti.
