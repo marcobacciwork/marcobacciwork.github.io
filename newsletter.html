@@ -1,0 +1,29 @@
+---
+layout: default
+title: "Newsletter"
+nav: newsletter
+permalink: /newsletter/
+description: "Ogni lunedì le novità di Claude, ChatGPT e Gemini che contano per il lavoro di imprese e liberi professionisti. Gratis, ti cancelli con un clic."
+---
+
+{% comment %}
+  Pagina da linkare dai social: marcobacci.it/newsletter
+  Il modulo è lo stesso della home (_includes/newsletter-box.html).
+{% endcomment %}
+
+{% include newsletter-box.html titolo_pagina=true %}
+
+{% assign ultimi = site.posts | where: "categoria", "novita-settimana" %}
+{% if ultimi.size > 0 %}
+<section class="section section-warm section-tight">
+  <div class="wrap wrap-narrow">
+    <h2>Le ultime uscite</h2>
+    <ul class="ticks" style="margin:1.5rem 0 2rem">
+      {% for post in ultimi limit:3 %}
+      <li><a href="{{ post.url | relative_url }}">{{ post.title }}</a></li>
+      {% endfor %}
+    </ul>
+    <a class="link-arrow" href="{{ '/blog/' | relative_url }}">Tutte le uscite sul blog</a>
+  </div>
+</section>
+{% endif %}

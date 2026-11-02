@@ -1,13 +1,14 @@
 {% comment %}
   Riquadro di iscrizione alla newsletter: usato in home e in fondo agli articoli del blog.
   Si accende da _config.yml con newsletter_attiva: true.
+  Nella pagina /newsletter/ si usa con titolo_pagina=true: il titolo diventa h1.
 {% endcomment %}
 <section class="section" id="newsletter">
   <div class="wrap">
     <div class="optin">
       <div>
         <p class="eyebrow" style="color:var(--brass)">Newsletter</p>
-        <h2>Le novità AI della settimana, in cinque minuti</h2>
+        {% if include.titolo_pagina %}<h1 style="font-size:clamp(2rem, 5vw, 3rem)">Le novità AI della settimana, in cinque minuti</h1>{% else %}<h2>Le novità AI della settimana, in cinque minuti</h2>{% endif %}
         <p>
           Ogni lunedì ti scrivo cosa è cambiato su Claude, ChatGPT e Gemini
           e cosa significa per il lavoro di un'impresa o di un professionista.
