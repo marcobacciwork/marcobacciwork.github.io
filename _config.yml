@@ -43,6 +43,10 @@ legal:
   piva: "18685861009"
   sede: "Via Francesco Vitalini 65, 00155 Roma"
 
+# Pubblica gli articoli anche se l'orario nel campo date è più avanti del momento in cui il sito si aggiorna
+# (es. articolo della newsletter caricato alle 12:09 con date 12:20: senza questa riga resterebbe nascosto)
+future: true
+
 plugins:
   - jekyll-seo-tag
   - jekyll-sitemap
