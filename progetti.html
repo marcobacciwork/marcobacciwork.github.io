@@ -1,65 +1,19 @@
 ---
-layout: default
-title: "Progetti"
-nav: progetti
+layout: null
 permalink: /progetti/
-description: "Progetti personali e strumenti che ho costruito con l'intelligenza artificiale per sperimentare soluzioni applicate a problemi concreti."
+sitemap: false
 ---
-
-<section class="hero">
-  <div class="wrap hero-inner">
-    <p class="eyebrow" style="color:var(--brass)">Laboratorio</p>
-    <h1>Progetti che ho<br><em>costruito</em></h1>
-    <p class="lead">
-      Qui trovi, per ora, progetti personali: non sono casi cliente.
-      Li uso per sperimentare strumenti e soluzioni partendo da problemi concreti.
-      Per ognuno trovi il problema di partenza, cosa ho costruito e il risultato.
-    </p>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
-
-    {% for p in site.data.progetti %}
-    <article class="project">
-      <a class="project-preview" href="{{ p.url | relative_url }}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
-        {% if p.immagine and p.immagine != "" %}
-        <img src="{{ '/assets/img/progetti/' | append: p.immagine | relative_url }}" alt="" loading="lazy">
-        {% else %}
-        <span class="project-bar"><i></i><i></i><i></i></span>
-        <span class="project-nome">{{ p.nome }}</span>
-        <span class="project-sub">{{ p.sottotitolo }}</span>
-        {% endif %}
-      </a>
-
-      <div class="project-body">
-        <span class="case-tag">{{ p.tag }}</span>
-        <h2>{{ p.nome }}</h2>
-        <p class="project-claim">{{ p.sottotitolo }}</p>
-        <dl class="project-steps">
-          <dt>Il problema</dt><dd>{{ p.problema }}</dd>
-          <dt>Cosa ho costruito</dt><dd>{{ p.descrizione }}</dd>
-          <dt>Tecnologia</dt><dd>{{ p.tecnologia }}</dd>
-          <dt>Risultato</dt><dd>{{ p.risultato }}</dd>
-        </dl>
-        <p class="project-nota"><strong>Per il tuo lavoro.</strong> {{ p.per_te }}</p>
-        <a class="btn btn-outline" href="{{ p.url | relative_url }}" target="_blank" rel="noopener">Apri il progetto <span aria-hidden="true">↗</span></a>
-      </div>
-    </article>
-    {% endfor %}
-
-  </div>
-</section>
-
-<section class="section section-warm">
-  <div class="wrap wrap-narrow" style="text-align:center">
-    <h2>Hai un problema che potrebbe diventare un progetto?</h2>
-    <p class="lead" style="margin:0 auto 2rem">
-      Raccontami cosa vuoi migliorare. Prima capisco il processo e poi ti dico
-      se serve davvero costruire qualcosa, automatizzare un passaggio
-      oppure usare meglio gli strumenti che hai già.
-    </p>
-    <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Raccontami la tua idea</a>
-  </div>
-</section>
+{%- comment -%} La pagina Progetti è stata unita a Strumenti: questo file rimanda al Laboratorio, così i vecchi link funzionano. {%- endcomment -%}
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <title>Laboratorio – Marco Bacci</title>
+  <meta name="robots" content="noindex">
+  <link rel="canonical" href="{{ site.url }}/strumenti/#laboratorio">
+  <meta http-equiv="refresh" content="0; url={{ '/strumenti/#laboratorio' | relative_url }}">
+</head>
+<body>
+  <p>I progetti ora sono nel <a href="{{ '/strumenti/#laboratorio' | relative_url }}">Laboratorio, nella pagina Strumenti</a>.</p>
+</body>
+</html>

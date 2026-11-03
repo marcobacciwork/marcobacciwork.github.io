@@ -2256,3 +2256,13 @@ a.cliente-logo:hover { background: var(--accent-soft); }
 .home-esempi .card h4 { font-size: 1.08rem; margin: 0; }
 .home-esempi .card-chi { font-size: 0.85rem; color: var(--text-3); margin: 0; }
 .home-esempi .card-esempio { font-size: 0.95rem; color: var(--text-2); margin: 0; }
+
+/* Laboratorio in fondo alla pagina Strumenti (dati in _data/progetti.yml) */
+#laboratorio { scroll-margin-top: 5rem; }
+.lab-card .case-tag { align-self: flex-start; }
+.lab-card h3 { margin: 0; }
+.lab-card .lab-sub { color: var(--text); font-weight: 500; margin: 0; }
+.lab-card p { color: var(--text-2); margin: 0; }
+.lab-card .lab-nota { font-size: 0.95rem; }
+.lab-card .lab-nota strong { color: var(--text); font-weight: 600; }
+.lab-card .link-arrow { margin-top: auto; padding-top: 0.6rem; }

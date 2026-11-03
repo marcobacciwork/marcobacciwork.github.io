@@ -1,4 +1,5 @@
-# Progetti mostrati nella pagina Progetti e in home.
+# Progetti del Laboratorio, mostrati in fondo alla pagina Strumenti (/strumenti/#laboratorio).
+# La vecchia pagina /progetti/ rimanda lì.
 # Per aggiungerne uno: copia un blocco intero (dal trattino in poi) e cambia i testi.
 # Schema: problema → cosa ho costruito (descrizione) → tecnologia → risultato → per_te.
 # Nel campo risultato solo fatti verificabili: niente numeri inventati.

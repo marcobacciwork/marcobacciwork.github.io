@@ -8,7 +8,7 @@ Sito vetrina statico. Jekyll su GitHub Pages, nessun backend.
 
 ```
 _config.yml          Dati e link: email, telefono, P.IVA, profili social, interruttore newsletter
-_data/progetti.yml   I progetti mostrati nella pagina Progetti e in home
+_data/progetti.yml   I progetti del Laboratorio, in fondo alla pagina Strumenti
 _data/clienti.yml    Partner e clienti mostrati in home (logo, nome, settore)
 _layouts/default     Head, meta social, struttura pagina, animazioni
 _includes/           header.html (menu) · footer.html · social.html (pulsanti LinkedIn e Instagram)
@@ -20,7 +20,8 @@ assets/img/logo/     logo MB Ai: splash (apertura animata, orizzontale e vertica
 
 index.html           Home
 servizi.html         Tre servizi + formati + domande frequenti
-progetti.html        Cosa ho costruito
+progetti.html        Solo rimando: /progetti/ porta a /strumenti/#laboratorio
+strumenti.html       Strumenti gratuiti + Laboratorio (progetti personali)
 libri.html           Libri
 chi-sono.html        Storia professionale
 prenota.html         Calendario Cal.com incorporato

@@ -34,7 +34,32 @@ image: /assets/img/og-strumenti.png
   </div>
 </section>
 
-<section class="section section-warm">
+<!-- LABORATORIO: progetti personali (dati in _data/progetti.yml) -->
+{% if site.data.progetti and site.data.progetti.size > 0 %}
+<section class="section section-warm" id="laboratorio">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Laboratorio</p>
+      <h2>Cose che ho costruito con l'AI</h2>
+      <p class="lead">Progetti personali, non lavori per clienti. Servono a mostrare cosa si può costruire con l'intelligenza artificiale partendo da un problema concreto.</p>
+    </div>
+    <div class="grid grid-2">
+      {% for p in site.data.progetti %}
+      <div class="card lab-card">
+        <span class="case-tag">{{ p.tag }}</span>
+        <h3>{{ p.nome }}</h3>
+        <p class="lab-sub">{{ p.sottotitolo }}</p>
+        <p>{{ p.descrizione }}</p>
+        <p class="lab-nota"><strong>Per il tuo lavoro.</strong> {{ p.per_te }}</p>
+        <a class="link-arrow" href="{{ p.url | relative_url }}" target="_blank" rel="noopener">Apri il progetto</a>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section class="section">
   <div class="wrap wrap-narrow" style="text-align:center">
     <h2>Vuoi applicarlo al tuo caso?</h2>
     <p class="lead" style="margin:0 auto 2rem">
