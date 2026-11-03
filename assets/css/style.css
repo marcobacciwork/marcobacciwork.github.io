@@ -2200,6 +2200,10 @@ a.cliente-logo:hover { background: var(--accent-soft); }
 @media (min-width: 900px) {
   #strumenti .strumento { flex-direction: row; }
   #strumenti .strumento-preview { flex: 0 0 48%; aspect-ratio: auto; min-height: 300px; }
+  /* L'anteprima è più alta che larga rispetto all'immagine (16:10): la mostro intera, centrata, invece di tagliarne i lati */
+  #strumenti .strumento-preview img { object-fit: contain; object-position: center top; }
+  /* Sfondo piatto dello stesso blu del bordo dell'immagine: lo spazio sotto non si nota */
+  #strumenti .strumento-preview:has(img) { background: #0f172a; }
 }
 
 .home-strumenti-more { margin: 1.5rem 0 0; }
