@@ -2202,8 +2202,8 @@ a.cliente-logo:hover { background: var(--accent-soft); }
   #strumenti .strumento-preview { flex: 0 0 48%; aspect-ratio: auto; min-height: 300px; }
   /* L'anteprima è più alta che larga rispetto all'immagine (16:10): la mostro intera, centrata, invece di tagliarne i lati */
   #strumenti .strumento-preview img { object-fit: contain; object-position: center top; }
-  /* Sfondo piatto dello stesso blu del bordo dell'immagine: lo spazio sotto non si nota */
-  #strumenti .strumento-preview:has(img) { background: #0f172a; }
+  /* Sfondo piatto dello stesso colore del fondo della schermata: lo spazio sotto non si nota */
+  #strumenti .strumento-preview:has(img) { background: #f8f9fa; border-right: 1px solid var(--line); }
 }
 
 .home-strumenti-more { margin: 1.5rem 0 0; }
@@ -2266,3 +2266,6 @@ a.cliente-logo:hover { background: var(--accent-soft); }
 .lab-card .lab-nota { font-size: 0.95rem; }
 .lab-card .lab-nota strong { color: var(--text); font-weight: 600; }
 .lab-card .link-arrow { margin-top: auto; padding-top: 0.6rem; }
+.lab-preview { display: block; margin: -0.4rem -0.4rem 0.6rem; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; aspect-ratio: 16 / 10; transition: transform var(--dur) var(--ease); }
+.lab-preview:hover { transform: translateY(-3px); }
+.lab-preview img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }

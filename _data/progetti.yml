@@ -14,7 +14,7 @@
   risultato: "Online e gratuito. Si aggiorna da solo a ogni apertura: nessun foglio di calcolo da sistemare a mano."
   per_te: "Un cruscotto simile può mostrarti a colpo d'occhio i numeri che oggi cerchi in più file."
   url: "/WorldEconomy/"
-  immagine: ""
+  immagine: "worldeconomy.jpg"
 
 - nome: "CloudScanner"
   tag: "Costi e fornitori"
@@ -25,4 +25,4 @@
   risultato: "Online, gratuito, si usa senza registrazione. Un confronto che richiedeva ore si fa in pochi clic."
   per_te: "Lo stesso metodo funziona per confrontare i tuoi fornitori, le tariffe o i preventivi che ricevi."
   url: "/CloudScanner/"
-  immagine: ""
+  immagine: "cloudscanner.jpg"

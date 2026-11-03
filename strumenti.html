@@ -46,6 +46,11 @@ image: /assets/img/og-strumenti.png
     <div class="grid grid-2">
       {% for p in site.data.progetti %}
       <div class="card lab-card">
+        {% if p.immagine and p.immagine != "" %}
+        <a class="lab-preview" href="{{ p.url | relative_url }}" target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+          <img src="{{ '/assets/img/progetti/' | append: p.immagine | relative_url }}" alt="" loading="lazy" width="1280" height="800">
+        </a>
+        {% endif %}
         <span class="case-tag">{{ p.tag }}</span>
         <h3>{{ p.nome }}</h3>
         <p class="lab-sub">{{ p.sottotitolo }}</p>
