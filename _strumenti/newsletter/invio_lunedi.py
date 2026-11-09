@@ -222,6 +222,10 @@ def articolo(campagna, lunedi, ora):
 def main():
     prova = os.environ.get("MODALITA", "invio").strip().lower() == "prova"
     ora = dt.datetime.now(ROMA)
+    if not os.environ.get("BREVO_API_KEY", "").strip() and not prova and ora.time() < ORA_ALLARME:
+        # senza chiave avvisa una sola volta (al passaggio delle 11:30), non ogni mezz'ora
+        log("BREVO_API_KEY mancante: niente da fare ora, l'avviso parte alle 11:30.")
+        return
     if os.environ.get("DATA_LUNEDI"):
         lunedi = dt.date.fromisoformat(os.environ["DATA_LUNEDI"])
     else:
