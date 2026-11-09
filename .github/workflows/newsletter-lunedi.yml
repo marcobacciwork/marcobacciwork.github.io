@@ -1,0 +1,55 @@
+# Invio della newsletter del lunedì e articolo sul blog.
+# La revisione automatica di Claude prepara in Brevo la bozza "Newsletter – <data>";
+# questo workflow la invia e pubblica lo stesso testo sul blog.
+# Dettagli: _strumenti/newsletter/invio_lunedi.py e _strumenti/newsletter/LEGGIMI.md
+name: Newsletter del lunedì
+
+on:
+  schedule:
+    # Ogni 30 minuti, il lunedì, dalle 6:00 alle 10:30 UTC
+    # (ora italiana: 7:00-11:30 d'inverno, 8:00-12:30 d'estate).
+    # Lo script invia solo dalle 9:15 ora di Roma e non invia mai due volte.
+    - cron: "0,30 6-10 * * 1"
+  workflow_dispatch:
+    inputs:
+      modalita:
+        description: "prova = non invia e non scrive nulla; invio = come il lunedì"
+        default: "prova"
+        type: choice
+        options: [prova, invio]
+
+permissions:
+  contents: write
+  pages: write
+
+concurrency:
+  group: newsletter-lunedi
+  cancel-in-progress: false
+
+jobs:
+  invio:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Invia la bozza e prepara l'articolo
+        env:
+          BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
+          MODALITA: ${{ github.event.inputs.modalita || 'invio' }}
+        run: python3 _strumenti/newsletter/invio_lunedi.py
+
+      - name: Pubblica l'articolo sul blog
+        if: ${{ (github.event.inputs.modalita || 'invio') == 'invio' }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ -z "$(git status --porcelain _posts)" ]; then echo "Nessun articolo nuovo."; exit 0; fi
+          git config user.name "Claude"
+          git config user.email "noreply@anthropic.com"
+          git add _posts
+          git commit -m "Blog: novità AI della settimana (newsletter del lunedì)"
+          git pull --rebase origin main
+          git push origin main
+          # chiede comunque una nuova build del sito (se non serve, l'errore si ignora)
+          gh api -X POST "repos/${GITHUB_REPOSITORY}/pages/builds" >/dev/null 2>&1 || true
