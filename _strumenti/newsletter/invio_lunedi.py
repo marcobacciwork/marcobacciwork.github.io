@@ -11,7 +11,7 @@ Cosa fa, in ordine:
    Le bozze con un altro nome (ad esempio "BLOCCATA – ...") non vengono mai toccate.
 3. Se la newsletter risulta inviata e l'articolo del blog non esiste ancora,
    scrive _posts/AAAA-MM-GG-novita-ai-settimana-G-mese-AAAA.md con lo stesso testo.
-4. Se alle 11:00 (ora di Roma) non c'è né una bozza né una campagna inviata,
+4. Se dalle 11:25 (ora di Roma) non c'è né una bozza né una campagna inviata,
    esce con errore: GitHub manda un'email di avviso al proprietario del repository.
 
 Variabili d'ambiente:
@@ -42,7 +42,7 @@ MESI = ["gennaio", "febbraio", "marzo", "aprile", "maggio", "giugno", "luglio",
         "agosto", "settembre", "ottobre", "novembre", "dicembre"]
 LISTA_NEWSLETTER = 3
 ORA_INVIO = dt.time(9, 15)      # prima di quest'ora non invia
-ORA_ALLARME = dt.time(11, 0)    # da quest'ora, se manca tutto, avvisa con un errore
+ORA_ALLARME = dt.time(11, 25)   # da quest'ora, se manca tutto, avvisa con un errore
 REPO = Path(__file__).resolve().parents[2]
 
 

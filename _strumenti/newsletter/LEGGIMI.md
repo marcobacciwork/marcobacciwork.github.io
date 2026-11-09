@@ -9,7 +9,7 @@
 - Dopo: in Brevo rinomina la bozza (es. "BLOCCATA – …") o cancellala. Il workflow invia solo una bozza con il nome esatto.
 
 ## Se qualcosa non parte
-- Alle 11:00 (ora di Roma), se non c'è né la bozza né una campagna inviata, il workflow fallisce e GitHub manda un'email a Marco.
+- Dalle 11:30 (ora di Roma), se non c'è né la bozza né una campagna inviata, il workflow fallisce e GitHub manda un'email a Marco.
 - Prova a mano: GitHub → Actions → "Newsletter del lunedì" → Run workflow → modalità `prova` (non invia nulla, mostra cosa farebbe).
 
 ## Requisito
