@@ -99,6 +99,12 @@ description: "Come tratto i dati personali raccolti tramite questo sito."
       si usano senza registrazione e non impostano cookie. Sono ospitati da GitHub Pages, come il resto del sito.
       I dati che inserisci per i calcoli vengono elaborati nel tuo browser: non li ricevo e non li conservo.
     </p>
+    <p>
+      Il <a href="{{ '/check-up-dominio/' | relative_url }}">Check-up email e dominio</a> legge solo informazioni pubbliche:
+      per farlo, il tuo browser chiede il nome del dominio che scrivi ai DNS pubblici di Cloudflare
+      (e, se non rispondono, a quelli di Google) e prova ad aprire il sito di quel dominio.
+      Il risultato resta nel tuo browser: non lo ricevo e non lo conservo.
+    </p>
     {% if site.report_email_attivo %}
     <p>
       Se uno strumento ti offre di ricevere i risultati via email, i dati del modulo

@@ -1,0 +1,129 @@
+---
+layout: default
+title: "Check-up email e dominio"
+nav: strumenti
+permalink: /check-up-dominio/
+description: "Controllo gratuito in meno di un minuto: qualcuno può mandare email a nome della tua azienda? Verifica SPF, DKIM, DMARC, HTTPS e DNSSEC del tuo dominio. Senza registrazione."
+---
+{%- comment -%}
+  Check-up email e dominio. Tutta la logica è in assets/js/check-up-dominio.js,
+  gli stili nella sezione "Check-up dominio" in fondo a assets/css/style.css.
+  Il controllo gira nel browser: il nome del dominio va solo ai DNS pubblici
+  (Cloudflare, con Google come riserva). Nessun dato arriva a Marco.
+{%- endcomment -%}
+
+<section class="hero">
+  <div class="wrap hero-inner">
+    <p class="eyebrow">Strumento gratuito · Sicurezza</p>
+    <h1>Check-up<br><em>email e dominio</em></h1>
+    <p class="lead">
+      In meno di un minuto scopri se qualcuno può mandare email a nome della tua azienda
+      e quanto è protetto il tuo dominio. Gratis, senza registrazione.
+    </p>
+
+    <form class="cu-form" id="cu-form" novalidate>
+      <label class="cu-label" for="cu-dominio">Il dominio della tua azienda (o un tuo indirizzo email)</label>
+      <div class="form-row">
+        <input class="field" id="cu-dominio" name="dominio" type="text" inputmode="url"
+               autocomplete="off" autocapitalize="off" spellcheck="false"
+               placeholder="es. studiorossi.it oppure info@studiorossi.it" required>
+        <button class="btn btn-primary" type="submit" id="cu-avvia">Avvia il check-up</button>
+      </div>
+      <p class="form-note" id="cu-errore" role="alert" hidden></p>
+      <p class="form-note">
+        Il controllo avviene nel tuo browser e legge solo informazioni pubbliche.
+        Il nome del dominio viene chiesto ai DNS pubblici di Cloudflare, come succede ogni volta che apri un sito.
+        Non ricevo e non salvo nulla.
+      </p>
+    </form>
+  </div>
+</section>
+
+<!-- RISULTATI: riempiti dallo script -->
+<section class="section cu-risultati" id="cu-risultati" hidden aria-live="polite">
+  <div class="wrap wrap-narrow" id="cu-contenuto"></div>
+</section>
+
+<!-- COSA CONTROLLA -->
+<section class="section section-warm cu-spiegazione" id="cosa-controlla">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Cosa controlla</p>
+      <h2>Le protezioni che contano di più per una piccola attività</h2>
+      <p class="lead">
+        Il rischio più comune non è un attacco da film: è qualcuno che manda email false
+        con il tuo nome ai tuoi clienti, per esempio con un IBAN diverso per il pagamento.
+      </p>
+    </div>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>SPF, DKIM e DMARC</h3>
+        <p>Tre impostazioni che dicono al mondo quali server possono inviare email a tuo nome e cosa fare con quelle false. Senza, chiunque può fingersi te.</p>
+      </div>
+      <div class="card">
+        <h3>HTTPS e DNSSEC</h3>
+        <p>Il sito risponde con una connessione cifrata? Il dominio è firmato, così nessuno può dirottare chi lo cerca?</p>
+      </div>
+      <div class="card">
+        <h3>Protezioni extra</h3>
+        <p>MTA-STS e CAA: impostazioni meno note che obbligano la cifratura delle email e limitano chi può emettere certificati per il tuo dominio.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DOMANDE -->
+<section class="section cu-faq">
+  <div class="wrap wrap-narrow">
+    <div class="section-head">
+      <p class="eyebrow">Domande frequenti</p>
+      <h2>Prima di fidarti del risultato</h2>
+    </div>
+    <div class="faq">
+      <details>
+        <summary>È un test di sicurezza completo?</summary>
+        <p>
+          No. È un primo controllo delle impostazioni pubbliche del dominio, le stesse che vede chiunque.
+          Non controlla computer, password, backup o programmi. Serve a capire in un minuto se ci sono
+          buchi evidenti e da dove partire.
+        </p>
+      </details>
+      <details>
+        <summary>Posso controllare il dominio di un'altra azienda?</summary>
+        <p>
+          Sì, perché legge solo informazioni pubbliche. Ma il risultato è più utile sul tuo dominio:
+          così sai cosa chiedere a chi ti gestisce sito ed email.
+        </p>
+      </details>
+      <details>
+        <summary>La DKIM risulta "non trovata": è un problema?</summary>
+        <p>
+          Non per forza. La DKIM si cerca per nome e ogni fornitore ne usa uno diverso. Lo strumento prova
+          i nomi più comuni (Google, Microsoft 365, Brevo, Mailchimp e altri). Se usi un fornitore diverso,
+          chiedi a chi gestisce la tua posta di confermare che sia attiva.
+        </p>
+      </details>
+      <details>
+        <summary>Chi può sistemare quello che non va?</summary>
+        <p>
+          Di solito chi gestisce il dominio o la posta (il fornitore del sito, il tecnico informatico, il registrar).
+          Il pulsante "Copia il riepilogo" prepara un testo da mandargli. Se non sai a chi chiedere,
+          possiamo guardarlo insieme in una call.
+        </p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<section class="section section-warm cu-cta-finale">
+  <div class="wrap wrap-narrow" style="text-align:center">
+    <h2>Sicurezza e AI vanno insieme</h2>
+    <p class="lead" style="margin:0 auto 2rem">
+      Se la tua azienda inizia a usare l'intelligenza artificiale, le email e i dati dei clienti
+      vanno protetti prima. In una call gratuita di 20 minuti guardiamo il tuo caso.
+    </p>
+    <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Prenota una call</a>
+  </div>
+</section>
+
+<script src="{{ '/assets/js/check-up-dominio.js' | relative_url }}?v={{ site.time | date: '%s' }}" defer></script>
