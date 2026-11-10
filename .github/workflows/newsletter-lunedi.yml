@@ -17,6 +17,10 @@ on:
         default: "prova"
         type: choice
         options: [prova, invio]
+      data_lunedi:
+        description: "Solo per recuperi: data del lunedì da inviare (AAAA-MM-GG). Vuoto = oggi"
+        default: ""
+        type: string
 
 permissions:
   contents: write
@@ -37,6 +41,7 @@ jobs:
         env:
           BREVO_API_KEY: ${{ secrets.BREVO_API_KEY }}
           MODALITA: ${{ github.event.inputs.modalita || 'invio' }}
+          DATA_LUNEDI: ${{ github.event.inputs.data_lunedi || '' }}
         run: python3 _strumenti/newsletter/invio_lunedi.py
 
       - name: Pubblica l'articolo sul blog
