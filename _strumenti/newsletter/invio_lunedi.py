@@ -29,6 +29,7 @@ import json
 import os
 import re
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
@@ -63,18 +64,32 @@ def brevo(metodo, percorso, corpo=None):
         "accept": "application/json",
         "content-type": "application/json",
     })
-    try:
-        with urllib.request.urlopen(req, timeout=60) as r:
-            testo = r.read().decode() or "{}"
-            return json.loads(testo)
-    except urllib.error.HTTPError as e:
-        sys.exit(f"Brevo ha risposto {e.code} su {metodo} {percorso}: {e.read().decode()[:500]}")
+    for tentativo in range(3):
+        try:
+            with urllib.request.urlopen(req, timeout=60) as r:
+                testo = r.read().decode() or "{}"
+                return json.loads(testo)
+        except urllib.error.HTTPError as e:
+            corpo_err = e.read().decode()[:500]
+            if e.code >= 500 and tentativo < 2:
+                log(f"Brevo {e.code} su {metodo} {percorso}: riprovo tra 20 secondi.")
+                time.sleep(20)
+                continue
+            sys.exit(f"Brevo ha risposto {e.code} su {metodo} {percorso}: {corpo_err}")
+
+
+_CACHE = None
 
 
 def campagne(stato):
-    q = urllib.parse.urlencode({"type": "classic", "status": stato, "limit": 50,
-                                "sort": "desc", "excludeHtmlContent": "true"})
-    return brevo("GET", f"/emailCampaigns?{q}").get("campaigns", [])
+    """Ultime 50 campagne (una sola chiamata, filtrata qui per stato)."""
+    global _CACHE
+    if _CACHE is None:
+        q = urllib.parse.urlencode({"limit": 50, "offset": 0, "sort": "desc",
+                                    "statistics": "globalStats",
+                                    "excludeHtmlContent": "true"})
+        _CACHE = brevo("GET", f"/emailCampaigns?{q}").get("campaigns", [])
+    return [c for c in _CACHE if c.get("status") == stato]
 
 
 # ------------------------------------------------- HTML → Markdown (blog)
