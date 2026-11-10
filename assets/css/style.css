@@ -2269,3 +2269,63 @@ a.cliente-logo:hover { background: var(--accent-soft); }
 .lab-preview { display: block; margin: -0.4rem -0.4rem 0.6rem; border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; aspect-ratio: 16 / 10; transition: transform var(--dur) var(--ease); }
 .lab-preview:hover { transform: translateY(-3px); }
 .lab-preview img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: top; }
+
+/* --------------------------------------------------------------------------
+   Check-up dominio (check-up-dominio.html + assets/js/check-up-dominio.js)
+   -------------------------------------------------------------------------- */
+
+.cu-form { margin-top: 2.6rem; max-width: 40rem; }
+.cu-label { display: block; font-size: 0.9rem; color: var(--on-deep-2); margin-bottom: 0.7rem; }
+.cu-form .btn[disabled] { opacity: 0.6; cursor: wait; }
+.cu-risultati { scroll-margin-top: 4rem; }
+.cu-attesa { font-family: var(--display); font-size: 1.2rem; color: var(--text-2); }
+.cu-attesa::before { content: ""; display: inline-block; width: 0.9rem; height: 0.9rem; margin-right: 0.7rem; border: 2px solid var(--line-strong); border-top-color: var(--accent); border-radius: 50%; vertical-align: -0.1rem; animation: cu-giro 0.8s linear infinite; }
+@keyframes cu-giro { to { transform: rotate(360deg); } }
+
+.cu-voto { display: flex; gap: 1.6rem; align-items: center; padding: clamp(1.4rem, 3vw, 2rem); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-lg); margin-bottom: 2rem; }
+.cu-voto .eyebrow { margin-bottom: 0.6rem; }
+.cu-voto h2 { margin: 0 0 0.4rem; }
+.cu-voto p { margin: 0; color: var(--text-2); }
+.cu-pct { font-size: 0.55em; color: var(--text-3); font-weight: 400; }
+.cu-lettera { flex: none; width: 4.6rem; height: 4.6rem; display: grid; place-items: center; border-radius: 50%; font-family: var(--display); font-size: 2.4rem; font-weight: 600; color: #fff; background: var(--cu-colore, var(--accent)); }
+.cu-voto-a, .cu-voto-b { --cu-colore: #0E8A5F; }
+.cu-voto-c { --cu-colore: #B26A00; }
+.cu-voto-d, .cu-voto-e { --cu-colore: #C8322B; }
+
+.cu-priorita { padding: 1.4rem 1.6rem; background: var(--accent-soft); border-radius: var(--radius-lg); margin-bottom: 2rem; }
+.cu-priorita h3 { margin: 0 0 0.8rem; font-size: 1.1rem; }
+.cu-priorita ol { margin: 0; padding-left: 1.2rem; }
+.cu-priorita li { margin-bottom: 0.5rem; }
+
+.cu-lista { list-style: none; margin: 0 0 2rem; padding: 0; border-top: 1px solid var(--line); }
+.cu-voce { padding: 1.3rem 0; border-bottom: 1px solid var(--line); }
+.cu-voce-testa { display: flex; align-items: center; gap: 0.8rem; flex-wrap: wrap; }
+.cu-voce h3 { margin: 0; font-size: 1.12rem; }
+.cu-badge { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.08em; padding: 0.25rem 0.55rem; border-radius: 4px; color: #fff; background: var(--cu-colore, var(--text-3)); }
+.cu-ok         { --cu-colore: #0E8A5F; }
+.cu-attenzione { --cu-colore: #B26A00; }
+.cu-critico    { --cu-colore: #C8322B; }
+.cu-verifica   { --cu-colore: #5A6478; }
+.cu-info       { --cu-colore: #8A94A6; }
+.cu-esito { margin: 0.6rem 0 0.4rem; }
+.cu-voce details summary { cursor: pointer; color: var(--accent); font-size: 0.9rem; }
+.cu-voce details p { color: var(--text-2); font-size: 0.95rem; margin: 0.6rem 0 0; }
+.cu-record { margin: 0.7rem 0 0; padding: 0.8rem 1rem; background: var(--bg-alt); border-radius: var(--radius); font-family: var(--mono); font-size: 0.78rem; white-space: pre-wrap; word-break: break-all; }
+
+.cu-azioni { flex-wrap: wrap; }
+.cu-azioni .btn { white-space: normal; }
+.cu-nota { font-size: 0.85rem; color: var(--text-3); margin-top: 1rem; }
+.cu-cta { margin-top: 2.5rem; padding: clamp(1.4rem, 3vw, 2rem); background: var(--deep); color: var(--on-deep); border-radius: var(--radius-lg); }
+.cu-cta h3 { margin: 0 0 0.6rem; color: var(--on-deep); }
+.cu-cta p { color: var(--on-deep-2); margin: 0 0 1.4rem; }
+
+@media (max-width: 540px) {
+  .cu-voto { flex-direction: column; align-items: flex-start; }
+  .cu-azioni .btn { width: 100%; }
+}
+
+@media print {
+  .site-header, .site-footer, footer, .hero, .cu-spiegazione, .cu-faq, .cu-cta-finale, .cu-azioni, .cu-cta, #cu-copiato { display: none !important; }
+  .cu-risultati { padding: 0 !important; }
+  .cu-badge, .cu-lettera { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+}

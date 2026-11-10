@@ -26,3 +26,13 @@
   stato: "online"
   aggiornato_il: 2026-10-23
   tag: "Costi e consumi"
+
+- nome: "Check-up email e dominio"
+  slug: "check-up-dominio"
+  url: "/check-up-dominio/"
+  descrizione: "Controlla in meno di un minuto se qualcuno può mandare email a nome della tua azienda e quanto è protetto il tuo dominio (SPF, DKIM, DMARC, HTTPS, DNSSEC)."
+  per_chi: "Titolari di imprese e studi professionali che vogliono sapere se le loro email si possono imitare, prima di chiedere al tecnico."
+  immagine: ""
+  stato: "online"
+  aggiornato_il: 2026-11-11
+  tag: "Sicurezza"
