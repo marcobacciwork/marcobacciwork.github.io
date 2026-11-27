@@ -2630,5 +2630,6 @@ a.cliente-logo:hover { border-color: var(--accent); }
 }
 
 .numeri-chiusura { margin-top: clamp(1.75rem, 3.5vw, 2.5rem); }
+.numeri-chiusura .numeri-articolo { margin: -0.5rem 0 1.25rem; }
 .numeri-chiusura p { margin: 0 0 1.25rem; max-width: var(--measure); color: var(--on-deep-2); font-size: 1.05rem; }
 @media (max-width: 919px) { .numeri-chiusura > span { display: none; } }
