@@ -23,6 +23,9 @@ linkedin_nome: "marcobacci-ai"
 instagram_url: "https://www.instagram.com/marcobacci.ai/"
 instagram_nome: "@marcobacci.ai"
 
+# Modulo "Scrivimi" nella pagina Contatti (/prenota/): webhook Make.com, scenario "Richieste dal sito → Google Sheets"
+modulo_richieste_url: "https://hook.eu1.make.com/tcai956n6f22jlpuk437uux54mnxxual"
+
 # Iscrizione alla newsletter in home: metti true quando il modulo Brevo è collegato
 newsletter_attiva: true
 # Indirizzo del modulo Brevo "Iscrizione newsletter sito" (HTML semplice), lista Newsletter con doppia conferma

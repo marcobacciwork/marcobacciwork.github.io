@@ -1,26 +1,127 @@
 ---
 layout: default
-title: "Prenota una call"
+title: "Contatti"
 nav: prenota
 permalink: /prenota/
-description: "Venti minuti gratuiti per raccontarmi della tua azienda e di come lavora, e capire se e come posso aiutarti. Nessun impegno."
+description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota una call gratuita di 20 minuti. Formazione, interventi a convegni, automazioni e setup degli account AI."
 ---
 
 <section class="hero" style="padding-block:clamp(3.5rem,8vw,5.5rem) clamp(2.5rem,5vw,3.5rem)">
   <div class="wrap hero-inner">
-    <p class="eyebrow" style="color:var(--brass)">Primo incontro</p>
-    <h1>Venti minuti,<br>senza <em>impegno</em></h1>
+    <p class="eyebrow" style="color:var(--brass)">Contatti</p>
+    <h1>Scrivimi o prenota<br>una <em>call</em></h1>
     <p class="lead">
-      Mi racconti della tua azienda, di come lavorate e di cosa vorresti migliorare.
-      Io ti dico se posso aiutarti e da dove partirei.
-      Se non vedo come, te lo dico.
+      Dimmi di cosa hai bisogno con il modulo qui sotto: ti rispondo io, via email o per telefono.
+      Se preferisci parlarne a voce, prenota una call gratuita di 20 minuti.
     </p>
   </div>
 </section>
 
-<section class="section-tight">
+<!-- MODULO RICHIESTE -->
+<section class="section-tight" id="scrivimi">
   <div class="wrap split">
     <div>
+      <h2 style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1rem">Scrivimi</h2>
+      <p style="color:var(--muted);max-width:42ch">
+        Bastano due minuti. Scegli una o più voci e aggiungi due righe sul tuo caso.
+      </p>
+    </div>
+
+    <div>
+      {% comment %}
+        Modulo scritto nel sito: il browser contatta Make.com solo quando premi "Invia".
+        Make copia la richiesta nel foglio Google "Richieste dal sito" (scenario
+        "Richieste dal sito → Google Sheets"). L'indirizzo sta in _config.yml → modulo_richieste_url.
+      {% endcomment %}
+      <form class="richiesta" id="richiesta" action="{{ site.modulo_richieste_url }}" method="POST" novalidate>
+        <input type="text" name="sito_web" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
+
+        <fieldset class="richiesta-scelte">
+          <legend>Di cosa hai bisogno?</legend>
+          <label><input type="checkbox" name="bisogno" value="Formazione per il team"> Formazione per il team</label>
+          <label><input type="checkbox" name="bisogno" value="Intervento a un convegno o evento"> Intervento a un convegno o evento</label>
+          <label><input type="checkbox" name="bisogno" value="Automazioni"> Automazioni</label>
+          <label><input type="checkbox" name="bisogno" value="Setup degli account AI"> Setup degli account AI</label>
+          <label><input type="checkbox" name="bisogno" value="Affiancamento"> Affiancamento</label>
+          <label><input type="checkbox" name="bisogno" value="Strumento su misura"> Strumento su misura</label>
+          <label><input type="checkbox" name="bisogno" value="Altro"> Altro</label>
+        </fieldset>
+
+        <label class="richiesta-campo">Descrivi in breve
+          <textarea name="descrizione" rows="4" maxlength="2000" placeholder="Per esempio: che lavoro fate, quante persone siete, cosa vorreste migliorare"></textarea>
+        </label>
+
+        <div class="richiesta-due">
+          <label class="richiesta-campo">Nome e cognome *
+            <input type="text" name="nome" required maxlength="120" autocomplete="name">
+          </label>
+          <label class="richiesta-campo">Azienda o associazione
+            <input type="text" name="azienda" maxlength="120" autocomplete="organization">
+          </label>
+          <label class="richiesta-campo">Email *
+            <input type="email" name="email" required maxlength="160" autocomplete="email">
+          </label>
+          <label class="richiesta-campo">Telefono
+            <input type="tel" name="telefono" maxlength="40" autocomplete="tel">
+          </label>
+        </div>
+
+        <p class="richiesta-errore" id="richiesta-errore" role="alert" hidden></p>
+
+        <button class="btn btn-primary" type="submit">Invia la richiesta</button>
+        <p class="richiesta-nota">
+          Uso questi dati solo per risponderti. Dettagli nella
+          <a href="{{ '/privacy/' | relative_url }}">privacy policy</a>.
+        </p>
+      </form>
+
+      <div class="richiesta-ok" id="richiesta-ok" hidden tabindex="-1">
+        <p class="richiesta-ok-titolo">Grazie, ho ricevuto la tua richiesta.</p>
+        <p>Ti rispondo io, via email o per telefono. Se intanto vuoi fissare un momento per parlarne, prenota una call qui sotto.</p>
+      </div>
+
+      <script>
+        (function () {
+          var f = document.getElementById('richiesta');
+          if (!f) return;
+          var err = document.getElementById('richiesta-errore');
+          var ok = document.getElementById('richiesta-ok');
+          function mostra(msg) { err.textContent = msg; err.hidden = false; }
+          f.addEventListener('submit', function (e) {
+            e.preventDefault();
+            err.hidden = true;
+            if (f.sito_web.value) return;
+            var scelte = Array.prototype.map.call(f.querySelectorAll('input[name="bisogno"]:checked'), function (c) { return c.value; });
+            if (!scelte.length) { mostra('Scegli almeno una voce in "Di cosa hai bisogno?".'); return; }
+            if (!f.nome.value.trim()) { mostra('Scrivi nome e cognome.'); f.nome.focus(); return; }
+            if (!f.email.checkValidity() || !f.email.value.trim()) { mostra('Controlla l\'indirizzo email.'); f.email.focus(); return; }
+            var dati = new URLSearchParams();
+            dati.append('nome', f.nome.value.trim());
+            dati.append('azienda', f.azienda.value.trim());
+            dati.append('email', f.email.value.trim());
+            dati.append('telefono', f.telefono.value.trim());
+            dati.append('bisogno', scelte.join(', '));
+            dati.append('descrizione', f.descrizione.value.trim());
+            dati.append('pagina', location.pathname);
+            var btn = f.querySelector('button[type="submit"]');
+            btn.disabled = true; btn.textContent = 'Invio in corso…';
+            fetch(f.action, { method: 'POST', mode: 'no-cors', body: dati })
+              .then(function () { f.hidden = true; ok.hidden = false; ok.focus(); })
+              .catch(function () {
+                btn.disabled = false; btn.textContent = 'Invia la richiesta';
+                mostra('Invio non riuscito. Riprova, oppure scrivimi a {{ site.author.email }}.');
+              });
+          });
+        })();
+      </script>
+    </div>
+  </div>
+</section>
+
+<section class="section-tight section-warm" id="call">
+  <div class="wrap split">
+    <div>
+      <h2 style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1.5rem">Oppure prenota una call</h2>
       <h3 style="font-size:1.15rem;margin-bottom:1rem">Cosa ti conviene preparare</h3>
       <ul class="ticks" style="margin-bottom:2rem">
         <li>Che lavoro fai e quante persone lavorano con te</li>
