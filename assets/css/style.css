@@ -2574,3 +2574,61 @@ a.cliente-logo:hover { border-color: var(--accent); }
 .chiusura h2 { margin: 0; }
 .chiusura .lead { margin-bottom: 1.75rem; }
 .chiusura-social { margin-top: 0.75rem; }
+
+/* --------------------------------------------------------------------------
+   34. Home: numeri sull'AI nelle imprese (dati in _data/numeri.yml)
+   Fondo scuro come pausa fra esempi e servizi. Il numero sta nella colonna
+   di sinistra, la frase sull'asse del contenuto, la fonte sotto in piccolo.
+   -------------------------------------------------------------------------- */
+.numeri-head { margin-bottom: clamp(1.75rem, 3.5vw, 2.75rem); align-items: end; }
+.numeri-head h2 { margin: 0; color: var(--on-deep); }
+.numeri-head .lead { margin: 0; color: var(--on-deep-2); }
+
+.numeri {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--deep-line);
+}
+
+.numero {
+  display: grid;
+  gap: 0.5rem var(--gap);
+  padding: 1.5rem 0 1.6rem;
+  border-bottom: 1px solid var(--deep-line);
+}
+
+.numero-valore {
+  margin: 0;
+  font-family: var(--display);
+  font-size: clamp(2.1rem, 1.5rem + 2.4vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: var(--accent-lift);
+}
+
+.numero-testo p {
+  margin: 0;
+  max-width: var(--measure);
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--on-deep);
+}
+
+.numero-testo .numero-fonte {
+  margin-top: 0.55rem;
+  font-size: var(--t-meta);
+  color: var(--on-deep-2);
+}
+
+.numero-fonte a { color: inherit; text-decoration: underline; text-decoration-color: rgba(237, 241, 247, 0.35); text-underline-offset: 0.18em; }
+.numero-fonte a:hover { color: var(--on-deep); text-decoration-color: currentColor; }
+
+@media (min-width: 920px) {
+  .numero { grid-template-columns: var(--col-label) var(--col-body); align-items: baseline; padding-block: 1.75rem 1.9rem; }
+}
+
+.numeri-chiusura { margin-top: clamp(1.75rem, 3.5vw, 2.5rem); }
+.numeri-chiusura p { margin: 0 0 1.25rem; max-width: var(--measure); color: var(--on-deep-2); font-size: 1.05rem; }
+@media (max-width: 919px) { .numeri-chiusura > span { display: none; } }

@@ -72,6 +72,50 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
 </section>
 {% endif %}
 
+<!-- ============ NUMERI: PERCHÉ PARLARNE ADESSO (dati in _data/numeri.yml) ============ -->
+{% if site.data.numeri and site.data.numeri.size > 0 %}
+<section class="section section-dark numeri-sezione" id="numeri">
+  <div class="wrap">
+    <div class="split numeri-head">
+      <h2>In Italia l'AI in azienda è appena all'inizio</h2>
+      <p class="lead">
+        Se non la usi ancora, non sei in ritardo: sei come la maggior parte delle imprese.
+        Però le cose si muovono in fretta, e i numeri dicono anche un'altra cosa:
+        usarla non basta, bisogna capire dove serve.
+      </p>
+    </div>
+
+    <ul class="numeri" role="list">
+      {% for n in site.data.numeri %}
+      <li class="numero">
+        <p class="numero-valore">{{ n.valore }}</p>
+        <div class="numero-testo">
+          <p>{{ n.testo }}</p>
+          <p class="numero-fonte">Fonte:
+            {% for f in n.fonti %}<a href="{{ f.url }}" target="_blank" rel="noopener">{{ f.nome }}</a>{% unless forloop.last %}; {% endunless %}{% endfor %}
+          </p>
+        </div>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <div class="split numeri-chiusura">
+      <span aria-hidden="true"></span>
+      <div>
+        <p>
+          Per questo parto dal tuo lavoro: prima capiamo dove l'AI ti fa risparmiare tempo,
+          poi imparate a usarla lì. Raccontami cosa fai e ti dico dove la userei e dove no.
+        </p>
+        <div class="btn-row">
+          <a class="btn btn-primary" href="{{ '/prenota/#scrivimi' | relative_url }}">Scrivimi</a>
+          <a class="btn btn-secondario" href="{{ '/prenota/' | relative_url }}">Prenota una call</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
 <!-- ============ SERVIZI ============ -->
 <section class="section section-warm servizi-sezione">
   <div class="wrap">

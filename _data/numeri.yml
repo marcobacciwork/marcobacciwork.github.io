@@ -1,0 +1,23 @@
+# Numeri sull'AI nelle imprese, mostrati in home (sezione "In Italia l'AI in azienda è appena all'inizio").
+# Aggiornali quando escono le nuove indagini: valore, testo e fonti con link.
+# Ultima verifica: 27 novembre 2026.
+
+- valore: "16,4%"
+  testo: "delle imprese con almeno 10 addetti usa l'AI: il doppio dell'anno prima. Tra le più piccole si scende al 5%, ma un altro 19% la sta provando o conta di farlo entro un anno."
+  fonti:
+    - nome: "Istat, Imprese e ICT 2025"
+      url: "https://www.istat.it/comunicato-stampa/imprese-e-ict-anno-2025/"
+    - nome: "Banca d'Italia, indagine sulle piccole imprese 2025"
+      url: "https://www.bancaditalia.it/pubblicazioni/indagini-alfabetizzazione/2025-indagine-alfabetizzazione-piccole-imprese/"
+
+- valore: "Più di 1 su 2"
+  testo: "tra le imprese più piccole non sa come usarla bene o non ne vede l'utilità. Il freno non è lo strumento: è capire a cosa serve nel proprio lavoro."
+  fonti:
+    - nome: "Fondazione per la Sostenibilità Digitale, Osservatorio 2026"
+      url: "https://www.lindipendente.online/2026/07/17/in-italia-i-media-elogiano-lia-ma-le-microimprese-non-capiscono-come-usarla/"
+
+- valore: "37%"
+  testo: "delle aziende intervistate nel mondo vede un effetto dell'AI sull'utile operativo. È la stessa quota dell'anno prima, anche se l'uso continua a crescere."
+  fonti:
+    - nome: "McKinsey, The state of AI in 2026"
+      url: "https://www.mckinsey.com/capabilities/quantumblack/our-insights/the-state-of-ai"
