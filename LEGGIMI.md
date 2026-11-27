@@ -24,7 +24,7 @@ progetti.html        Solo rimando: /progetti/ porta a /strumenti/#laboratorio
 strumenti.html       Strumenti gratuiti + Laboratorio (progetti personali)
 libri.html           Libri
 chi-sono.html        Storia professionale
-prenota.html         Contatti: modulo «Scrivimi» (→ Make.com → foglio Google «Richieste dal sito») + calendario Cal.com
+prenota.html         Contatti: modulo «Scrivimi» (→ Google Modulo «Richieste dal sito») + calendario Cal.com
 grazie.html          Dopo l'iscrizione alla newsletter: "controlla la posta e conferma"
 iscrizione-confermata.html  Dopo il clic sul link di conferma nell'email
 privacy.html         Bozza da far verificare
@@ -95,9 +95,9 @@ salvato come `og-image.png`. Il sorgente non viene pubblicato.
 - **Nessun cookie di profilazione e nessuna statistica**: niente banner. Se aggiungi Google
   Analytics o pixel pubblicitari servono il banner con consenso e una nuova cookie policy.
 - **Pulsanti social senza loghi**: nome del profilo e freccia, nessun file esterno.
-- **Modulo di contatto senza server**: il modulo «Scrivimi» in /prenota/ invia i dati al webhook Make.com
-  (`modulo_richieste_url` in `_config.yml`) solo al clic su Invia. Make li scrive nel foglio Google
-  «Richieste dal sito». Se cambi i campi del modulo, aggiorna anche lo scenario Make e il foglio.
+- **Modulo di contatto senza server**: il modulo «Scrivimi» in /prenota/ invia i dati al Google Modulo
+  «Richieste dal sito» (`modulo_richieste` in `_config.yml`) solo al clic su Invia. Nel Google Modulo nessuna
+  domanda deve essere obbligatoria. Se cambi le domande, aggiorna i codici entry.* in `_config.yml`.
 - **I prezzi non compaiono** per i servizi, come da posizionamento.
 - **Accessibilità**: contrasto verificato, navigazione da tastiera, `prefers-reduced-motion`
   rispettato, salto al contenuto.

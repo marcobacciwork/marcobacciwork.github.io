@@ -23,8 +23,18 @@ linkedin_nome: "marcobacci-ai"
 instagram_url: "https://www.instagram.com/marcobacci.ai/"
 instagram_nome: "@marcobacci.ai"
 
-# Modulo "Scrivimi" nella pagina Contatti (/prenota/): webhook Make.com, scenario "Richieste dal sito → Google Sheets"
-modulo_richieste_url: "https://hook.eu1.make.com/tcai956n6f22jlpuk437uux54mnxxual"
+# Modulo "Scrivimi" nella pagina Contatti (/prenota/): le risposte vanno nel Google Modulo "Richieste dal sito".
+# I codici entry.* si leggono dal link di "Modulo precompilato" (menu ⋮ del Google Modulo).
+# Se aggiungi o cambi una domanda nel Google Modulo, aggiorna qui il suo codice.
+modulo_richieste:
+  url: "https://docs.google.com/forms/d/e/1FAIpQLSfWA2fEJtpVZQ5E-2-bO3KKKKUISWHSOuykNPaz_d4E3omWag/formResponse"
+  bisogno: "entry.1935779498"
+  descrizione: "entry.11496948"
+  nome: "entry.1255070175"
+  azienda: "entry.982794386"
+  email: "entry.1578997316"
+  telefono: "entry.1150961221"
+  pagina: "entry.1341429927"
 
 # Iscrizione alla newsletter in home: metti true quando il modulo Brevo è collegato
 newsletter_attiva: true

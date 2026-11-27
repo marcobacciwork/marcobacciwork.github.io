@@ -29,11 +29,11 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
 
     <div>
       {% comment %}
-        Modulo scritto nel sito: il browser contatta Make.com solo quando premi "Invia".
-        Make copia la richiesta nel foglio Google "Richieste dal sito" (scenario
-        "Richieste dal sito → Google Sheets"). L'indirizzo sta in _config.yml → modulo_richieste_url.
+        Modulo scritto nel sito: il browser contatta Google solo quando premi "Invia".
+        Le risposte arrivano nel Google Modulo "Richieste dal sito" (e nel foglio collegato).
+        Indirizzo e codici dei campi stanno in _config.yml → modulo_richieste.
       {% endcomment %}
-      <form class="richiesta" id="richiesta" action="{{ site.modulo_richieste_url }}" method="POST" novalidate>
+      <form class="richiesta" id="richiesta" action="{{ site.modulo_richieste.url }}" method="POST" novalidate>
         <input type="text" name="sito_web" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
 
         <fieldset class="richiesta-scelte">
@@ -96,13 +96,13 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
             if (!f.nome.value.trim()) { mostra('Scrivi nome e cognome.'); f.nome.focus(); return; }
             if (!f.email.checkValidity() || !f.email.value.trim()) { mostra('Controlla l\'indirizzo email.'); f.email.focus(); return; }
             var dati = new URLSearchParams();
-            dati.append('nome', f.nome.value.trim());
-            dati.append('azienda', f.azienda.value.trim());
-            dati.append('email', f.email.value.trim());
-            dati.append('telefono', f.telefono.value.trim());
-            dati.append('bisogno', scelte.join(', '));
-            dati.append('descrizione', f.descrizione.value.trim());
-            dati.append('pagina', location.pathname);
+            scelte.forEach(function (v) { dati.append('{{ site.modulo_richieste.bisogno }}', v); });
+            dati.append('{{ site.modulo_richieste.descrizione }}', f.descrizione.value.trim());
+            dati.append('{{ site.modulo_richieste.nome }}', f.nome.value.trim());
+            dati.append('{{ site.modulo_richieste.azienda }}', f.azienda.value.trim());
+            dati.append('{{ site.modulo_richieste.email }}', f.email.value.trim());
+            dati.append('{{ site.modulo_richieste.telefono }}', f.telefono.value.trim());
+            dati.append('{{ site.modulo_richieste.pagina }}', location.pathname);
             var btn = f.querySelector('button[type="submit"]');
             btn.disabled = true; btn.textContent = 'Invio in corso…';
             fetch(f.action, { method: 'POST', mode: 'no-cors', body: dati })
