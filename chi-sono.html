@@ -15,19 +15,19 @@ description: "Marco Bacci, dottore in Ingegneria gestionale. Formazione, consule
         <p class="lead">
           Dott. in Ingegneria gestionale · Formazione, consulenza e affiancamento AI per imprese e liberi professionisti
         </p>
+
+        <ul class="cred">
+          <li><strong>Torno Subito 2018</strong>Vincitore del bando della Regione Lazio con un progetto sulla digitalizzazione delle imprese</li>
+          <li><strong>Grande azienda ICT</strong>Oltre 60 partnership con i grandi fornitori di tecnologia, tra cui AWS, Microsoft, Google e SAP</li>
+          <li><strong>Dott. in Ingegneria gestionale</strong>Con una tesi sull'uso dell'intelligenza artificiale nelle imprese</li>
+        </ul>
+
+        <div class="btn-row">
+          <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Prenota una call gratuita</a>
+        </div>
       </div>
       <img class="bio-foto" src="{{ '/assets/img/marco-bacci.jpg' | relative_url }}"
            alt="Marco Bacci" width="720" height="900">
-    </div>
-
-    <ul class="cred">
-      <li><strong>Torno Subito 2018</strong>Vincitore del bando della Regione Lazio con un progetto sulla digitalizzazione delle imprese</li>
-      <li><strong>Grande azienda ICT</strong>Oltre 60 partnership con i grandi fornitori di tecnologia, tra cui AWS, Microsoft, Google e SAP</li>
-      <li><strong>Dott. in Ingegneria gestionale</strong>Con una tesi sull'uso dell'intelligenza artificiale nelle imprese</li>
-    </ul>
-
-    <div class="btn-row">
-      <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Prenota una call gratuita</a>
     </div>
   </div>
 </section>
@@ -118,19 +118,21 @@ description: "Marco Bacci, dottore in Ingegneria gestionale. Formazione, consule
   </div>
 </section>
 
-<section class="section section-dark">
-  <div class="wrap wrap-narrow" style="text-align:center">
+<section class="section section-dark chiusura">
+  <div class="wrap split">
     <h2 style="color:var(--ivory)">Raccontami il tuo caso</h2>
-    <p class="lead" style="margin:0 auto 2rem">
+    <div>
+      <p class="lead">
       Venti minuti di call gratuita, oppure un'email se preferisci scrivere.
     </p>
-    <div class="btn-row" style="justify-content:center">
-      <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Prenota una call</a>
-      <a class="btn btn-outline" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
-    </div>
-    <p style="margin:2.2rem 0 1rem;color:var(--on-deep-2);font-size:0.95rem">Oppure seguimi qui:</p>
-    <div class="social-center">
-      {% include social.html %}
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Prenota una call</a>
+        <a class="btn btn-outline" href="mailto:{{ site.author.email }}">{{ site.author.email }}</a>
+      </div>
+      <p style="margin:2.2rem 0 1rem;color:var(--on-deep-2);font-size:0.95rem">Oppure seguimi qui:</p>
+      <div class="chiusura-social">
+        {% include social.html %}
+      </div>
     </div>
   </div>
 </section>

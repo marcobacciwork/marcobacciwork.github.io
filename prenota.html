@@ -6,10 +6,10 @@ permalink: /prenota/
 description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota una call gratuita di 20 minuti. Formazione, interventi a convegni, automazioni e setup degli account AI."
 ---
 
-<section class="hero" style="padding-block:clamp(3.5rem,8vw,5.5rem) clamp(2.5rem,5vw,3.5rem)">
+<section class="hero">
   <div class="wrap hero-inner">
     <p class="eyebrow" style="color:var(--brass)">Contatti</p>
-    <h1>Scrivimi o prenota<br>una <em>call</em></h1>
+    <h1>Scrivimi o prenota una <em>call</em></h1>
     <p class="lead">
       Dimmi di cosa hai bisogno con il modulo qui sotto: ti rispondo io entro 2 giorni lavorativi, via email o per telefono.
       Se preferisci parlarne a voce, prenota una call gratuita di 20 minuti.
@@ -18,11 +18,11 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
 </section>
 
 <!-- MODULO RICHIESTE -->
-<section class="section-tight" id="scrivimi">
+<section class="section-tight scrivimi" id="scrivimi">
   <div class="wrap split">
-    <div>
-      <h2 style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1rem">Scrivimi</h2>
-      <p style="color:var(--muted);max-width:42ch">
+    <div class="scrivimi-intro">
+      <h2>Scrivimi</h2>
+      <p>
         Bastano due minuti. Scegli una o più voci e aggiungi due righe sul tuo caso.
       </p>
     </div>
@@ -32,26 +32,31 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
         Modulo scritto nel sito: il browser contatta Google solo quando premi "Invia".
         Le risposte arrivano nel Google Modulo "Richieste dal sito" (e nel foglio collegato).
         Indirizzo e codici dei campi stanno in _config.yml → modulo_richieste.
+        Campi, nomi, valori e logica di invio: non cambiarli senza aggiornare il Google Modulo.
       {% endcomment %}
       <form class="richiesta" id="richiesta" action="{{ site.modulo_richieste.url }}" method="POST" novalidate>
         <input type="text" name="sito_web" value="" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px">
 
-        <fieldset class="richiesta-scelte">
+        <fieldset class="richiesta-gruppo richiesta-scelte">
           <legend>Di cosa hai bisogno?</legend>
-          <label><input type="checkbox" name="bisogno" value="Formazione per il team"> Formazione per il team</label>
-          <label><input type="checkbox" name="bisogno" value="Intervento a un convegno o evento"> Intervento a un convegno o evento</label>
-          <label><input type="checkbox" name="bisogno" value="Automazioni"> Automazioni</label>
-          <label><input type="checkbox" name="bisogno" value="Setup degli account AI"> Setup degli account AI</label>
-          <label><input type="checkbox" name="bisogno" value="Affiancamento"> Affiancamento</label>
-          <label><input type="checkbox" name="bisogno" value="Strumento su misura"> Strumento su misura</label>
-          <label><input type="checkbox" name="bisogno" value="Altro"> Altro</label>
+          <div class="richiesta-opzioni">
+            <label><input type="checkbox" name="bisogno" value="Formazione per il team"> <span>Formazione per il team</span></label>
+            <label><input type="checkbox" name="bisogno" value="Intervento a un convegno o evento"> <span>Intervento a un convegno o evento</span></label>
+            <label><input type="checkbox" name="bisogno" value="Automazioni"> <span>Automazioni</span></label>
+            <label><input type="checkbox" name="bisogno" value="Setup degli account AI"> <span>Setup degli account AI</span></label>
+            <label><input type="checkbox" name="bisogno" value="Affiancamento"> <span>Affiancamento</span></label>
+            <label><input type="checkbox" name="bisogno" value="Strumento su misura"> <span>Strumento su misura</span></label>
+            <label><input type="checkbox" name="bisogno" value="Altro"> <span>Altro</span></label>
+          </div>
         </fieldset>
 
-        <label class="richiesta-campo">Descrivi in breve
-          <textarea name="descrizione" rows="4" maxlength="2000" placeholder="Per esempio: che lavoro fate, quante persone siete, cosa vorreste migliorare"></textarea>
-        </label>
+        <div class="richiesta-gruppo">
+          <label class="richiesta-campo">Descrivi in breve
+            <textarea name="descrizione" rows="4" maxlength="2000" placeholder="Per esempio: che lavoro fate, quante persone siete, cosa vorreste migliorare"></textarea>
+          </label>
+        </div>
 
-        <div class="richiesta-due">
+        <div class="richiesta-gruppo richiesta-due">
           <label class="richiesta-campo">Nome e cognome *
             <input type="text" name="nome" required maxlength="120" autocomplete="name">
           </label>
@@ -66,13 +71,15 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
           </label>
         </div>
 
-        <p class="richiesta-errore" id="richiesta-errore" role="alert" hidden></p>
-
-        <button class="btn btn-primary" type="submit">Invia la richiesta</button>
-        <p class="richiesta-nota">
-          Uso questi dati solo per risponderti. Dettagli nella
-          <a href="{{ '/privacy/' | relative_url }}">privacy policy</a>.
-        </p>
+        <div class="richiesta-invio">
+          <p class="richiesta-errore" id="richiesta-errore" role="alert" hidden></p>
+          <button class="btn btn-primary btn-grande" type="submit">Invia la richiesta</button>
+          <p class="richiesta-nota">
+            Uso questi dati solo per risponderti. Dettagli nella
+            <a href="{{ '/privacy/' | relative_url }}">privacy policy</a>.
+            <span class="richiesta-tempi">Ti rispondo io entro 2 giorni lavorativi, via email o per telefono.</span>
+          </p>
+        </div>
       </form>
 
       <div class="richiesta-ok" id="richiesta-ok" hidden tabindex="-1">
@@ -87,13 +94,21 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
           if (!f) return;
           var err = document.getElementById('richiesta-errore');
           var ok = document.getElementById('richiesta-ok');
-          function mostra(msg) { err.textContent = msg; err.hidden = false; }
+          function mostra(msg) { err.textContent = msg; err.hidden = false; segna(); }
+          /* Segna i campi obbligatori vuoti o non validi mentre c'è un errore (solo aspetto, l'invio non cambia) */
+          function segna() {
+            var on = !err.hidden;
+            function imposta(c, male) { if (on && male) c.setAttribute('aria-invalid', 'true'); else c.removeAttribute('aria-invalid'); }
+            imposta(f.nome, !f.nome.value.trim());
+            imposta(f.email, !f.email.value.trim() || !f.email.checkValidity());
+          }
           f.addEventListener('submit', function (e) {
             e.preventDefault();
             err.hidden = true;
+            segna();
             if (f.sito_web.value) return;
             var scelte = Array.prototype.map.call(f.querySelectorAll('input[name="bisogno"]:checked'), function (c) { return c.value; });
-            if (!scelte.length) { mostra('Scegli almeno una voce in "Di cosa hai bisogno?".'); return; }
+            if (!scelte.length) { mostra('Scegli almeno una voce in "Di cosa hai bisogno?".'); f.querySelector('input[name="bisogno"]').focus(); return; }
             if (!f.nome.value.trim()) { mostra('Scrivi nome e cognome.'); f.nome.focus(); return; }
             if (!f.email.checkValidity() || !f.email.value.trim()) { mostra('Controlla l\'indirizzo email.'); f.email.focus(); return; }
             var dati = new URLSearchParams();
@@ -105,14 +120,14 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
             dati.append('{{ site.modulo_richieste.telefono }}', f.telefono.value.trim());
             dati.append('{{ site.modulo_richieste.pagina }}', location.pathname);
             var btn = f.querySelector('button[type="submit"]');
-            btn.disabled = true; btn.textContent = 'Invio in corso…';
+            btn.disabled = true; btn.setAttribute('aria-busy', 'true'); btn.textContent = 'Invio in corso…';
             fetch(f.action, { method: 'POST', mode: 'no-cors', body: dati })
               .then(function () {
                 f.reset(); f.hidden = true; ok.hidden = false;
                 ok.scrollIntoView({ block: 'center' }); ok.focus({ preventScroll: true });
               })
               .catch(function () {
-                btn.disabled = false; btn.textContent = 'Invia la richiesta';
+                btn.disabled = false; btn.removeAttribute('aria-busy'); btn.textContent = 'Invia la richiesta';
                 mostra('Invio non riuscito. Riprova, oppure scrivimi a {{ site.author.email }}.');
               });
           });
@@ -125,15 +140,15 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
 <section class="section-tight section-warm" id="call">
   <div class="wrap split">
     <div>
-      <h2 style="font-size:clamp(1.6rem,3.5vw,2.2rem);margin-bottom:1.5rem">Oppure prenota una call</h2>
-      <h3 style="font-size:1.15rem;margin-bottom:1rem">Cosa ti conviene preparare</h3>
+      <h2>Oppure prenota una call</h2>
+      <h3 class="sottotitolo">Cosa ti conviene preparare</h3>
       <ul class="ticks" style="margin-bottom:2rem">
         <li>Che lavoro fai e quante persone lavorano con te</li>
         <li>Una o due attività su cui vorresti lavorare</li>
         <li>I programmi che usi tutti i giorni</li>
       </ul>
 
-      <h3 style="font-size:1.15rem;margin-bottom:1rem">Come funziona</h3>
+      <h3 class="sottotitolo">Come funziona</h3>
       <ul class="ticks ticks-open">
         <li>Videochiamata, con il link nell'email di conferma</li>
         <li>Nessun materiale da mandare prima</li>

@@ -1,7 +1,8 @@
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="{{ '/' | relative_url }}">
-      Marco Bacci<span class="brand-dot" aria-hidden="true"></span>
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="Marco Bacci, torna alla home">
+      <img class="brand-logo" src="{{ '/assets/img/logo/logo-mb-ai-testata.svg' | relative_url }}" width="474" height="132" alt="">
+      <span class="brand-nome">Marco Bacci</span>
     </a>
 
     <div class="header-right">
@@ -13,6 +14,10 @@
       <a href="{{ '/blog/' | relative_url }}" {% if page.nav == 'blog' %}aria-current="page"{% endif %}>Blog</a>
       <a href="{{ '/chi-sono/' | relative_url }}" {% if page.nav == 'chi-sono' %}aria-current="page"{% endif %}>Chi sono</a>
       <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Prenota una call</a>
+      <span class="nav-social">
+        <a href="{{ site.linkedin_url }}" rel="me noopener" target="_blank">LinkedIn ↗</a>
+        <a href="{{ site.instagram_url }}" rel="me noopener" target="_blank">Instagram ↗</a>
+      </span>
     </nav>
 
     <div class="header-social">
@@ -24,7 +29,7 @@
       </a>
     </div>
 
-    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav">Menu</button>
+    <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav"><span class="nav-toggle-icona" aria-hidden="true"></span><span class="nav-toggle-testo">Menu</span></button>
     </div>
   </div>
 </header>

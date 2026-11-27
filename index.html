@@ -4,10 +4,10 @@ nav: home
 description: "Formazione, consulenza e affiancamento sull'intelligenza artificiale per imprese e liberi professionisti, costruiti sul lavoro che fai ogni giorno. Roma e tutta Italia."
 ---
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="wrap hero-inner">
-    <h1>Porto l'intelligenza artificiale<br>nel tuo lavoro<br><em>di tutti i giorni.</em></h1>
+<!-- ============ APERTURA ============ -->
+<section class="hero hero-home">
+  <div class="wrap">
+    <h1>Porto l'intelligenza artificiale nel tuo lavoro <em>di&nbsp;tutti i giorni.</em></h1>
 
     <p class="lead">
       Formazione, consulenza e affiancamento per imprese e liberi professionisti:
@@ -17,21 +17,22 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
       Niente corsi generici, e quello che imposto resta a te.
     </p>
 
-    <div class="hero-prenota">
-      <div class="hero-prenota-testo">
-        <p class="hero-prenota-titolo">Parliamone in una call gratuita di 20&nbsp;minuti</p>
+    <div class="hero-azioni">
+      <div class="hero-call">
+        <p class="hero-call-titolo">Parliamone in una call gratuita di 20&nbsp;minuti</p>
         <p>Mi racconti che lavoro fai e come lo organizzi. Io ti dico dove vedo un uso concreto
           dell'AI e dove invece non la userei.</p>
-        <ul class="hero-prenota-punti">
-          <li>Gratis</li>
-          <li>Online, su Google Meet</li>
-          <li>Nessun impegno</li>
-        </ul>
       </div>
-      <div class="hero-prenota-azioni">
+      <div class="hero-pulsanti">
         <a class="btn btn-primary btn-grande" href="{{ '/prenota/' | relative_url }}">Scegli un orario</a>
-        <a class="link-arrow hero-prenota-link" href="#come-lavoro">Prima scopri come lavoro</a>
+        <a class="btn btn-secondario btn-grande" href="{{ '/prenota/#scrivimi' | relative_url }}">Scrivimi</a>
       </div>
+      <ul class="hero-call-punti">
+        <li>Gratis</li>
+        <li>Online, su Google Meet</li>
+        <li>Nessun impegno</li>
+      </ul>
+      <a class="link-arrow link-giu hero-lettura" href="#come-lavoro">Prima scopri come lavoro</a>
     </div>
 
     <p class="hero-meta">
@@ -42,58 +43,67 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
   </div>
 </section>
 
+<!-- ============ ESEMPI PER MESTIERE (dati in _data/esempi.yml) ============ -->
+{% if site.data.esempi and site.data.esempi.size > 0 %}
+<section class="section mestieri-sezione" id="esempi">
+  <div class="wrap">
+    <div class="split mestieri-head">
+      <h2>Esempi per il tuo lavoro</h2>
+      <p class="lead">Cosa vuol dire in pratica, mestiere per mestiere.</p>
+    </div>
+
+    <ul class="mestieri" role="list">
+      {% for m in site.data.esempi %}
+      <li>
+        <a class="mestiere" href="{{ '/esempi/' | relative_url }}#{{ m.id }}">
+          <span class="mestiere-nome">
+            <span class="mestiere-titolo">{{ m.nome }}</span>
+            <span class="mestiere-chi">{{ m.chi }}</span>
+          </span>
+          <span class="mestiere-esempio">{{ m.esempi.first }}</span>
+          <span class="mestiere-freccia" aria-hidden="true">→</span>
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+
+    <p class="mestieri-tutti"><a class="link-arrow" href="{{ '/esempi/' | relative_url }}">Vedi gli esempi</a></p>
+  </div>
+</section>
+{% endif %}
+
 <!-- ============ SERVIZI ============ -->
-<section class="section section-warm">
+<section class="section section-warm servizi-sezione">
   <div class="wrap">
     <div class="section-head">
       <p class="eyebrow">Servizi</p>
       <h2>Cosa posso fare per te</h2>
     </div>
 
-    <div class="grid grid-3">
+    <div class="servizi">
 
-      <a class="card" href="{{ '/servizi/#formazione' | relative_url }}">
-        <span class="card-mark" aria-hidden="true">01</span>
+      <a class="servizio" href="{{ '/servizi/#formazione' | relative_url }}">
+        <span class="servizio-n" aria-hidden="true">01</span>
         <h3>Formazione AI</h3>
         <p>Incontri pratici per te e il tuo team, sulle attività che fate ogni giorno. Ci si esercita su casi del tuo settore e si impara cosa si può caricare, cosa no e cosa controllare prima di usare un risultato.</p>
         <span class="link-arrow">Vedi come funziona</span>
       </a>
 
-      <a class="card" href="{{ '/servizi/#affiancamento' | relative_url }}">
-        <span class="card-mark" aria-hidden="true">02</span>
+      <a class="servizio" href="{{ '/servizi/#affiancamento' | relative_url }}">
+        <span class="servizio-n" aria-hidden="true">02</span>
         <h3>Affiancamento operativo</h3>
         <p>Dopo la formazione posso continuare a lavorare con te sui casi che emergono: sistemiamo quello che non funziona e decidiamo insieme cosa conviene affidare all'AI.</p>
         <span class="link-arrow">Scopri l'affiancamento</span>
       </a>
 
-      <a class="card" href="{{ '/servizi/#progetti' | relative_url }}">
-        <span class="card-mark" aria-hidden="true">03</span>
+      <a class="servizio" href="{{ '/servizi/#progetti' | relative_url }}">
+        <span class="servizio-n" aria-hidden="true">03</span>
         <h3>Progetti e strumenti su misura</h3>
         <p>Quando serve qualcosa in più, costruisco strumenti su misura: un assistente che lavora sui tuoi documenti, un'automazione che raccoglie le prenotazioni in un foglio. Accessi, configurazioni e documentazione restano a te.</p>
         <span class="link-arrow">Vedi cosa posso costruire</span>
       </a>
 
     </div>
-
-    <!-- Esempi per mestiere (dati in _data/esempi.yml) -->
-    {% if site.data.esempi and site.data.esempi.size > 0 %}
-    <div class="home-esempi">
-      <div class="home-esempi-head">
-        <h3>Esempi per il tuo lavoro</h3>
-        <p>Cosa vuol dire in pratica, mestiere per mestiere.</p>
-      </div>
-      <div class="grid">
-        {% for m in site.data.esempi %}
-        <a class="card" href="{{ '/esempi/' | relative_url }}#{{ m.id }}">
-          <h4>{{ m.nome }}</h4>
-          <p class="card-chi">{{ m.chi }}</p>
-          <p class="card-esempio">{{ m.esempi.first }}</p>
-          <span class="link-arrow">Vedi gli esempi</span>
-        </a>
-        {% endfor %}
-      </div>
-    </div>
-    {% endif %}
   </div>
 </section>
 
@@ -114,41 +124,36 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
 </section>
 {% endif %}
 
-<!-- ============ FIRMA: IL PERCORSO CHE FINISCE ============ -->
-<section class="section-dark section-tight" id="come-lavoro">
+<!-- ============ COME LAVORO: IL METODO ============ -->
+<section class="section section-dark metodo" id="come-lavoro">
   <div class="wrap">
-    <p class="eyebrow">Come lavoro</p>
-    <h2 style="max-width:22ch;color:var(--ivory)">Parto dal tuo lavoro, non da un corso già pronto.</h2>
-
-    <div class="path">
-      <div class="path-track">
-
-        <div class="path-step">
-          <span class="n">Fase uno</span>
-          <h3>Analizzo</h3>
-          <p>Prima di proporti qualcosa guardo come lavori oggi: le attività che si ripetono, i programmi che usi, i documenti che passano di mano e i passaggi che portano via tempo. Da lì capisco dove l'AI può servirti e dove no.</p>
-        </div>
-
-        <div class="path-step">
-          <span class="n">Fase due</span>
-          <h3>Progetto</h3>
-          <p>Con quello che ho visto preparo l'intervento: scelgo casi, materiali ed esercitazioni del tuo settore e ti dico cosa serve, che sia una formazione, un affiancamento o un progetto specifico.</p>
-        </div>
-
-        <div class="path-step">
-          <span class="n">Fase tre</span>
-          <h3>Formo</h3>
-          <p>Lavoro con te o con il tuo team sulle attività di tutti i giorni, spesso su un cliente di prova con dati realistici. Si prova, si corregge e alla fine avete un metodo da usare subito, con regole chiare su dati e limiti degli strumenti.</p>
-        </div>
-
-        <div class="path-step">
-          <span class="n">Fase quattro</span>
-          <h3>Affianco</h3>
-          <p>Se serve, continuo a seguirti sui casi che emergono in azienda. Posso affiancarti per un periodo oppure lavorare a un progetto preciso: un'automazione, uno strumento interno, un'attività nuova da impostare.</p>
-        </div>
-
-      </div>
+    <div class="section-head">
+      <p class="eyebrow">Come lavoro</p>
+      <h2>Parto dal tuo lavoro, non da un corso già pronto.</h2>
     </div>
+
+    <ol class="metodo-passi">
+      <li class="metodo-passo">
+        <span class="metodo-n">Fase uno</span>
+        <h3 class="metodo-verbo">Analizzo</h3>
+        <p>Prima di proporti qualcosa guardo come lavori oggi: le attività che si ripetono, i programmi che usi, i documenti che passano di mano e i passaggi che portano via tempo. Da lì capisco dove l'AI può servirti e dove no.</p>
+      </li>
+      <li class="metodo-passo">
+        <span class="metodo-n">Fase due</span>
+        <h3 class="metodo-verbo">Progetto</h3>
+        <p>Con quello che ho visto preparo l'intervento: scelgo casi, materiali ed esercitazioni del tuo settore e ti dico cosa serve, che sia una formazione, un affiancamento o un progetto specifico.</p>
+      </li>
+      <li class="metodo-passo">
+        <span class="metodo-n">Fase tre</span>
+        <h3 class="metodo-verbo">Formo</h3>
+        <p>Lavoro con te o con il tuo team sulle attività di tutti i giorni, spesso su un cliente di prova con dati realistici. Si prova, si corregge e alla fine avete un metodo da usare subito, con regole chiare su dati e limiti degli strumenti.</p>
+      </li>
+      <li class="metodo-passo">
+        <span class="metodo-n">Fase quattro</span>
+        <h3 class="metodo-verbo">Affianco</h3>
+        <p>Se serve, continuo a seguirti sui casi che emergono in azienda. Posso affiancarti per un periodo oppure lavorare a un progetto preciso: un'automazione, uno strumento interno, un'attività nuova da impostare.</p>
+      </li>
+    </ol>
   </div>
 </section>
 
@@ -157,10 +162,8 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
 {% assign clienti = site.data.clienti %}
 {% if clienti and clienti.size > 0 %}
 <section class="section-warm section-tight" id="clienti">
-  <div class="wrap">
-    <div class="section-head clienti-head">
-      <h2>Partner e clienti</h2>
-    </div>
+  <div class="wrap split">
+    <h2 class="clienti-titolo">Partner e clienti</h2>
 
     <ul class="clienti" role="list">
       {% for c in clienti %}
@@ -192,14 +195,19 @@ description: "Formazione, consulenza e affiancamento sull'intelligenza artificia
 {% endif %}
 
 <!-- ============ CHIUSURA ============ -->
-<section class="section section-warm">
-  <div class="wrap wrap-narrow" style="text-align:center">
+<section class="section section-warm chiusura">
+  <div class="wrap split">
     <h2>Venti minuti per capire se ha senso</h2>
-    <p class="lead" style="margin:0 auto 2rem">
-      Mi racconti della tua azienda, di come lavora e di cosa ti piacerebbe saper fare con l'AI.
-      Io ti dico se posso esserti utile e da dove partirei. Se non posso, te lo dico lo stesso.
-      La call è gratuita e non ti impegna a niente.
-    </p>
-    <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Scegli un orario</a>
+    <div>
+      <p class="lead">
+        Mi racconti della tua azienda, di come lavora e di cosa ti piacerebbe saper fare con l'AI.
+        Io ti dico se posso esserti utile e da dove partirei. Se non posso, te lo dico lo stesso.
+        La call è gratuita e non ti impegna a niente.
+      </p>
+      <div class="btn-row">
+        <a class="btn btn-primary" href="{{ '/prenota/' | relative_url }}">Scegli un orario</a>
+        <a class="btn btn-secondario" href="{{ '/prenota/#scrivimi' | relative_url }}">Scrivimi</a>
+      </div>
+    </div>
   </div>
 </section>

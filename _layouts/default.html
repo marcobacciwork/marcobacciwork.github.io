@@ -128,86 +128,35 @@
     var toggle = document.querySelector('.nav-toggle');
     var nav = document.getElementById('nav');
     if (!toggle || !nav) return;
+    var testo = toggle.querySelector('.nav-toggle-testo') || toggle;
+    function imposta(apri) {
+      nav.setAttribute('data-open', String(apri));
+      toggle.setAttribute('aria-expanded', String(apri));
+      testo.textContent = apri ? 'Chiudi' : 'Menu';
+    }
     toggle.addEventListener('click', function () {
-      var open = nav.getAttribute('data-open') === 'true';
-      nav.setAttribute('data-open', String(!open));
-      toggle.setAttribute('aria-expanded', String(!open));
-      toggle.textContent = open ? 'Menu' : 'Chiudi';
+      imposta(nav.getAttribute('data-open') !== 'true');
+    });
+    /* Esc chiude il menu e riporta il focus sul pulsante */
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && nav.getAttribute('data-open') === 'true') { imposta(false); toggle.focus(); }
+    });
+    /* Un clic su una voce chiude il menu (serve per le ancore nella stessa pagina) */
+    nav.addEventListener('click', function (e) {
+      if (e.target.closest('a') && nav.getAttribute('data-open') === 'true') imposta(false);
     });
   })();
 
-  /* Movimento. Se JavaScript è disattivato o l'utente preferisce ridurre
-     le animazioni, la classe non viene aggiunta e il sito resta statico
-     ma completamente leggibile. */
+  /* Movimento: solo dove aiuta. Niente comparse allo scorrimento;
+     l'intestazione prende un'ombra leggera quando la pagina scorre. */
   (function () {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    if (!('IntersectionObserver' in window)) return;
-
-    document.body.classList.add('js-anim');
-
-    var bersagli = document.querySelectorAll(
-      '.section-head, .split > *, .card, .project, .book, ' +
-      '.optin, .faq, .path-step, .booking-frame, .cliente'
-    );
-
-    Array.prototype.forEach.call(bersagli, function (el) {
-      el.setAttribute('data-rivela', '');
-    });
-
-    /* Sfalsa gli elementi che stanno nella stessa griglia */
-    Array.prototype.forEach.call(document.querySelectorAll('.grid'), function (g) {
-      Array.prototype.forEach.call(g.children, function (figlio, i) {
-        figlio.style.setProperty('--i', i);
-      });
-    });
-
-    var osservatore = new IntersectionObserver(function (voci) {
-      voci.forEach(function (voce) {
-        if (voce.isIntersecting) {
-          voce.target.classList.add('visibile');
-          osservatore.unobserve(voce.target);
-        }
-      });
-    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.08 });
-
-    Array.prototype.forEach.call(bersagli, function (el) {
-      osservatore.observe(el);
-    });
-
-    /* Il percorso non usa data-rivela: gli serve solo la classe visibile */
-    Array.prototype.forEach.call(document.querySelectorAll('.path-step'), function (el) {
-      el.removeAttribute('data-rivela');
-    });
-
-    /* Elenco a barre: la voce accesa scorre da sola, si ferma al passaggio del mouse */
-    Array.prototype.forEach.call(document.querySelectorAll('.bars'), function (lista) {
-      var voci = lista.querySelectorAll('li');
-      if (voci.length < 2) return;
-      var i = 0, fermo = false;
-      Array.prototype.forEach.call(voci, function (v, k) {
-        if (v.classList.contains('acceso')) i = k;
-      });
-      /* Pausa solo con un mouse vero: sul telefono il tocco simula il passaggio
-         del mouse ma non lo "toglie" mai, e la sequenza restava ferma */
-      lista.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') fermo = true; });
-      lista.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') fermo = false; });
-      setInterval(function () {
-        if (fermo || document.hidden) return;
-        voci[i].classList.remove('acceso');
-        i = (i + 1) % voci.length;
-        voci[i].classList.add('acceso');
-      }, 2800);
-    });
-
-    /* Intestazione che si stacca */
     var testata = document.querySelector('.site-header');
-    if (testata) {
-      var aggiorna = function () {
-        testata.classList.toggle('staccata', window.scrollY > 12);
-      };
-      aggiorna();
-      window.addEventListener('scroll', aggiorna, { passive: true });
-    }
+    if (!testata) return;
+    var aggiorna = function () {
+      testata.classList.toggle('staccata', window.scrollY > 12);
+    };
+    aggiorna();
+    window.addEventListener('scroll', aggiorna, { passive: true });
   })();
 </script>
 </body>

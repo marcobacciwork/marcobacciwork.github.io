@@ -82,6 +82,14 @@ Prima di pubblicare un logo fatti dare l'ok scritto dall'azienda.
 Il foglio di stile mantiene degli alias (`--navy`, `--brass`, `--ivory`) perché alcune pagine
 li usano negli stili scritti nell'HTML. Non rimuoverli: puntano ai colori nuovi.
 
+**Impaginazione (restyling di novembre 2026)** → in cima a `style.css` ci sono le variabili della griglia
+(`--wrap`, `--gutter`, `--gap`, `--measure`) e i livelli tipografici (`--t-display`, `--t-page`, `--t-section`,
+`--t-item`, `--t-meta`). Tutto parte dallo stesso bordo sinistro; nelle sezioni a due colonne (`.split`)
+il contenuto parte a un terzo. Sullo stesso asse stanno l'elenco dei mestieri in home, il blog, i libri,
+le pagine di testo (`.wrap-narrow`) e il modulo Scrivimi. L'apertura della home usa `.hero-home`,
+le pagine interne la `.hero` compatta. Il logo in testata è `assets/img/logo/logo-mb-ai-testata.svg`
+(il segno di `logo-mb-ai.svg` senza motto, con i colori per fondo chiaro).
+
 **Immagine per i social** → `assets/img/og-image.source.html`: screenshot 1200×630 della pagina,
 salvato come `og-image.png`. Il sorgente non viene pubblicato.
 
