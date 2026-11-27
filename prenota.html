@@ -11,7 +11,7 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
     <p class="eyebrow" style="color:var(--brass)">Contatti</p>
     <h1>Scrivimi o prenota<br>una <em>call</em></h1>
     <p class="lead">
-      Dimmi di cosa hai bisogno con il modulo qui sotto: ti rispondo io, via email o per telefono.
+      Dimmi di cosa hai bisogno con il modulo qui sotto: ti rispondo io entro 2 giorni lavorativi, via email o per telefono.
       Se preferisci parlarne a voce, prenota una call gratuita di 20 minuti.
     </p>
   </div>
@@ -77,7 +77,8 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
 
       <div class="richiesta-ok" id="richiesta-ok" hidden tabindex="-1">
         <p class="richiesta-ok-titolo">Grazie, ho ricevuto la tua richiesta.</p>
-        <p>Ti rispondo io, via email o per telefono. Se intanto vuoi fissare un momento per parlarne, prenota una call qui sotto.</p>
+        <p>Ti arriva un'email di conferma e ti rispondo io entro 2 giorni lavorativi, via email o per telefono.
+        Se intanto vuoi fissare un momento per parlarne, prenota una call qui sotto.</p>
       </div>
 
       <script>
@@ -106,7 +107,10 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
             var btn = f.querySelector('button[type="submit"]');
             btn.disabled = true; btn.textContent = 'Invio in corso…';
             fetch(f.action, { method: 'POST', mode: 'no-cors', body: dati })
-              .then(function () { f.hidden = true; ok.hidden = false; ok.focus(); })
+              .then(function () {
+                f.reset(); f.hidden = true; ok.hidden = false;
+                ok.scrollIntoView({ block: 'center' }); ok.focus({ preventScroll: true });
+              })
               .catch(function () {
                 btn.disabled = false; btn.textContent = 'Invia la richiesta';
                 mostra('Invio non riuscito. Riprova, oppure scrivimi a {{ site.author.email }}.');
