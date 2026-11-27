@@ -478,6 +478,8 @@ p:last-child { margin-bottom: 0; }
 .nav a.btn { margin-left: 0.5rem; min-height: 40px; padding: 0.5rem 1rem; font-size: 0.9rem; }
 .nav a.btn-primary { color: #fff; }
 .nav a.btn-primary::after { display: none; }
+.nav a.btn-secondario { color: var(--text); }
+.nav a.nav-scrivimi + .btn { margin-left: 0; }
 
 /* Profili social dentro il menu: solo su telefono */
 .nav-social { display: none; }
@@ -559,6 +561,9 @@ p:last-child { margin-bottom: 0; }
   .nav a[aria-current="page"] { color: var(--accent); }
 
   .nav a.btn { margin: 1.1rem 0 0; min-height: 50px; border-bottom: none; font-size: 1rem; }
+  /* Nel menu: prima la call, sotto Scrivimi, poi i profili social */
+  .nav a.nav-scrivimi { order: 2; margin-top: 0.6rem; border: 1px solid var(--line-strong); }
+  .nav-social { order: 3; }
 
   .nav-social { display: flex; gap: 1.25rem; padding-top: 1rem; }
   .nav .nav-social a { min-height: 44px; border-bottom: 0; font-size: 0.95rem; color: var(--text-2); }
@@ -1870,11 +1875,16 @@ html.con-splash .splash.via { opacity: 0; visibility: hidden; }
   margin: 1.75rem 0 2rem;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  grid-template-columns: minmax(0, 1fr);
   gap: 1px;
   background: var(--line-deep);
   border: 1px solid var(--line-deep);
   max-width: 62rem;
+}
+
+/* Quattro credenziali: una colonna su telefono, due per due dal tablet in su (nessuna casella vuota) */
+@media (min-width: 520px) {
+  .cred { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 .cred li {
