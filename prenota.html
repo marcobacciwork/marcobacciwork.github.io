@@ -11,7 +11,7 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
     <p class="eyebrow" style="color:var(--brass)">Contatti</p>
     <h1>Scrivimi o prenota una <em>call</em></h1>
     <p class="lead">
-      Dimmi di cosa hai bisogno con il modulo qui sotto: ti rispondo io entro 2 giorni lavorativi, via email o per telefono.
+      Dimmi di cosa hai bisogno con il modulo qui sotto: ti risponderò io entro 2 giorni lavorativi, via email o per telefono.
       Se preferisci parlarne a voce, prenota una call gratuita di 20 minuti.
     </p>
   </div>
@@ -67,7 +67,8 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
             <input type="email" name="email" required maxlength="160" autocomplete="email">
           </label>
           <label class="richiesta-campo">Telefono
-            <input type="tel" name="telefono" maxlength="40" autocomplete="tel">
+            <input type="tel" name="telefono" maxlength="25" autocomplete="tel" inputmode="tel" pattern="[0-9+ ()./-]*" aria-describedby="telefono-aiuto">
+            <span class="richiesta-aiuto" id="telefono-aiuto">Solo numeri, con il prefisso se è un numero estero.</span>
           </label>
         </div>
 
@@ -77,14 +78,14 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
           <p class="richiesta-nota">
             Uso questi dati solo per risponderti. Dettagli nella
             <a href="{{ '/privacy/' | relative_url }}">privacy policy</a>.
-            <span class="richiesta-tempi">Ti rispondo io entro 2 giorni lavorativi, via email o per telefono.</span>
+            <span class="richiesta-tempi">Ti risponderò io entro 2 giorni lavorativi, via email o per telefono.</span>
           </p>
         </div>
       </form>
 
       <div class="richiesta-ok" id="richiesta-ok" hidden tabindex="-1">
         <p class="richiesta-ok-titolo">Grazie, ho ricevuto la tua richiesta.</p>
-        <p>Ti arriva un'email di conferma e ti rispondo io entro 2 giorni lavorativi, via email o per telefono.
+        <p>Ti arriverà un'email di conferma e ti risponderò io entro 2 giorni lavorativi, via email o per telefono.
         Se intanto vuoi fissare un momento per parlarne, prenota una call qui sotto.</p>
       </div>
 
@@ -101,7 +102,19 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
             function imposta(c, male) { if (on && male) c.setAttribute('aria-invalid', 'true'); else c.removeAttribute('aria-invalid'); }
             imposta(f.nome, !f.nome.value.trim());
             imposta(f.email, !f.email.value.trim() || !f.email.checkValidity());
+            imposta(f.telefono, !telefonoValido());
           }
+          /* Telefono: accetta solo cifre, spazi e i segni + ( ) . / - ; le lettere non entrano nel campo */
+          f.telefono.addEventListener('input', function () {
+            var pulito = f.telefono.value.replace(/[^0-9+ ()./-]/g, '');
+            if (pulito !== f.telefono.value) f.telefono.value = pulito;
+          });
+          function telefonoValido() {
+            var v = f.telefono.value.trim();
+            if (!v) return true;                       /* il telefono è facoltativo */
+            return /^[0-9+ ()./-]+$/.test(v) && v.replace(/\D/g, '').length >= 6;
+          }
+
           f.addEventListener('submit', function (e) {
             e.preventDefault();
             err.hidden = true;
@@ -111,6 +124,7 @@ description: "Scrivimi di cosa hai bisogno con un modulo breve, oppure prenota u
             if (!scelte.length) { mostra('Scegli almeno una voce in "Di cosa hai bisogno?".'); f.querySelector('input[name="bisogno"]').focus(); return; }
             if (!f.nome.value.trim()) { mostra('Scrivi nome e cognome.'); f.nome.focus(); return; }
             if (!f.email.checkValidity() || !f.email.value.trim()) { mostra('Controlla l\'indirizzo email.'); f.email.focus(); return; }
+            if (!telefonoValido()) { mostra('Controlla il numero di telefono: servono almeno 6 cifre, senza lettere.'); f.telefono.focus(); return; }
             var dati = new URLSearchParams();
             scelte.forEach(function (v) { dati.append('{{ site.modulo_richieste.bisogno }}', v); });
             dati.append('{{ site.modulo_richieste.descrizione }}', f.descrizione.value.trim());

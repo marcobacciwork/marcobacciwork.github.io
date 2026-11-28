@@ -88,7 +88,7 @@ li usano negli stili scritti nell'HTML. Non rimuoverli: puntano ai colori nuovi.
 il contenuto parte a un terzo. Sullo stesso asse stanno l'elenco dei mestieri in home, il blog, i libri,
 le pagine di testo (`.wrap-narrow`) e il modulo Scrivimi. L'apertura della home usa `.hero-home`,
 le pagine interne la `.hero` compatta. Il logo in testata è `assets/img/logo/logo-mb-ai-testata.svg`
-(il segno di `logo-mb-ai.svg` senza motto, con i colori per fondo chiaro).
+(il segno di `logo-mb-ai.svg` senza motto, con i colori originali: per questo la testata è scura). Per le email c'è `logo-mb-ai-email.png`, logo originale su fondo blu notte.
 
 **Immagine per i social** → `assets/img/og-image.source.html`: screenshot 1200×630 della pagina,
 salvato come `og-image.png`. Il sorgente non viene pubblicato.

@@ -382,16 +382,18 @@ p:last-child { margin-bottom: 0; }
    6. Intestazione
    -------------------------------------------------------------------------- */
 
+/* Testata scura: il logo MB Ai resta con i suoi colori originali
+   (MB chiaro, segno blu, A bianca), come nel footer e nell'apertura animata. */
 .site-header {
   position: sticky;
   top: 0;
   z-index: 80;
-  background: rgba(248, 249, 250, 0.86);
-  backdrop-filter: saturate(180%) blur(14px);
-  -webkit-backdrop-filter: saturate(180%) blur(14px);
-  border-bottom: 1px solid var(--line);
-  color: var(--text);
+  background: var(--deep);
+  border-bottom: 1px solid var(--deep-line);
+  color: var(--on-deep);
 }
+
+.site-header :focus-visible { outline-color: var(--accent-lift); }
 
 .header-inner {
   display: flex;
@@ -411,7 +413,7 @@ p:last-child { margin-bottom: 0; }
   font-weight: 600;
   font-size: 1.0625rem;
   letter-spacing: -0.02em;
-  color: var(--text);
+  color: var(--on-deep);
   text-decoration: none;
   white-space: nowrap;
 }
@@ -434,10 +436,10 @@ p:last-child { margin-bottom: 0; }
   content: "";
   width: 1px;
   height: 1.15em;
-  background: var(--line-strong);
+  background: var(--deep-line);
 }
 
-.brand:hover .brand-nome { color: var(--accent-deep); }
+.brand:hover .brand-nome { color: var(--accent-lift); }
 
 .nav {
   display: flex;
@@ -453,16 +455,16 @@ p:last-child { margin-bottom: 0; }
   padding: 0 0.5rem;
   font-size: 0.93rem;
   letter-spacing: -0.006em;
-  color: var(--text-2);
+  color: var(--on-deep-2);
   text-decoration: none;
   white-space: nowrap;
   border-radius: 6px;
   transition: color 0.16s var(--ease), background-color 0.16s var(--ease);
 }
 
-.nav a:not(.btn):hover { color: var(--text); background: rgba(15, 23, 42, 0.045); }
+.nav a:not(.btn):hover { color: var(--on-deep); background: rgba(237, 241, 247, 0.07); }
 
-.nav a[aria-current="page"] { color: var(--text); font-weight: 500; }
+.nav a[aria-current="page"] { color: var(--on-deep); font-weight: 500; }
 
 .nav a[aria-current="page"]::after {
   content: "";
@@ -472,13 +474,19 @@ p:last-child { margin-bottom: 0; }
   bottom: 2px;
   height: 2px;
   border-radius: 2px;
-  background: var(--accent);
+  background: var(--accent-lift);
 }
 
 .nav a.btn { margin-left: 0.5rem; min-height: 40px; padding: 0.5rem 1rem; font-size: 0.9rem; }
 .nav a.btn-primary { color: #fff; }
 .nav a.btn-primary::after { display: none; }
-.nav a.btn-secondario { color: var(--text); }
+.nav a.btn-secondario {
+  color: var(--on-deep);
+  background: transparent;
+  border-color: rgba(237, 241, 247, 0.28);
+}
+.nav a.btn-secondario:hover { background: rgba(237, 241, 247, 0.08); border-color: var(--on-deep-2); }
+.nav a.btn-primary { border-color: var(--accent); }
 .nav a.nav-scrivimi + .btn { margin-left: 0; }
 
 /* Profili social dentro il menu: solo su telefono */
@@ -489,8 +497,9 @@ p:last-child { margin-bottom: 0; }
   align-items: center;
   gap: 0.55rem;
   min-height: 44px;
-  background: var(--surface);
-  border: 1px solid var(--line-strong);
+  background: transparent;
+  color: var(--on-deep);
+  border: 1px solid rgba(237, 241, 247, 0.28);
   border-radius: var(--radius);
   padding: 0 0.9rem;
   font-size: 0.9rem;
@@ -523,8 +532,8 @@ p:last-child { margin-bottom: 0; }
 .nav-toggle[aria-expanded="true"] .nav-toggle-icona::before { top: 4.25px; transform: rotate(45deg); }
 .nav-toggle[aria-expanded="true"] .nav-toggle-icona::after  { top: 4.25px; transform: rotate(-45deg); }
 
-.nav-toggle:hover { border-color: var(--text-3); }
-.nav-toggle:active { background: var(--bg-alt); }
+.nav-toggle:hover { border-color: var(--on-deep-2); }
+.nav-toggle:active { background: rgba(237, 241, 247, 0.08); }
 
 @media (max-width: 960px) {
   .nav-toggle { display: inline-flex; }
@@ -539,9 +548,9 @@ p:last-child { margin-bottom: 0; }
     max-height: calc(100vh - var(--header-h));
     max-height: calc(100dvh - var(--header-h));
     overflow-y: auto;
-    background: var(--surface);
-    border-bottom: 1px solid var(--line);
-    box-shadow: 0 18px 40px -24px rgba(15, 23, 42, 0.35);
+    background: var(--deep);
+    border-bottom: 1px solid var(--deep-line);
+    box-shadow: 0 18px 40px -24px rgba(0, 0, 0, 0.6);
     padding: 0.25rem var(--gutter) 1.5rem;
   }
 
@@ -550,23 +559,23 @@ p:last-child { margin-bottom: 0; }
   .nav a {
     min-height: 52px;
     padding: 0;
-    border-bottom: 1px solid var(--line);
+    border-bottom: 1px solid var(--deep-line);
     border-radius: 0;
     font-size: 1.05rem;
-    color: var(--text);
+    color: var(--on-deep);
   }
 
-  .nav a:not(.btn):hover { background: none; color: var(--accent); }
+  .nav a:not(.btn):hover { background: none; color: var(--accent-lift); }
   .nav a[aria-current="page"]::after { display: none; }
-  .nav a[aria-current="page"] { color: var(--accent); }
+  .nav a[aria-current="page"] { color: var(--accent-lift); }
 
   .nav a.btn { margin: 1.1rem 0 0; min-height: 50px; border-bottom: none; font-size: 1rem; }
   /* Nel menu: prima la call, sotto Scrivimi, poi i profili social */
-  .nav a.nav-scrivimi { order: 2; margin-top: 0.6rem; border: 1px solid var(--line-strong); }
+  .nav a.nav-scrivimi { order: 2; margin-top: 0.6rem; border: 1px solid rgba(237, 241, 247, 0.28); }
   .nav-social { order: 3; }
 
   .nav-social { display: flex; gap: 1.25rem; padding-top: 1rem; }
-  .nav .nav-social a { min-height: 44px; border-bottom: 0; font-size: 0.95rem; color: var(--text-2); }
+  .nav .nav-social a { min-height: 44px; border-bottom: 0; font-size: 0.95rem; color: var(--on-deep-2); }
 }
 
 /* --------------------------------------------------------------------------
@@ -1483,8 +1492,8 @@ html.con-splash .splash.via { opacity: 0; visibility: hidden; }
 .site-header { transition: box-shadow 0.3s var(--ease), background-color 0.3s var(--ease); }
 
 .site-header.staccata {
-  background: rgba(248, 249, 250, 0.94);
-  box-shadow: 0 10px 30px -24px rgba(15, 23, 42, 0.45);
+  background: var(--deep);
+  box-shadow: 0 10px 30px -20px rgba(0, 0, 0, 0.55);
 }
 
 /* --------------------------------------------------------------------------
@@ -1972,9 +1981,9 @@ html.con-splash .splash.via { opacity: 0; visibility: hidden; }
   width: 38px;
   height: 38px;
   border-radius: 50%;
-  border: 1px solid var(--line-strong);
-  background: var(--surface);
-  color: var(--text);
+  border: 1px solid rgba(237, 241, 247, 0.22);
+  background: transparent;
+  color: var(--on-deep);
   transition: color var(--dur) var(--ease), border-color var(--dur) var(--ease),
               background var(--dur) var(--ease), transform var(--dur) var(--ease);
 }
@@ -2394,6 +2403,7 @@ a.cliente-logo:hover { border-color: var(--accent); }
 .richiesta-campo [aria-invalid="true"]:focus { box-shadow: 0 0 0 3px rgba(180, 35, 24, 0.18); }
 
 .richiesta-due { display: grid; gap: 1rem; }
+.richiesta-aiuto { font-size: 0.8125rem; font-weight: 400; color: var(--text-3); }
 @container (min-width: 30rem) { .richiesta-due { grid-template-columns: 1fr 1fr; } }
 
 /* Invio: pulsante con accanto privacy e tempi di risposta */
